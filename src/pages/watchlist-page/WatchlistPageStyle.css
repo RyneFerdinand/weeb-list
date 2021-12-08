@@ -1,0 +1,103 @@
+*{
+    font-family: 'Poppins', sans-serif;
+    color: white;
+    box-sizing: border-box;
+    overflow-x: hidden;
+}
+
+body{
+    background-color: #18181A;
+    padding: 1vw
+}
+
+.title{
+    font-weight: bold;
+    font-size: 5vw;
+}
+
+.second-title{
+    color: #44C1E9;
+}
+
+.watchlist-header{
+    opacity: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.watchlist-header div{
+    text-align: center;
+    font-size: 1.5rem;
+}
+
+.watchlist-header > div:nth-child(1){
+    width: 50vw;
+}
+
+.watchlist-header > div:nth-child(2){
+    width: 20vw;
+}
+
+.watchlist-header > div:nth-child(3){
+    width: 20vw;
+}
+
+.watchlist-content{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 2.5rem;
+    margin-bottom: 2.5rem;
+}
+
+img{
+    width: 125px;
+    height: 200px;
+    border-radius: 10px;
+    margin-right: 1rem;
+}
+
+.watchlist-title{
+    text-align: center;
+    display: flex;
+    align-items: center;
+    font-size: 1.5rem;
+    width: 50vw;
+    font-weight: bold;
+}
+
+.watchlist-status{
+    text-align: center;
+    width: 20vw;
+    font-size: 1.5rem;
+}
+
+.watchlist-rating{
+    width: 20vw;
+    text-align: center;
+    font-size: 1.5rem;
+}
+
+.fa-plus{
+    color: #44C1E9;
+}
+
+.watchlist-delete{
+    width: 5vw;
+}
+
+.delete{
+    border: #44C1E9 2px solid;
+    outline: none;
+    background: transparent;
+    display: flex;
+    align-items: center;
+    height: 2.5vw;
+    width: 2.5vw;
+    justify-content: center;
+}
+
+.fa-star{
+    color: #E4C44F;
+}

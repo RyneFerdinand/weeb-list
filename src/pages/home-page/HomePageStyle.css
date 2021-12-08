@@ -1,0 +1,126 @@
+*{
+    font-family: 'Poppins', sans-serif;
+    color: white;
+    box-sizing: border-box;
+    overflow-x: hidden;
+}
+
+body{
+    background-color: #18181A;
+    padding: 1vw 0 1vw 1vw;
+}
+
+.title{
+    font-weight: bold;
+    font-size: 5vw;
+}
+
+.second-title{
+    color: #44C1E9;
+}
+
+.content{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+}
+
+.detail{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 35vw;
+}
+
+.anime-title{
+    font-weight: bold;
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.anime-show{
+    margin-bottom: 1rem;
+}
+
+.fa-star{
+    color: #E4C44F;
+}
+
+.fa-tv{
+    color: #44C1E9;
+}
+
+.fa-plus{
+    color: #44C1E9;
+}
+
+.anime-description{
+    opacity: 80%;
+    margin-bottom: 1rem;
+}
+
+.add{
+    width: 12.5vw;
+    text-align: center;
+    background: transparent;
+    outline: none;
+    border: #44C1E9 2px solid;
+    border-radius: 5px;
+}
+
+.image{
+    width: 65vw;
+    background-image: url('https://picsum.photos/200/300');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+}
+
+.first-transparent-image{
+    width: 100%;
+    height: 25vw;
+    background-image: linear-gradient(to right, #18181A, rgba(0 , 0, 0, 0.1) ,rgba(0, 0, 0, 0.1));
+}
+
+.second-transparent-image{
+    width: 100%;
+    height: 25vw;
+    background-image: linear-gradient(to left, #18181A, rgba(0 , 0, 0, 0.1) ,rgba(0, 0, 0, 0.1));
+}
+
+.more-div{
+    margin-top: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.fa-arrow-right{
+    color: #44C1E9;
+}
+
+.more-button{
+    width: 7.5vw;
+    text-align: center;
+    background: transparent;
+    outline: none;
+    border: #44C1E9 2px solid;
+    border-radius: 5px;
+}
+
+.fa-calendar{
+    color: #44C1E9;
+}
+
+.anime-date{
+    margin-top: -1rem;
+    margin-bottom: 1rem;
+}
+
+.top, .bottom, .middle{
+    margin-top: 1rem;
+    margin-bottom: 4rem;
+}
