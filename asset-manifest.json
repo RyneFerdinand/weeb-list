@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "/weeb-list/static/css/main.a617e044.chunk.css",
+    "main.js": "/weeb-list/static/js/main.e9d725bd.chunk.js",
+    "main.js.map": "/weeb-list/static/js/main.e9d725bd.chunk.js.map",
+    "runtime-main.js": "/weeb-list/static/js/runtime-main.bc68f853.js",
+    "runtime-main.js.map": "/weeb-list/static/js/runtime-main.bc68f853.js.map",
+    "static/js/2.1b79986f.chunk.js": "/weeb-list/static/js/2.1b79986f.chunk.js",
+    "static/js/2.1b79986f.chunk.js.map": "/weeb-list/static/js/2.1b79986f.chunk.js.map",
+    "static/js/3.ca7d912f.chunk.js": "/weeb-list/static/js/3.ca7d912f.chunk.js",
+    "static/js/3.ca7d912f.chunk.js.map": "/weeb-list/static/js/3.ca7d912f.chunk.js.map",
+    "index.html": "/weeb-list/index.html",
+    "static/css/main.a617e044.chunk.css.map": "/weeb-list/static/css/main.a617e044.chunk.css.map",
+    "static/js/2.1b79986f.chunk.js.LICENSE.txt": "/weeb-list/static/js/2.1b79986f.chunk.js.LICENSE.txt",
+    "static/media/logo.6ce24c58.svg": "/weeb-list/static/media/logo.6ce24c58.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.bc68f853.js",
+    "static/js/2.1b79986f.chunk.js",
+    "static/css/main.a617e044.chunk.css",
+    "static/js/main.e9d725bd.chunk.js"
+  ]
+}
