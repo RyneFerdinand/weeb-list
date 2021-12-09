@@ -1,12 +1,16 @@
 import logo from './logo.svg';
 import './App.css';
-import { HashRouter as Router, Route, Switch } from 'react-router-dom';
+import { HashRouter as Router, Link, Route, Switch } from 'react-router-dom';
 import DetailPage from './pages/detail-page/DetailPage';
 import SearchPage from './pages/search-page/SearchPage';
 
 function App() {
   return (
       <Router>
+      <div>
+        <Link to="/detail">detail</Link>
+        <Link to="/search">search</Link>
+      </div>
       <Switch>
         <Route exact path="/detail">
           <DetailPage/>
@@ -15,9 +19,8 @@ function App() {
           <SearchPage/>
         </Route>
       </Switch>
-
       </Router>
-  );
+  )
 }
 
 export default App;
