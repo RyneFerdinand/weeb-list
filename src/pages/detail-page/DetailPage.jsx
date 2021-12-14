@@ -3,6 +3,8 @@ import poster from "../../assets/sangatsu.jpg"
 import GenreTag from "../../components/genre-tag/GenreTag";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import CharacterCard from "../../components/character-card/CharacterCard";
+import ReviewCard from "../../components/review-card/ReviewCard";
+import RecommendationCard from "../../components/recommendation-card/RecommendationCard";
 
 function DetailPage(){
     let genres = ["Drama", "Slice of Life"];
@@ -51,6 +53,66 @@ function DetailPage(){
         }
     ]
 
+    let reviews = [
+        {
+            "profile": "https://media-exp1.licdn.com/dms/image/C4E03AQGIbxivyhW18Q/profile-displayphoto-shrink_800_800/0/1632250683020?e=1645056000&v=beta&t=juY6_qRxSSAmWTMjWCrzKYGXqtkCNtyVQ3zZKdGOLnE",
+            "name": "Hans",
+            "description": "This is very good",
+            "rating": "10"
+        },
+        {
+            "profile": "https://media-exp1.licdn.com/dms/image/C4E03AQGIbxivyhW18Q/profile-displayphoto-shrink_800_800/0/1632250683020?e=1645056000&v=beta&t=juY6_qRxSSAmWTMjWCrzKYGXqtkCNtyVQ3zZKdGOLnE",
+            "name": "Hans",
+            "description": "This is amazing",
+            "rating": "10"
+        },
+        {
+            "profile": "https://media-exp1.licdn.com/dms/image/C4E03AQGIbxivyhW18Q/profile-displayphoto-shrink_800_800/0/1632250683020?e=1645056000&v=beta&t=juY6_qRxSSAmWTMjWCrzKYGXqtkCNtyVQ3zZKdGOLnE",
+            "name": "Hans",
+            "description": "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ipsam accusamus tempora ipsum distinctio, voluptas suscipit dignissimos placeat repellendus rerum tenetur nostrum nihil, unde molestiae corporis amet itaque explicabo dolore cum a aperiam quas magni laborum voluptatibus commodi! Nam, facilis adipisci.",
+            "rating": "9"
+        }
+    ]
+
+    let recommendations = [
+        {
+            "poster": "https://cdn.myanimelist.net/images/anime/11/75274.jpg",
+            "title": "Bakemonogatari",
+            "rating": "8.35"
+        },
+        {
+            "poster": "https://cdn.myanimelist.net/images/anime/3/67177.jpg",
+            "title": "Shigatsu wa Kimi no Uso",
+            "rating": "8.68"
+        },
+        {
+            "poster": "https://cdn.myanimelist.net/images/anime/1896/119844.jpg",
+            "title": "JoJo no Kimyou na Bouken Part 6: Stone Ocean",
+            "rating": "8.74"
+        },
+        {
+            "poster": "https://cdn.myanimelist.net/images/anime/1613/102179.jpg",
+            "title": "Seishun Buta Yarou wa Yumemiru Shoujo no Yume wo Minai",
+            "rating": "8.64"
+        },
+        {
+            "poster": "https://cdn.myanimelist.net/images/anime/1097/109646.jpg",
+            "title": "Beastars 2nd Season",
+            "rating": "7.90"
+        },
+        {
+            "poster": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx142329-Oa6NT07c5KOn.jpg",
+            "title": "Kimetsu no Yaiba: Yuukaku-hen",
+            "rating": "8.66"
+        },
+        {
+            "poster": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx133965-9TZBS4m4yvED.png",
+            "title": "Komi-san wa, Komyushou desu.",
+            "rating": "8.26"
+        }
+
+    ]
+
     return (
         <div className="detail-page">
             <div className="d-flex flex-row align-items-center information-section custom-container">
@@ -69,7 +131,7 @@ function DetailPage(){
                         <h5>Overview</h5>
                         <span className="d-flex flex-row align-items-center rating">
                             <FontAwesomeIcon icon={['fas', 'star']} style={{ color: "#E4C44F" }} />
-                            <p>5.89</p>
+                            <p>8.97</p>
                         </span>
                     </div>
                     <div className="information-section__fourth">
@@ -81,26 +143,47 @@ function DetailPage(){
                 </div>
             
             </div>
-            <div className="character-section custom-container">
+            <div className="character-section d-flex flex-column justify-content-start custom-container">
                 <h1>Characters & <span className="text--blue">Voice Actors</span></h1>
 
-                <div className="character-section">
+                <div className="character-section__cards">
                     <div className="row row-cols-3">
                     {
                         characters.map(character => <CharacterCard character={character}/>)
                     }
                     </div>
-
                 </div>
+                <button className="d-flex flex-row align-items-center load-button">
+                    <FontAwesomeIcon icon={['fas', 'chevron-down']} style={{ color: "#44C1E9" }} />
+                    <p>Load More</p>
+                </button>
                 
             </div>
 
             
-            <div className="review-section">
-                
+            <div className="d-flex flex-column review-section custom-container">
+                <h1>Review</h1>
+                <div className="review-section__review d-flex flex-column">
+                    {
+                        reviews.map(review=><ReviewCard review={review}/>)
+                    }
+                </div>
+                <button className="d-flex flex-row align-items-center load-button">
+                    <FontAwesomeIcon icon={['fas', 'chevron-down']} style={{ color: "#44C1E9" }} />
+                    <p>Load More</p>
+                </button>
             </div>
-            <div className="recommendation-section">
-
+            <div className="recommendation-section custom-container d-flex flex-column">
+                <h1>More <span className="text--blue">Like</span> This</h1>
+                <div className="recommendation-section__cards">
+                    <div className="card-wrapper d-flex flex-row">
+                        {
+                            recommendations.map(recommendation => <RecommendationCard recommendation={recommendation}/>)
+                        }
+                   
+                    </div>
+                </div>
+  
             </div>
 
         </div>

@@ -1,0 +1,35 @@
+.review-wrapper{
+    gap: 1em;
+    font-family: 'Poppins', sans-serif;
+
+}
+
+.review{
+    gap: 2%;
+}
+
+.review__profile{
+    width: 8%;
+    height: 8%;
+    border-radius: 10px;
+}
+
+.review__data{
+    width: 90%;
+}
+
+.review__data h4{
+    font-weight: 600;
+    color: var(--dark-blue);
+}
+
+.review__data p {
+    width: 90%;
+    color: #FFFFFF;
+}
+
+.review__rating {
+    color: #FFFFFF;
+    gap: 1em;
+}
+

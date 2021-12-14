@@ -50,6 +50,10 @@ h5, p{
     gap: 1em;
 }
 
+.information-section__third h5{
+    font-weight: 600;
+}
+
 .information-section__third p{
     margin-top: 0.1em;
 }
@@ -58,6 +62,35 @@ h5, p{
     gap: 0.5em;
 }
 
-.description-section{
-    width: 100%;
+.character-section{
+    padding: 1em 0;
+    min-height: 300px;
+}
+
+.character-section__cards{
+    padding: 1em 0;
+}
+
+.load-button{
+    align-self: center;
+    color: #FFFFFF;
+    background-color: transparent;
+    border: 1px solid var(--blue);
+    padding: 0.5em 1.5em;
+    gap: 1em;
+    border-radius: 5px;
+    margin-top: 1em;
+}
+
+.review-section{
+    padding: 2em 0;
+}
+
+.review-section__review{
+    gap: 2em;
+    padding: 2em 0;
+}
+
+.card-wrapper{
+    gap: 2%;
 }
