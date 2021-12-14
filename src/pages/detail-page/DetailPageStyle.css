@@ -1,0 +1,63 @@
+
+h1{
+    font-family: 'Montserrat', sans-serif;
+    color: #FFFFFF;
+}
+
+h5, p{
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+}
+
+.text--blue{
+    color: var(--blue);
+}
+
+.detail-page{
+    background-color: #18181A;
+}
+
+.information-section{
+    gap: 5%;
+    min-height: 400px;
+}
+
+.anime-detail{
+    color: #FFFFFF;
+    gap: 1em;
+    width: 80%;
+}
+
+.information-section__second{
+    gap: 0.5em;
+}
+
+.genre-container{
+    gap: 0.5em;
+}
+
+.custom-container{
+    width: 90%;
+    margin: 0 auto;
+}
+
+.anime-poster{
+    width: 18%;
+
+}
+
+.information-section__third{
+    gap: 1em;
+}
+
+.information-section__third p{
+    margin-top: 0.1em;
+}
+
+.rating{
+    gap: 0.5em;
+}
+
+.description-section{
+    width: 100%;
+}
