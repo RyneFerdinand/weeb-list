@@ -1,108 +1,69 @@
+import TopAndBottom from "./TopAndBottom";
+import Middle from "./Middle";
 function HomePage(){
+    let anime = [
+        {
+            "firstTitle": "Now",
+            "secondTitle": "Airing",
+            "title": "Takt Op. Destiny",
+            "rating": 8.09,    
+            "genre": "Action, Fantasy, Music",
+            "show": "TV",
+            "description": "The year is 2047, a world where music has been forgotten. In America which has fallen to ruin thanks to the D2, Takt, a Conductor, is partnered with a Musicart named Unmei. Takt yeans for music to be returned to the world, and Unmei wishes to destroy the D2. Their aim is to travel to New York",
+            "image": "https://picsum.photos/200/300"
+        },
+        {
+            "firstTitle": "Up",
+            "secondTitle": "Coming",
+            "title": "Attack on Titan Final Season 4 part 2", 
+            "date": "Jan 10, 2022",
+            "show": "TV",
+            "description": "Second part of Shingeki no Kyojin: The Final Season.",
+            "image": "https://picsum.photos/200/300"
+        },
+        {
+            "firstTitle": "Fall 2021",
+            "secondTitle": "Anime",
+            "title": "Mushoku Tensei: Jobless Reincarnation",
+            "rating": 8.16,    
+            "genre": "Drama, Fantasy, Ecchi",
+            "show": "TV",
+            "description": "After the mysterious mana calamity, Rudeus Greyrat and his fierce student Eris Boreas Greyrat are teleported to the Demon Continent. There, they team up with their newfound companion Ruijerd Supardia—the former leader of ...",
+            "image": "https://picsum.photos/200/300"
+        },
+    ]
     return (
         <div>
-            <div className="top">
-                <div className="title">
-                    <span className="first-title">Now </span>
-                    <span className="second-title">Airing</span>
-                </div>
-                <div className="content">
-                    <div className="detail">
-                        <div className="top-detail">
-                            <div className="anime-title">
-                                Takt Op. Destiny
-                            </div>
-                            <div className="anime-rating-genre">
-                                <i class="fas fa-star"></i> 8.09 &emsp; Action, Fantasy, Music
-                            </div>
-                            <div className="anime-show">
-                                <i class="fas fa-tv"></i> TV
-                            </div>
-                            <div className="anime-description">
-                                The year is 2047, a world where music has been forgotten. In America which has fallen to ruin thanks to the D2, Takt, a Conductor, is partnered with a Musicart named Unmei. Takt yeans for music to be returned to the world, and Unmei wishes to destroy the D2. Their aim is to travel to New York
-                            </div>
-                        </div>
-                        <div className="bottom-detail">
-                            <button class="add"><i class="fas fa-plus"></i>&emsp; Add to Watchlist</button>
-                        </div>
-                    </div>
-                    <div class="image">
-                        <div class="first-transparent-image"></div>
-                    </div>
-                </div>
-                <div className="more-div">
-                    <button className="more-button">More &emsp; <i class="fas fa-arrow-right"></i></button>
-                </div>
-            </div>
-            <div className="middle">
-                <div className="title">
-                    <span className="second-title" style={{float: "right"}}>&nbsp;Coming</span>
-                    <span className="first-title" style={{float: "right"}}>Up</span>
-                </div>
-                <div className="content">
-                    <div class="image">
-                        <div class="second-transparent-image"></div>
-                    </div>
-                     <div className="detail">
-                        <div className="top-detail">
-                            <div className="anime-title">
-                                Attack on Titan Final Season 4 part 2
-                            </div>
-                            <div className="anime-rating-genre">
-                                Action, Drama, Fantasy, Mystery, Militar, Super Power, Shounen
-                            </div>
-                            <div className="anime-show">
-                                <i class="fas fa-tv"></i> TV
-                            </div>
-                            <div className="anime-date">
-                                <i class="fa fa-calendar" aria-hidden="true"></i>&nbsp; Jan 10, 2022
-                            </div>
-                            <div className="anime-description">
-                            Second part of Shingeki no Kyojin: The Final Season.
-                            </div>
-                        </div>
-                        <div className="bottom-detail">
-                            <button class="add"><i class="fas fa-plus"></i>&emsp; Add to Watchlist</button>
-                        </div>
-                    </div>
-                </div>
-                <div className="more-div">
-                    <button className="more-button">More &emsp; <i class="fas fa-arrow-right"></i></button>
-                </div>
-            </div>
-            <div className="bottom">
-                <div className="title">
-                    <span className="first-title">Fall 2021 </span>
-                    <span className="second-title">Anime</span>
-                </div>
-                <div className="content">
-                    <div className="detail">
-                        <div className="top-detail">
-                            <div className="anime-title">
-                                Mushoku Tensei: Jobless Reincarnation
-                            </div>
-                            <div className="anime-rating-genre">
-                                <i class="fas fa-star"></i> 8.16 &emsp; Drama, Fantasy, Ecchi
-                            </div>
-                            <div className="anime-show">
-                                <i class="fas fa-tv"></i> TV
-                            </div>
-                            <div className="anime-description">
-                                After the mysterious mana calamity, Rudeus Greyrat and his fierce student Eris Boreas Greyrat are teleported to the Demon Continent. There, they team up with their newfound companion Ruijerd Supardia—the former leader of ...
-                            </div>
-                        </div>
-                        <div className="bottom-detail">
-                            <button class="add"><i class="fas fa-plus"></i>&emsp; Add to Watchlist</button>
-                        </div>
-                    </div>
-                    <div class="image">
-                        <div class="first-transparent-image"></div>
-                    </div>
-                </div>
-                <div className="more-div">
-                    <button className="more-button">More &emsp; <i class="fas fa-arrow-right"></i></button>
-                </div>
-            </div>
+            <TopAndBottom 
+                firstTitle={anime[0].firstTitle}
+                secondTitle={anime[0].secondTitle}
+                animeTitle={anime[0].title}
+                animeRating={anime[0].rating}
+                animeGenre={anime[0].genre}
+                animeShow={anime[0].show}
+                animeDescription={anime[0].description}
+                image={anime[0].image}
+            />
+            <Middle
+                firstTitle={anime[1].firstTitle}
+                secondTitle={anime[1].secondTitle}
+                animeTitle={anime[1].title}
+                animeDate={anime[1].date}
+                animeGenre={anime[1].genre}
+                animeShow={anime[1].show}
+                animeDescription={anime[1].description}
+                image={anime[1].image}
+            />
+            <TopAndBottom 
+                firstTitle={anime[2].firstTitle}
+                secondTitle={anime[2].secondTitle}
+                animeTitle={anime[2].title}
+                animeRating={anime[2].rating}
+                animeGenre={anime[2].genre}
+                animeShow={anime[2].show}
+                animeDescription={anime[2].description}
+                image={anime[2].image}
+            />
         </div>
     )
 }

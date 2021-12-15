@@ -1,4 +1,25 @@
+import WatchlistContent from "./WatchlistContent"
 function HomePage(){
+    let watchlists = [
+        {
+            "title": "Boruto: Naruto Next Generations",
+            "status": "Finished",
+            "rating": "Add Rating",
+            "image": "https://picsum.photos/200/300"
+        },
+        {
+            "title": "Takt Op. Destiny",
+            "status": "Watching",
+            "rating": "8.5",
+            "image": "https://picsum.photos/200/300"
+        },
+        {
+            "title": "Kimetsu no Yaiba: Mugen Ressha-hen",
+            "status": "Planned",
+            "rating": "Add Rating",
+            "image": "https://picsum.photos/200/300"
+        }
+    ]
     return (
         <div>
             <div className="title">
@@ -12,57 +33,16 @@ function HomePage(){
                     <div>My Rating</div>
                     <div className="watchlist-delete"></div>
                 </div>
-                <div className="watchlist-content">
-                    <div className="watchlist-title">
-                        <img src="https://picsum.photos/200/300"></img>
-                        <div>
-                            &nbsp; Boruto: Naruto Next Generations
-                        </div>
-                    </div>
-                    <div className="watchlist-status">
-                        Finished
-                    </div>
-                    <div className="watchlist-status">
-                        <i class="fas fa-plus"></i>&nbsp;Add Rating
-                    </div>
-                    <div className="watchlist-delete">
-                    <   button className="delete"><i class="far fa-trash-alt"></i></button>
-                    </div>
-                </div>
-                <div className="watchlist-content">
-                    <div className="watchlist-title">
-                        <img src="https://picsum.photos/200/300"></img>
-                        <div>
-                            &nbsp; Takt Op. Destiny
-                        </div>
-                    </div>
-                    <div className="watchlist-status">
-                        Watching
-                    </div>
-                    <div className="watchlist-status">
-                        <i class="fas fa-star"></i>&nbsp;8.5
-                    </div>
-                    <div className="watchlist-delete">
-                    <   button className="delete"><i class="far fa-trash-alt"></i></button>
-                    </div>
-                </div>
-                <div className="watchlist-content">
-                    <div className="watchlist-title">
-                        <img src="https://picsum.photos/200/300"></img>
-                        <div>
-                            &nbsp; Kimetsu no Yaiba: Mugen Ressha-hen
-                        </div>
-                    </div>
-                    <div className="watchlist-status">
-                        Planned
-                    </div>
-                    <div className="watchlist-status">
-                        <i class="fas fa-plus"></i>&nbsp;Add Rating
-                    </div>
-                    <div className="watchlist-delete">
-                    <   button className="delete"><i class="far fa-trash-alt"></i></button>
-                    </div>
-                </div>
+                {watchlists.map((watchlist) => {
+                    return (
+                        <WatchlistContent
+                            watchlistTitle={watchlist.title}
+                            watchlistStatus={watchlist.status}
+                            watchlistRating={watchlist.rating}
+                            watchlistImage={watchlist.image}
+                        />
+                    )
+                })}
             </div>
         </div>
     )
