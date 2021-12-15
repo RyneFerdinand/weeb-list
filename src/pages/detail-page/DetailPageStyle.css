@@ -84,6 +84,7 @@ h5, p{
 
 .review-section{
     padding: 2em 0;
+    min-height: 500px;
 }
 
 .review-section__review{
@@ -92,5 +93,9 @@ h5, p{
 }
 
 .card-wrapper{
-    gap: 2%;
+    padding: 3em 0;
+}
+
+.recommendation-section{
+    padding: 2em 0;
 }

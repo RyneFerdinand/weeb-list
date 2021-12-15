@@ -1,29 +1,37 @@
 .recommendation-card{
-    width: 15%;
+    width: 75%;
 }
 
 .recommendation-card__poster{
     position: relative;
-    height: 12rem;
+    height: 14rem;
 }
 
 .recommendation-card__poster img{
     width: 100%;
     height: 100%;
     object-fit: cover;
+    object-position: center;
     border-radius: 10px 10px 0 0;
 }
 
-.recommendation-card__title{
+.recommendation-card__title-wrapper{
     background-color: rgba(39, 144, 177, 0.75);
-    font-size: 1rem;
     padding: 0.5em;
+    height: 4rem;
+    border: 1px transparent solid;
     border-radius: 0 0 10px 10px;
-    font-family: "Montserrat", sans-serif;
-    color: #FFFFFF;
-    width: 100%;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
 }
 
+.recommendation-card__title{
+    font-family: "Montserrat", sans-serif;
+    color: #FFFFFF;
+    line-height: 140%;
+    overflow: hidden;
+    flex-wrap: wrap;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    line-clamp: 2; 
+    -webkit-box-orient: vertical;
+}

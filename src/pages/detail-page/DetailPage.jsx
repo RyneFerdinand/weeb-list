@@ -5,9 +5,12 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import CharacterCard from "../../components/character-card/CharacterCard";
 import ReviewCard from "../../components/review-card/ReviewCard";
 import RecommendationCard from "../../components/recommendation-card/RecommendationCard";
+import Carousel from "react-multi-carousel";
+import "react-multi-carousel/lib/styles.css";
 
 function DetailPage(){
     let genres = ["Drama", "Slice of Life"];
+
     let characters = [
         {
             "charName": "Kiriyama, Rei",
@@ -113,6 +116,23 @@ function DetailPage(){
 
     ]
 
+    const responsive = {
+        desktop: {
+          breakpoint: { max: 3000, min: 1024 },
+          items: 6,
+          slidesToSlide: 1
+        },
+        tablet: {
+          breakpoint: { max: 1024, min: 464 },
+          items: 4,
+          slidesToSlide: 1
+        },
+        mobile: {
+          breakpoint: { max: 464, min: 0 },
+          items: 1,
+          slidesToSlide: 1 
+        }
+      };
     return (
         <div className="detail-page">
             <div className="d-flex flex-row align-items-center information-section custom-container">
@@ -173,15 +193,24 @@ function DetailPage(){
                     <p>Load More</p>
                 </button>
             </div>
+
             <div className="recommendation-section custom-container d-flex flex-column">
+                
                 <h1>More <span className="text--blue">Like</span> This</h1>
                 <div className="recommendation-section__cards">
-                    <div className="card-wrapper d-flex flex-row">
+                    <Carousel 
+                        swipeable={false} 
+                        className="card-wrapper" 
+                        draggable={false} 
+                        partialVisbile={false} 
+                        responsive={responsive}
+                        containerClass="carousel-container"
+                        itemClass="carousel-item-padding-40-px"
+                    >
                         {
                             recommendations.map(recommendation => <RecommendationCard recommendation={recommendation}/>)
                         }
-                   
-                    </div>
+                    </Carousel>
                 </div>
   
             </div>
