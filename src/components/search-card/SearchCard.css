@@ -1,0 +1,33 @@
+.recommendation-card__poster{
+    position: relative;
+    height: 15rem;
+}
+
+.recommendation-card__poster img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 10px 10px 0 0;
+}
+
+.recommendation-card__title-wrapper{
+    background-color: rgba(39, 144, 177, 0.75);
+    padding: 0.5em;
+    height: 4rem;
+    border: 1px transparent solid;
+    border-radius: 0 0 10px 10px;
+}
+
+.recommendation-card__title{
+    font-family: "Montserrat", sans-serif;
+    color: #FFFFFF;
+    line-height: 140%;
+    overflow: hidden;
+    flex-wrap: wrap;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    line-clamp: 2; 
+    -webkit-box-orient: vertical;
+}
