@@ -14,7 +14,12 @@ h5, p{
 }
 
 .detail-page{
+    min-height: 600px;
     background-color: #18181A;
+}
+
+.detail-content{
+    padding: 3em 0;
 }
 
 .information-section{
@@ -43,7 +48,6 @@ h5, p{
 
 .anime-poster{
     width: 18%;
-
 }
 
 .information-section__third{
@@ -63,13 +67,15 @@ h5, p{
 }
 
 .character-section{
-    padding: 1em 0;
+    padding: 4em 0;
     min-height: 300px;
 }
 
 .character-section__cards{
     padding: 1em 0;
 }
+
+
 
 .load-button{
     align-self: center;
@@ -92,6 +98,7 @@ h5, p{
     padding: 2em 0;
 }
 
+    
 .card-wrapper{
     padding: 3em 0;
 }

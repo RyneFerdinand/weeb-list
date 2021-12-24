@@ -7,8 +7,34 @@ import ReviewCard from "../../components/review-card/ReviewCard";
 import RecommendationCard from "../../components/recommendation-card/RecommendationCard";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
+import { useState, useEffect } from "react";
+import { useParams } from "react-router-dom/cjs/react-router-dom.min";
+import axios from "axios";
 
 function DetailPage(){
+    let { id } = useParams();
+    let query = "";
+
+    const [anime, setAnime] = useState(()=>[])
+    const [fetchStatus, setFetchStatus] = useState(()=>true)
+    const [characterCount, setCharacterCount] = useState(() => 6)
+
+    useEffect(() => {
+        const getAnime = async () => {
+            let API_URL = "http://localhost:8080/anime/" + id;
+            console.log(API_URL)
+            try {
+                const anime = await axios.get(API_URL);
+                setAnime(anime.data);
+                console.log(anime.data)
+                setFetchStatus(false);
+            } catch (error) {
+                console.log(error);
+            }
+        }
+        getAnime();
+    }, [query]);
+
     let genres = ["Drama", "Slice of Life"];
 
     let characters = [
@@ -132,90 +158,115 @@ function DetailPage(){
           items: 1,
           slidesToSlide: 1 
         }
-      };
+    };
+
+    const loadCharacter = () => {
+        setCharacterCount(count => count + 6);
+    }
+
+    const hideCharacter = () => {
+        setCharacterCount(6);
+    }
+
     return (
         <div className="detail-page">
-            <div className="d-flex flex-row align-items-center information-section custom-container">
-                <img src={poster} alt="" className="anime-poster" />
-                <div className="d-flex flex-column anime-detail">
-                    <h1>March Comes in Like a Lion 2nd Season</h1>
-                    <div className="information-section__second align-items-center d-inline-flex">
-                        <span className="d-flex align-items-center genre-container">
-                            {genres?.map((genre, idx) => {return idx + 1 === genres.length ? <GenreTag tag={genre}/> : <GenreTag tag={genre + ","}/>})}
-                        </span>
-                        <p>
-                            | Oct 14, 2017 - Mar 31, 2018 | 25 mins
-                        </p>
-                    </div>
-                    <div className="d-flex flex-row align-items-center information-section__third">
-                        <h5>Overview</h5>
-                        <span className="d-flex flex-row align-items-center rating">
-                            <FontAwesomeIcon icon={['fas', 'star']} style={{ color: "#E4C44F" }} />
-                            <p>8.97</p>
-                        </span>
-                    </div>
-                    <div className="information-section__fourth">
-                        <p className="description-section">
-                            Having reached professional status in middle school, Rei Kiriyama is one of the few elite in the world of shogi. Due to this, he faces an enormous amount of pressure, both from the shogi community and his adoptive family. Seeking independence from his tense home life, he moves into an apartment in Tokyo. As a 17-year-old living on his own, Rei tends to take poor care of himself, and his reclusive personality ostracizes him from his peers in school and at the shogi hall.
-                        </p>
-                    </div>
+        {!fetchStatus?
 
-                </div>
-            
-            </div>
-            <div className="character-section d-flex flex-column justify-content-start custom-container">
-                <h1>Characters & <span className="text--blue">Voice Actors</span></h1>
+            <div className="detail-content">
+                <div className="d-flex flex-row align-items-center information-section custom-container">
+                    <img src={anime.image_url} alt="" className="anime-poster" />
+                    <div className="d-flex flex-column anime-detail">
+                        <h1>{anime.title}</h1>
+                        <div className="information-section__second align-items-center d-inline-flex">
+                            <span className="d-flex align-items-center genre-container">
+                                {anime.genres?.map((genre, idx) => {return idx + 1 === anime.genres.length ? <GenreTag tag={genre.name}/> : <GenreTag tag={genre.name + ","}/>})}
+                            </span>
+                            <p>
+                                | {anime.aired.string.replace("to", "-")} | {anime.duration.replace(" per ep", "s")}
+                            </p>
+                        </div>
+                        <div className="d-flex flex-row align-items-center information-section__third">
+                            <h5>Overview</h5>
+                            <span className="d-flex flex-row align-items-center rating">
+                                <FontAwesomeIcon icon={['fas', 'star']} style={{ color: "#E4C44F" }} />
+                                <p>{anime.score}</p>
+                            </span>
+                        </div>
+                        <div className="information-section__fourth">
+                            <p className="description-section">
+                                {anime.synopsis.replace(" [Written by MAL Rewrite]", "")}
+                            </p>
+                        </div>
 
-                <div className="character-section__cards">
-                    <div className="row row-cols-3">
-                    {
-                        characters.map(character => <CharacterCard character={character}/>)
-                    }
                     </div>
-                </div>
-                <button className="d-flex flex-row align-items-center load-button">
-                    <FontAwesomeIcon icon={['fas', 'chevron-down']} style={{ color: "#44C1E9" }} />
-                    <p>Load More</p>
-                </button>
                 
-            </div>
-
-            
-            <div className="d-flex flex-column review-section custom-container">
-                <h1>Review</h1>
-                <div className="review-section__review d-flex flex-column">
-                    {
-                        reviews.map(review=><ReviewCard review={review}/>)
-                    }
                 </div>
-                <button className="d-flex flex-row align-items-center load-button">
-                    <FontAwesomeIcon icon={['fas', 'chevron-down']} style={{ color: "#44C1E9" }} />
-                    <p>Load More</p>
-                </button>
-            </div>
+                <div className="character-section d-flex flex-column justify-content-start custom-container">
+                    <h1>Characters & <span className="text--blue">Voice Actors</span></h1>
 
-            <div className="recommendation-section custom-container d-flex flex-column">
-                
-                <h1>More <span className="text--blue">Like</span> This</h1>
-                <div className="recommendation-section__cards">
-                    <Carousel 
-                        swipeable={false} 
-                        className="card-wrapper" 
-                        draggable={false} 
-                        partialVisbile={false} 
-                        responsive={responsive}
-                        containerClass="carousel-container"
-                        itemClass="carousel-item-padding-40-px"
-                    >
+                    <div className="character-section__cards">
+                        <div className="row row-cols-3">
                         {
-                            recommendations.map(recommendation => <RecommendationCard recommendation={recommendation}/>)
+                            anime.characters.map((character, idx) => idx < characterCount ? <CharacterCard character={character}/> : <></>)
                         }
-                    </Carousel>
-                </div>
-  
-            </div>
+                        </div>
+                    </div>
+                    {
+                        characterCount < anime.characters.length?
+                        <button className="d-flex flex-row align-items-center load-button" onClick={loadCharacter}>
+                            <FontAwesomeIcon icon={['fas', 'chevron-down']} style={{ color: "#44C1E9" }} />
+                            <p>Load More</p>
+                        </button>:
+                        <button className="d-flex flex-row align-items-center load-button" onClick={hideCharacter}>
+                            <FontAwesomeIcon icon={['fas', 'chevron-up']} style={{ color: "#44C1E9" }} />
+                            <p>Hide</p>
+                        </button>
+                    }
 
+
+                    
+                </div>
+
+                
+                <div className="d-flex flex-column review-section custom-container">
+                    <h1>Review</h1>
+                    <div className="review-section__review d-flex flex-column">
+                        {
+                            reviews.map(review=><ReviewCard review={review}/>)
+                        }
+                    </div>
+                    <button className="d-flex flex-row align-items-center load-button">
+                        <FontAwesomeIcon icon={['fas', 'chevron-down']} style={{ color: "#44C1E9" }} />
+                        <p>Load More</p>
+                    </button>
+                </div>
+
+                <div className="recommendation-section custom-container d-flex flex-column">
+                    
+                    <h1>More <span className="text--blue">Like</span> This</h1>
+                    <div className="recommendation-section__cards">
+                        <Carousel 
+                            swipeable={false} 
+                            className="card-wrapper" 
+                            draggable={false} 
+                            partialVisbile={false} 
+                            responsive={responsive}
+                            containerClass="carousel-container"
+                            itemClass="carousel-item-padding-40-px"
+                        >
+                            {
+                                recommendations.map(recommendation => <RecommendationCard recommendation={recommendation}/>)
+                            }
+                        </Carousel>
+                    </div>
+    
+                </div>
+            </div>
+            :
+            <div></div>
+        }
         </div>
+        
     )
 }
 

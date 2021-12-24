@@ -4,6 +4,7 @@ import axios from 'axios'
 import "./AnimePage.css"
 import ToggleButton from '@mui/material/ToggleButton';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
+import { Link } from "react-router-dom";
 
 function AnimePage(){
     
@@ -16,9 +17,9 @@ function AnimePage(){
             console.log(API_URL)
             try {
                 const anime = await axios.get(API_URL);
-                setAnimeList(anime.data.top)
+                setAnimeList(anime.data.top);
             } catch (error) {
-                console.log(error)
+                console.log(error);
             }
         }
         getAnime();
@@ -30,16 +31,15 @@ function AnimePage(){
             <h1 className="text--blue">Anime</h1>
                 {/* <div className="anime-data d-flex flex-row"> */}
                     
-                    <div className="card-container">
-                    {
-                        animeList?.map(anime=>{
-                            return(
-                                <SearchCard anime={anime}/>
-                            )
-                        })
-                    }
-
-                    </div>
+                        <div className="card-container">
+                        {
+                            animeList?.map(anime=>{
+                                return(
+                                        <SearchCard anime={anime}/>
+                                    )
+                                })
+                        }
+                        </div>
                 {/* </div> */}
             </div>
         </div>

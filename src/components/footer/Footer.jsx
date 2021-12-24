@@ -7,7 +7,6 @@ function Footer() {
         <div className = "footer">
             <div className = "above">
                 <div className ="item">
-                   
                         <img className ="footer-logo"
                             src={WebsiteLogo}
                             alt="logo"/>
