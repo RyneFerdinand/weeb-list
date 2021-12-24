@@ -12,7 +12,8 @@ function AnimePage(){
 
     useEffect(() => {
         const getAnime = async () => {
-            let API_URL = "https://api.jikan.moe/v3/top/anime/1";
+            let API_URL = "http://localhost:8080/anime/top/1";
+            console.log(API_URL)
             try {
                 const anime = await axios.get(API_URL);
                 setAnimeList(anime.data.top)
