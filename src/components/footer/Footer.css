@@ -1,0 +1,94 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap");
+
+* {
+  margin: 0;
+}
+
+.footer {
+  background-color: #252525;
+}
+
+.above {
+  display: flex;
+  justify-content: space-around;
+  padding: 10px;
+}
+
+.item {
+  justify-content: center;
+  text-align: center;
+}
+
+.footer-logo {
+  width: 150px;
+}
+
+h1 {
+  color: white;
+  font-family: Montserrat;
+  font-weight: bold;
+  font-size: 26px;
+}
+
+p {
+  color: white;
+  width: 180px;
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 12.5px;
+  line-height: 18px;
+  text-align: center;
+  padding-top: 10px;
+}
+
+a {
+  color: #44c1e9;
+  text-decoration: none;
+}
+
+.logo-caption {
+  color: #2790b1;
+  font-family: "Poppins", sans-serif;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.followUs {
+  padding-top: 20px;
+  display: flex;
+  justify-content: space-between;
+  width: 250px;
+}
+
+.followUs i {
+  color: white;
+  font-size: 30px;
+}
+
+.back-to-top {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.back-to-top h1 {
+  font-size: 22px;
+  padding: 10px;
+}
+
+.back-to-top i {
+  font-size: 40px;
+}
+.above {
+  padding-top: 50px;
+}
+
+.bottom {
+  padding-bottom: 30px;
+  padding-top: 20px;
+}
+.copy-right {
+  width: 100%;
+}

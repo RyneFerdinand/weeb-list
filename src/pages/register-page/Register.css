@@ -1,0 +1,152 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap");
+
+* {
+  background-color: #18181a;
+}
+
+a {
+  text-decoration: none;
+}
+
+.register {
+  font-family: "Poppins", sans-serif;
+}
+
+.website-logo img {
+  width: 100px;
+}
+
+.website-logo {
+  margin-left: 36px;
+  margin-top: 30px;
+}
+
+.register-content {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.caption {
+  width: 500px;
+}
+
+.caption h1 {
+  font-size: 64px;
+}
+.caption a {
+  color: #44c1e9;
+}
+
+.sub-caption {
+  padding-top: 28px;
+}
+
+.sub-caption p {
+  font-size: 18px;
+  text-align: left;
+  width: 100%;
+  color: #9f9c9c;
+}
+
+.sub-caption a {
+  color: #44c1e9;
+}
+
+.register-back {
+  padding-top: 20px;
+  padding-left: 125px;
+}
+
+.form-box1 {
+  display: flex;
+  align-items: center;
+  border: 2.5px solid #44c1e9;
+  border-radius: 15px;
+  background-color: #242424;
+  width: 600px;
+  height: 60px;
+
+  margin-top: 18px;
+  margin-bottom: 18px;
+}
+.form-box1 p {
+  padding: 0;
+  text-align: left;
+  width: 150px;
+  padding-left: 18px;
+  font-weight: bold;
+  font-size: 20px;
+  color: #8f8f8f;
+  background-color: #242424;
+}
+.form-box1 input {
+  font-family: "Poppins", sans-serif;
+  border: none;
+  color: white;
+  font-weight: normal;
+  font-size: 20px;
+  background-color: #242424;
+  outline: none;
+  width: 400px;
+}
+
+.terms {
+  display: flex;
+  align-items: center;
+  padding-left: 25px;
+}
+
+.terms input {
+  width: 24px;
+  height: 24px;
+  outline: none;
+  border-radius: 5px;
+  color: #c4c4c4;
+}
+
+.terms p {
+  font-size: 14px;
+  width: 65%;
+  padding: 0;
+}
+
+.createAcc {
+  padding-top: 20px;
+}
+
+.createAcc input {
+  font-family: "Poppins", sans-serif;
+  border: none;
+  color: white;
+  font-weight: normal;
+  font-size: 20px;
+  background-color: #242424;
+  outline: none;
+
+  background-color: #2790b1;
+  border-radius: 20px;
+  width: 606px;
+  height: 60px;
+  font-size: 30px;
+  font-style: normal;
+  font-weight: normal;
+  line-height: 45px;
+}
+
+.createAcc input:hover {
+  background-color: #036d8e;
+}
+
+.left {
+  margin-right: 20px;
+}
+
+.right {
+  margin-left: 20px;
+}
+
+.form-box:first-child {
+  margin-top: 0;
+}
