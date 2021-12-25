@@ -1,5 +1,5 @@
 import './App.css';
-import { HashRouter as Router, Link, Route, Switch } from 'react-router-dom';
+import { HashRouter as Router, Route, Switch } from 'react-router-dom';
 import DetailPage from './pages/detail-page/DetailPage';
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { fas } from '@fortawesome/free-solid-svg-icons'
@@ -13,21 +13,21 @@ library.add(fas);
 function App() {
   return (
     <div>
-      <Header/>
-      <Router>
-        <Switch>
-          <Route path="/anime/:id">
-            <DetailPage/>
-          </Route>
-          <Route path="/anime">
-            <AnimePage/>
-          </Route>
-          <Route path="/">
-            <HomePage/>
-          </Route>
-        </Switch>
-      </Router>
-      <Footer/>
+        <Router>
+          <Header/>
+            <Switch>
+              <Route path="/anime/:id">
+                <DetailPage/>
+              </Route>
+              <Route path="/anime">
+                <AnimePage/>
+              </Route>
+              <Route path="/">
+                <HomePage/>
+              </Route>
+            </Switch>
+          <Footer/>
+        </Router>
     </div>
   )
 }

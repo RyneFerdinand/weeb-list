@@ -1,5 +1,7 @@
 import BottomDetail from "./BottomDetail";
 import MoreDiv from "./MoreDiv";
+import "./HomePageStyle.css";
+
 function Middle(props){
     return (
         <div className="middle">

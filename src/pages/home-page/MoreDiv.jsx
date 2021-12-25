@@ -1,3 +1,5 @@
+import "./HomePageStyle.css";
+
 function MoreDiv(){
     return (
         <div className="more-div">

@@ -1,5 +1,7 @@
 import BottomDetail from "./BottomDetail";
 import MoreDiv from "./MoreDiv";
+import "./HomePageStyle.css";
+
 function TopAndBottom(props){
     return (
         <div className="top">

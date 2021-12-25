@@ -1,5 +1,7 @@
 import TopAndBottom from "./TopAndBottom";
 import Middle from "./Middle";
+import "./HomePageStyle.css";
+
 function HomePage(){
     let anime = [
         {

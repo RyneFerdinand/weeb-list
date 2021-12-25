@@ -1,3 +1,5 @@
+import "./HomePageStyle.css";
+
 function BottomDetail(){
     return (
         <div className="bottom-detail">

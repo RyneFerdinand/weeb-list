@@ -35,53 +35,6 @@ function DetailPage(){
         getAnime();
     }, [query]);
 
-    let genres = ["Drama", "Slice of Life"];
-
-    let characters = [
-        {
-            "charName": "Kiriyama, Rei",
-            "charImage": "https://cdn.myanimelist.net/images/characters/14/320199.jpg",
-            "role": "Main",
-            "vaName": "Kawanishi, Kengo",
-            "vaImage": "https://cdn.myanimelist.net/images/voiceactors/1/63509.jpg"
-        },
-        {
-            "charName": "Kawamoto, Hinata",
-            "charImage": "https://cdn.myanimelist.net/images/characters/6/320379.jpg",
-            "role": "Main",
-            "vaName": "Hanazawa, Kana",
-            "vaImage": "https://cdn.myanimelist.net/images/voiceactors/3/61259.jpg"
-        },
-        {
-            "charName": "Kawamoto, Akari",
-            "charImage": "https://cdn.myanimelist.net/images/characters/6/320383.jpg",
-            "role": "Main",
-            "vaName": "Kayano, Ai",
-            "vaImage": "https://cdn.myanimelist.net/images/voiceactors/3/60503.jpg"
-        },
-        {
-            "charName": "Kawamoto, Momo",
-            "charImage": "https://cdn.myanimelist.net/images/characters/16/314603.jpg",
-            "role": "Main",
-            "vaName": "Kuno, Misaki",
-            "vaImage": "https://cdn.myanimelist.net/images/voiceactors/1/62089.jpg"
-        },
-        {
-            "charName": "Shimada, Kai",
-            "charImage": "https://cdn.myanimelist.net/images/characters/8/321343.jpg",
-            "role": "Supporting",
-            "vaName": "Miki, Shiniciro",
-            "vaImage": "https://cdn.myanimelist.net/images/voiceactors/3/54678.jpg"
-        },
-        {
-            "charName": "Nikaido, Harunobu",
-            "charImage": "https://cdn.myanimelist.net/images/characters/14/314605.jpg",
-            "role": "Supporting",
-            "vaName": "Okamoto, Nobuhiko",
-            "vaImage": "https://cdn.myanimelist.net/images/voiceactors/2/48785.jpg"
-        }
-    ]
-
     let reviews = [
         {
             "profile": "https://media-exp1.licdn.com/dms/image/C4E03AQGIbxivyhW18Q/profile-displayphoto-shrink_800_800/0/1632250683020?e=1645056000&v=beta&t=juY6_qRxSSAmWTMjWCrzKYGXqtkCNtyVQ3zZKdGOLnE",

@@ -3,6 +3,7 @@ import './Header.css'
 import WebsiteLogo from '../../Website Logo.png';
 import SearchBar from '../search-bar/SearchBar';
 import anime from '../../MOCK_DATA.json'
+import { Link } from 'react-router-dom';
 
 function Header() {
     return (
@@ -14,10 +15,10 @@ function Header() {
             src={WebsiteLogo}
             alt= "logo"/>
             <div className ="bar">
-              <a className="menu-bar" href="https://react.org">Home</a>
+              <Link to="/" className="menu-bar">Home</Link>
             </div>
             <div className ="bar">
-              <a className="menu-bar" href="https://react.org">Anime</a>
+              <Link to="anime" className="menu-bar">Anime</Link>
             </div>
           </div>
           
