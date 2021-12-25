@@ -8,7 +8,7 @@ import 'react-dropdown/style.css';
 function AnimePage(){
 
     const [animeList, setAnimeList] = useState(()=> []);
-    const [query, setQuery] = useState(()=>[]);
+    const [query, setQuery] = useState(()=> "");
     const [genre, setGenre] = useState(()=>[]);
     const [sortBy, setSortBy] = useState(()=>[]);
     const [season, setSeason] = useState(()=>[]);
@@ -17,10 +17,11 @@ function AnimePage(){
 
     useEffect(() => {
         const getAnime = async () => {
-            let API_URL = "http://localhost:8080/anime/top/1";
+            let API_URL = "http://localhost:8080/anime/search?q=" + query;
+            console.log(API_URL);
             try {
                 const anime = await axios.get(API_URL);
-                setAnimeList(anime.data.top);
+                setAnimeList(anime.data.results);
             } catch (error) {
                 console.log(error.message);
             }
@@ -30,7 +31,7 @@ function AnimePage(){
 
     useEffect(()=>{
         const getFilters = async ()=> {
-            let API_URL = "http://localhost:8080/anime/sort";
+            let API_URL = "http://localhost:8080/anime/sort" + query;
             try {
                 let sort = await axios.get(API_URL);
                 sort = sort.data;
@@ -83,11 +84,23 @@ function AnimePage(){
     
     function changeGenreState(selectedGenre){
         let tempGenre = genre;
+        let genreQuery = "&genre=";
+        let first = true;
+        
         tempGenre.forEach(gen => {
             if(gen.genreID === selectedGenre.genreID){
                 gen.selected = !gen.selected;
             }
+            if(gen.selected){
+                if(first){
+                    genreQuery += gen.genreID;
+                    first = false;
+                } else{
+                    genreQuery += "," + gen.genreID;
+                }
+            }
         });
+        setQuery(genreQuery);
         setGenre([...tempGenre]);
     }
 
