@@ -1,4 +1,5 @@
 import WatchlistDelete from "./WatchlistDelete"
+
 function WatchlistContent(props){
     let watchlistRating = props.watchlistRating
     if (watchlistRating === "Add Rating"){
@@ -10,7 +11,7 @@ function WatchlistContent(props){
     return (
         <div className="watchlist-content">
             <div className="watchlist-title">
-                <img src={props.watchlistImage}></img>
+                <img src={props.watchlistImage}/>
                 <div>
                     &nbsp; {props.watchlistTitle}
                 </div>

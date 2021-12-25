@@ -18,7 +18,7 @@ function Header() {
               <Link to="/" className="menu-bar">Home</Link>
             </div>
             <div className ="bar">
-              <Link to="anime" className="menu-bar">Anime</Link>
+              <Link to="/anime" className="menu-bar">Anime</Link>
             </div>
           </div>
           

@@ -1,5 +1,7 @@
 import WatchlistContent from "./WatchlistContent"
-function HomePage(){
+import './WatchlistPageStyle.css'
+
+function WatchlistPage(){
     let watchlists = [
         {
             "title": "Boruto: Naruto Next Generations",
@@ -48,4 +50,4 @@ function HomePage(){
     )
 }
 
-export default HomePage
+export default WatchlistPage

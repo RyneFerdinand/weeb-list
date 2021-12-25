@@ -1,4 +1,5 @@
 import "./DetailPageStyle.css"
+import poster from "../../assets/sangatsu.jpg"
 import GenreTag from "../../components/genre-tag/GenreTag";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import CharacterCard from "../../components/character-card/CharacterCard";
@@ -154,7 +155,7 @@ function DetailPage(){
                 
                 </div>
                 <div className="character-section d-flex flex-column justify-content-start custom-container">
-                    <h1>Characters & <span className="text--blue">Voice Actors</span></h1>
+                    <h1>Characters & <span className="text--blue fw-bolder">Voice Actors</span></h1>
 
                     <div className="character-section__cards">
                         <div className="row row-cols-3">
@@ -195,7 +196,7 @@ function DetailPage(){
 
                 <div className="recommendation-section custom-container d-flex flex-column">
                     
-                    <h1>More <span className="text--blue">Like</span> This</h1>
+                    <h1>More <span className="text--blue fw-bolder">Like</span> This</h1>
                     <div className="recommendation-section__cards">
                         <Carousel 
                             swipeable={false} 
