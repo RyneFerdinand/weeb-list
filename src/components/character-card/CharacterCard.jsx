@@ -3,9 +3,8 @@ import "./CharacterCard.css"
 function CharacterCard(props){
 
     function getJapaneseVA(voiceActors) {
-        console.log("MASUK")
         for (let i = 0; i < voiceActors.length; i++) {
-            const va = voiceActors[i];
+                const va = voiceActors[i];
             if(va.language === "Japanese"){
                 return va;
             }

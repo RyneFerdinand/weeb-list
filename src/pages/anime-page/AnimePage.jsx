@@ -8,7 +8,7 @@ function AnimePage(){
     
     const [animeList, setAnimeList] = useState(()=> [])
     const [query, setQuery] = useState(()=>[]);
-    const [genre, setGenre] = useState(()=>[])
+    const [genre, setGenre] = useState(()=>[]);
 
     useEffect(() => {
         const getAnime = async () => {
@@ -40,7 +40,17 @@ function AnimePage(){
         getGenres();
     }, []);
 
- 
+    function changeButtonState(selectedGenre){
+        let tempGenre = genre;
+        tempGenre.forEach(gen => {
+            if(gen.genreID === selectedGenre.genreID){
+                gen.selected = !gen.selected;
+            }
+        });
+
+        setGenre(tempGenre);
+    }
+
     return (
         <div className="anime-page">
             <div className="anime-section custom-container">
@@ -51,7 +61,7 @@ function AnimePage(){
                         {
                             animeList?.map(anime=>{
                                 return(
-                                        <SearchCard anime={anime}/>
+                                        <SearchCard key={anime.mal_id} anime={anime}/>
                                     )
                                 })
                         }
@@ -59,10 +69,10 @@ function AnimePage(){
 
 
                 </div>
-                {
+                {/*
                     genre?
-                    genre.map(gen=> <ToggleButton selected={gen.selected} value={gen.genreName} />) :  <></>
-                }
+                    genre.map(gen=> <ToggleButton key={gen.genreID} value={gen} buttonState={gen => changeButtonState(gen)} />) :  <></>
+                */}
             </div>
         </div>
     )

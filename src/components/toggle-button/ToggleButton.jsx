@@ -2,12 +2,8 @@ import './ToggleButton.css'
 
 function ToggleButton(props){
 
-    function buttonSelect(){
-        props.selected = !props.selected;
-    }
-
     return (
-        <button value={props.value} className={props.selected ? "toggle-btn btn-selected" : "toggle-btn"} onClick={}>{props.value}</button>
+        <button value={props.value.genreID} className={props.value.selected ? "toggle-btn btn-selected" : "toggle-btn"} onClick={() => props.buttonState(props.value)}>{props.value.genreName}</button>
     )
 }
 

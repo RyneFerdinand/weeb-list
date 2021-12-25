@@ -1,5 +1,4 @@
 import "./DetailPageStyle.css"
-import poster from "../../assets/sangatsu.jpg"
 import GenreTag from "../../components/genre-tag/GenreTag";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import CharacterCard from "../../components/character-card/CharacterCard";
@@ -141,7 +140,7 @@ function DetailPage(){
                         <div className="d-flex flex-row align-items-center information-section__third">
                             <h5>Overview</h5>
                             <span className="d-flex flex-row align-items-center rating">
-                                <FontAwesomeIcon icon={['fas', 'star']} style={{ color: "#E4C44F" }} />
+                                <FontAwesomeIcon icon={['fas', 'star']} style={{ color: "#FF0000" }}/>
                                 <p>{anime.score}</p>
                             </span>
                         </div>

@@ -5,3 +5,7 @@
     color: #FFFFFF;
     font-family: Poppins, sans-serif;
 }
+
+.btn-selected{
+    background-color: #44C1E9;
+}
