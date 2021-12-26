@@ -3,10 +3,10 @@ import WatchlistDelete from "./WatchlistDelete"
 function WatchlistContent(props){
     let watchlistRating = props.watchlistRating
     if (watchlistRating === "Add Rating"){
-        watchlistRating = <div><i class="fas fa-plus"></i>&nbsp;{watchlistRating}</div>
+        watchlistRating = <div><i className="fas fa-plus"></i>&nbsp;{watchlistRating}</div>
     }
     else {
-        watchlistRating = <div><i class="fas fa-star"></i>&nbsp;{watchlistRating}</div>
+        watchlistRating = <div><i className="fas fa-star"></i>&nbsp;{watchlistRating}</div>
     }
     return (
         <div className="watchlist-content">

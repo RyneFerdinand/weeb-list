@@ -35,7 +35,7 @@ function Login() {
                 </div>
             </div>
             <div className="back">
-                <a><i class="fas fa-chevron-left"></i> Back to Home</a>
+                <a><i className="fas fa-chevron-left"></i> Back to Home</a>
             </div>
         </div>
     )

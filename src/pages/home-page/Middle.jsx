@@ -10,8 +10,8 @@ function Middle(props){
                 <span className="first-title" style={{float: "right"}}>{props.firstTitle}</span>
             </div>
             <div className="content">
-                <div class="image" style={{backgroundImage: "url(props.image)"}}>
-                    <div class="second-transparent-image"></div>
+                <div className="image" style={{backgroundImage: "url(props.image)"}}>
+                    <div className="second-transparent-image"></div>
                 </div>
                 <div className="detail">
                     <div className="top-detail">
@@ -22,10 +22,10 @@ function Middle(props){
                             {props.animeGenre}
                         </div>
                         <div className="anime-show">
-                            <i class="fas fa-tv"></i> {props.animeShow}
+                            <i className="fas fa-tv"></i> {props.animeShow}
                         </div>
                         <div className="anime-date">
-                            <i class="fa fa-calendar" aria-hidden="true"></i>&nbsp; {props.animeDate}
+                            <i className="fa fa-calendar" aria-hidden="true"></i>&nbsp; {props.animeDate}
                         </div>
                         <div className="anime-description">
                             {props.animeDescription}

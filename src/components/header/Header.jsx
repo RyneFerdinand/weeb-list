@@ -2,7 +2,6 @@ import React from 'react'
 import './Header.css'
 import WebsiteLogo from '../../Website Logo.png';
 import SearchBar from '../search-bar/SearchBar';
-import anime from '../../MOCK_DATA.json'
 import { Link } from 'react-router-dom';
 
 function Header() {
@@ -22,14 +21,14 @@ function Header() {
             </div>
           </div>
           
-          <SearchBar placeholder="Search anime, genre, and more..." data={anime}/>
+          <SearchBar placeholder="Search anime..."/>
           
           <div className="right-nav d-flex flex-row align-items-center justify-content-end">
             <div className="right-bar">
               <a href="https://mywatchlist.com"className = "menu-bar">My watchlist</a>
             </div>
             <div className="user"> 
-              <a href="https://user.com" ><i class="fal fa-user"></i></a>
+              <a href="https://user.com" ><i className="fal fa-user"></i></a>
             </div>
           </div>
         </nav>

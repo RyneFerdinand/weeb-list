@@ -80,3 +80,19 @@ h5, p{
 .btn-selected{
     background-color: #44C1E9;
 }
+
+.custom-select{
+    background-color: transparent;
+    color: #FFFFFF;
+    width: 100%;
+    border: #44C1E9 2px solid;
+    padding: 0.4em 1em;
+    border-radius: 3px;
+    grid-column: 1 / 3;
+    cursor: pointer;
+}
+
+.custom-select option{
+    color: #000000;
+
+}

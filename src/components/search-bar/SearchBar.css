@@ -40,7 +40,7 @@
 
 .searchIcon i {
   font-size: 22px;
-  opacity: 50%;
+  /* opacity: 50%; */
   background-color: #383838;
 }
 
@@ -50,10 +50,10 @@
 }
 
 .dataResult {
+  z-index: 10;
   margin-top: 10px;
-  /* padding-top: px; */
   width: 540px;
-  height: 200px;
+  height: 400px;
   background-color: #383838;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   overflow: hidden;

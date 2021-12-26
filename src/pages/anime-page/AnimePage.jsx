@@ -2,25 +2,35 @@ import SearchCard from "../../components/search-card/SearchCard"
 import { useState, useEffect } from 'react'
 import axios from 'axios'
 import "./AnimePage.css"
-import Dropdown from 'react-dropdown';
 import 'react-dropdown/style.css';
+import { useLocation } from "react-router-dom";
+import queryString from 'query-string'
 
 function AnimePage(){
 
+    const { search } = useLocation();
+    let searchObj = queryString.parse(search);
+
+
     const [animeList, setAnimeList] = useState(()=> []);
-    const [query, setQuery] = useState(()=> "");
+    const [query, setQuery] = useState(()=> (searchObj.q !== undefined ? searchObj.q : ""));
     const [genre, setGenre] = useState(()=>[]);
     const [sortBy, setSortBy] = useState(()=>[]);
     const [season, setSeason] = useState(()=>[]);
     const [yearList, setYearList] = useState(()=>[]);
-    const [year, setYear] = useState(()=>"Year");
+    const [year, setYear] = useState(()=>2022);
+
 
     useEffect(() => {
         const getAnime = async () => {
+            
             let API_URL = "http://localhost:8080/anime/search?q=" + query;
             console.log(API_URL);
             try {
                 const anime = await axios.get(API_URL);
+                if(anime.data.results.length !== 50){
+                    anime.data.results = anime.data.results.slice(0, 50);
+                }
                 setAnimeList(anime.data.results);
             } catch (error) {
                 console.log(error.message);
@@ -31,7 +41,7 @@ function AnimePage(){
 
     useEffect(()=>{
         const getFilters = async ()=> {
-            let API_URL = "http://localhost:8080/anime/sort" + query;
+            let API_URL = "http://localhost:8080/anime/sort";
             try {
                 let sort = await axios.get(API_URL);
                 sort = sort.data;
@@ -81,27 +91,57 @@ function AnimePage(){
         }
         getFilters();
     }, []);
+
+    useEffect(() => {
+        setQuery(encodeURI(searchObj.q !== undefined ? searchObj.q : ""));
+        updateQuery();
+    }, [searchObj])
+
+    function updateQuery(){
+        let q = "";
+
+        let seasonChosen = false;
+        season.forEach(season => {
+            if(season.selected){
+                q += ("&season=" + season.season.toLowerCase());
+                seasonChosen = true;
+            }
+        })
+
+        if(seasonChosen){
+            q += ("&year=" + year);
+        } else {
+            let exist = false;
+            genre.forEach(gen => {
+                if(gen.selected && !exist){
+                    exist = true;
+                    q += "&genre=" + gen.genreID;
+                } else if(gen.selected){
+                    q += "," + gen.genreID;
+                }
+            });
+    
+    
+            sortBy.forEach(sort => {
+                if(sort.selected){
+                    q += ("&order_by=" + (sort.sortBy === "Latest Added" ? "start_date" : sort.sortBy.toLowerCase()));
+                } 
+            })
+    
+        }
+        setQuery(prevQuery => (prevQuery + q));
+    }
     
     function changeGenreState(selectedGenre){
         let tempGenre = genre;
-        let genreQuery = "&genre=";
-        let first = true;
         
         tempGenre.forEach(gen => {
             if(gen.genreID === selectedGenre.genreID){
                 gen.selected = !gen.selected;
             }
-            if(gen.selected){
-                if(first){
-                    genreQuery += gen.genreID;
-                    first = false;
-                } else{
-                    genreQuery += "," + gen.genreID;
-                }
-            }
         });
-        setQuery(genreQuery);
         setGenre([...tempGenre]);
+        updateQuery();
     }
 
     function changeSortState(selectedSort){
@@ -109,9 +149,12 @@ function AnimePage(){
         tempSort.forEach(sort => {
             if(sort.sortBy === selectedSort.sortBy){
                 sort.selected = !sort.selected;
+            } else {
+                sort.selected = false;
             }
         })
         setSortBy([...tempSort]);
+        updateQuery();
     }
 
     function changeSeasonState(selectedSeason){
@@ -119,9 +162,25 @@ function AnimePage(){
         tempSeason.forEach(season => {
             if(season.season === selectedSeason.season){
                 season.selected = !season.selected;
+            } else {
+                season.selected = false;
             }
         })
         setSeason([...tempSeason]);
+        updateQuery();
+    }
+
+    function changeYearState(selectedYear){
+        setYear(selectedYear.target.value);
+        let seasonChosen = false;
+        season.forEach(season => {
+            if(season.selected){
+                seasonChosen = true;
+            }
+        })
+        if(seasonChosen){
+            updateQuery();
+        }
     }
 
     return (
@@ -148,6 +207,14 @@ function AnimePage(){
                                 <button value={sort.sortBy} className={sort.selected === true ? "toggle-btn btn-selected" : "toggle-btn"} onClick={() => changeSortState(sort)}>{sort.sortBy}</button>
                             )
                         }
+                        <h4 className="filter-title">Year</h4>
+                        <select className="form-select custom-select" onClick={(e)=>{changeYearState(e)}}>
+                            {
+                                yearList?.map(year=>
+                                    <option value={year}>{year}</option>
+                                )
+                            }
+                        </select>
                         <h4 className="filter-title">Season</h4>
                         {
                             season?.map(season=>

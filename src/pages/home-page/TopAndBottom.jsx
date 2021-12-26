@@ -16,10 +16,10 @@ function TopAndBottom(props){
                             {props.animeTitle}
                         </div>
                         <div className="anime-rating-genre">
-                            <i class="fas fa-star"></i> {props.animeRating} &emsp; {props.animeGenre}
+                            <i className="fas fa-star"></i> {props.animeRating} &emsp; {props.animeGenre}
                         </div>
                         <div className="anime-show">
-                            <i class="fas fa-tv"></i> {props.animeShow}
+                            <i className="fas fa-tv"></i> {props.animeShow}
                         </div>
                         <div className="anime-description">
                             {props.animeDescription}
@@ -27,8 +27,8 @@ function TopAndBottom(props){
                     </div>
                     <BottomDetail/>
                 </div>
-                <div class="image" style={{backgroundImage: "url(props.image)"}}>
-                    <div class="first-transparent-image"></div>
+                <div className="image" style={{backgroundImage: "url(props.image)"}}>
+                    <div className="first-transparent-image"></div>
                 </div>
             </div>
             <MoreDiv/>
