@@ -25,7 +25,7 @@ function Header() {
           
           <div className="right-nav d-flex flex-row align-items-center justify-content-end">
             <div className="right-bar">
-              <a href="https://mywatchlist.com"className = "menu-bar">My watchlist</a>
+              <Link to="/watchlist" className="menu-bar">My watchlist</Link>
             </div>
             <div className="user"> 
               <a href="https://user.com" ><i className="fal fa-user"></i></a>

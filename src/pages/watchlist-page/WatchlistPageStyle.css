@@ -7,7 +7,6 @@
 
 body{
     background-color: #18181A;
-    padding: 1vw
 }
 
 .title{
@@ -96,8 +95,4 @@ img{
     height: 2.5vw;
     width: 2.5vw;
     justify-content: center;
-}
-
-.fa-star{
-    color: #E4C44F;
 }

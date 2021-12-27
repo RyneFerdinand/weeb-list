@@ -142,12 +142,16 @@ function DetailPage(){
                             <h5>Overview</h5>
                             <span className="d-flex flex-row align-items-center rating">
                                 <FontAwesomeIcon icon={['fas', 'star']} style={{ color: "#FF0000" }}/>
-                                <p>{anime.score}</p>
+                                <p>{anime.score ? anime.score : "N/A"}</p>
                             </span>
                         </div>
                         <div className="information-section__fourth">
                             <p className="description-section">
-                                {anime.synopsis.replace(" [Written by MAL Rewrite]", "")}
+                                {
+                                    anime.synopsis?
+                                        anime.synopsis.includes(" [Written by MAL Rewrite]") ? anime.synopsis.replace(" [Written by MAL Rewrite]", "") : anime.synopsis
+                                        : "[There's currently no synopsis for this anime.]"
+                                }
                             </p>
                         </div>
 
@@ -155,8 +159,10 @@ function DetailPage(){
                 
                 </div>
                 <div className="character-section d-flex flex-column justify-content-start custom-container">
-                    <h1>Characters & <span className="text--blue fw-bolder">Voice Actors</span></h1>
-
+                    <div className="d-flex flex-row">
+                        <h1>Characters &&nbsp;</h1>
+                        <h1 className="text--blue">Voice Actors</h1>
+                    </div>
                     <div className="character-section__cards">
                         <div className="row row-cols-3">
                         {
@@ -196,7 +202,11 @@ function DetailPage(){
 
                 <div className="recommendation-section custom-container d-flex flex-column">
                     
-                    <h1>More <span className="text--blue fw-bolder">Like</span> This</h1>
+                    <div className="d-flex flex-row">
+                        <h1>More&nbsp;</h1>
+                        <h1 className="text--blue">Like&nbsp;</h1>
+                        <h1>This</h1>
+                    </div>
                     <div className="recommendation-section__cards">
                         <Carousel 
                             swipeable={false} 

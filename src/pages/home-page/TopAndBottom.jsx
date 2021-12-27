@@ -3,6 +3,7 @@ import MoreDiv from "./MoreDiv";
 import "./HomePageStyle.css";
 
 function TopAndBottom(props){
+    console.log(props);
     return (
         <div className="top">
             <div className="title">
@@ -27,7 +28,7 @@ function TopAndBottom(props){
                     </div>
                     <BottomDetail/>
                 </div>
-                <div className="image" style={{backgroundImage: "url(props.image)"}}>
+                <div className="image" style={{backgroundImage: `url(${props.image})`}}>
                     <div className="first-transparent-image"></div>
                 </div>
             </div>

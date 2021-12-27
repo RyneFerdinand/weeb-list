@@ -10,7 +10,7 @@ function Middle(props){
                 <span className="first-title" style={{float: "right"}}>{props.firstTitle}</span>
             </div>
             <div className="content">
-                <div className="image" style={{backgroundImage: "url(props.image)"}}>
+                <div className="image" style={{backgroundImage: `url(${props.image})`}}>
                     <div className="second-transparent-image"></div>
                 </div>
                 <div className="detail">

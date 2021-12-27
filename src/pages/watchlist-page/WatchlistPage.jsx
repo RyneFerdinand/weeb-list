@@ -1,5 +1,5 @@
 import WatchlistContent from "./WatchlistContent"
-import './WatchlistPageStyle.css'
+// import './WatchlistPageStyle.css'
 
 function WatchlistPage(){
     let watchlists = [

@@ -5,6 +5,7 @@ import "./AnimePage.css"
 import 'react-dropdown/style.css';
 import { useLocation } from "react-router-dom";
 import queryString from 'query-string'
+import LoadingBar from 'react-top-loading-bar'
 
 function AnimePage(){
 
@@ -12,30 +13,37 @@ function AnimePage(){
     let searchObj = queryString.parse(search);
 
 
-    const [animeList, setAnimeList] = useState(()=> []);
+    const [animeList, setAnimeList] = useState([]);
     const [query, setQuery] = useState(()=> (searchObj.q !== undefined ? searchObj.q : ""));
     const [genre, setGenre] = useState(()=>[]);
     const [sortBy, setSortBy] = useState(()=>[]);
     const [season, setSeason] = useState(()=>[]);
     const [yearList, setYearList] = useState(()=>[]);
     const [year, setYear] = useState(()=>2022);
+    const [fetchProgress, setFetchProgress] = useState(()=> 0);
 
+    const getAnime = async () => {
+        setAnimeList([]);
+        let API_URL = "http://localhost:8080/anime/search?q=" + query;
+        console.log(API_URL);
+        let anime;
+        try {
+            anime = await axios.get(API_URL, {
+                onDownloadProgress: progressEvent => {
+                    setFetchProgress(Math.floor((progressEvent.loaded / progressEvent.total) * 100));
+                }
+            });
+            setFetchProgress(30);
+            if(anime.data.results.length !== 50){
+                anime.data.results = anime.data.results.slice(0, 50);
+            }
+            setAnimeList(anime.data.results);
+        } catch (error) {
+            console.log(error.message);
+        }
+    }
 
     useEffect(() => {
-        const getAnime = async () => {
-            
-            let API_URL = "http://localhost:8080/anime/search?q=" + query;
-            console.log(API_URL);
-            try {
-                const anime = await axios.get(API_URL);
-                if(anime.data.results.length !== 50){
-                    anime.data.results = anime.data.results.slice(0, 50);
-                }
-                setAnimeList(anime.data.results);
-            } catch (error) {
-                console.log(error.message);
-            }
-        }
         getAnime();
     }, [query]);
 
@@ -95,7 +103,7 @@ function AnimePage(){
     useEffect(() => {
         setQuery(encodeURI(searchObj.q !== undefined ? searchObj.q : ""));
         updateQuery();
-    }, [searchObj])
+    }, [searchObj]);
 
     function updateQuery(){
         let q = "";
@@ -184,7 +192,17 @@ function AnimePage(){
     }
 
     return (
+        
         <div className="anime-page">
+            <LoadingBar
+                color='#44B9DE'
+                progress={fetchProgress}
+                height={3}
+                transitionTime={100}
+                loaderSpeed={400}
+                waitingTime={500}
+                onLoaderFinished={() => setFetchProgress(0)}
+            />
             <div className="anime-section custom-container">
                 <h1 className="text--blue">Anime</h1>
                 <div className="anime-data d-flex flex-row">

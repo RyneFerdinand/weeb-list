@@ -7,6 +7,7 @@ import AnimePage from './pages/anime-page/AnimePage';
 import Header from './components/header/Header';
 import Footer from './components/footer/Footer';
 import HomePage from './pages/home-page/HomePage';
+import WatchlistPage from './pages/watchlist-page/WatchlistPage';
 // import WatchlistPage from './pages/watchlist-page/WatchlistPage';
  
 library.add(fas);
@@ -23,9 +24,9 @@ function App() {
               <Route path="/anime">
                 <AnimePage/>
               </Route>
-              {/* <Route path="/watchlist">
+              <Route path="/watchlist">
                 <WatchlistPage/>
-              </Route> */}
+              </Route>
               <Route path="/">
                 <HomePage/>
               </Route>
