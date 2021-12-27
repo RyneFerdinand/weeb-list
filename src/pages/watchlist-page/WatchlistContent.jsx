@@ -1,28 +1,31 @@
-import WatchlistDelete from "./WatchlistDelete"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 
 function WatchlistContent(props){
+
+    let status = ["Watching", "Planned", "Finished"];
     let watchlistRating = props.watchlistRating
+
     if (watchlistRating === "Add Rating"){
-        watchlistRating = <div><i className="fas fa-plus"></i>&nbsp;{watchlistRating}</div>
+        watchlistRating = <div><FontAwesomeIcon icon={['fas', 'plus']} style={{ color: "#44B9DE" }}/>&emsp;{watchlistRating}</div>
     }
     else {
-        watchlistRating = <div><i className="fas fa-star"></i>&nbsp;{watchlistRating}</div>
+        watchlistRating = <div><FontAwesomeIcon icon={['fas', 'star']} style={{ color: "#E4C44F" }}/>&emsp;{watchlistRating}</div>
     }
     return (
         <div className="watchlist-content">
-            <div className="watchlist-title">
-                <img src={props.watchlistImage}/>
-                <div>
-                    &nbsp; {props.watchlistTitle}
-                </div>
-            </div>
-            <div className="watchlist-status">
-                {props.watchlistStatus}
-            </div>
-            <div className="watchlist-rating">
-                {watchlistRating}
-            </div>
-            <WatchlistDelete/>
+            <img src={props.watchlistImage} alt="" className="watchlist-anime-poster"/>
+            <div className="watchlist-title">&nbsp; {props.watchlistTitle}</div>
+            <select className="status-select">
+                {
+                    status?.map((status)=>
+                            status === props.watchlistStatus ? 
+                            <option value={status} selected>{status}</option>
+                            :<option value={status}>{status}</option>
+                    )
+                }
+            </select>
+            <div className="watchlist-rating">{watchlistRating}</div>
+            <button className="delete-btn"><FontAwesomeIcon icon={['fa', 'trash']}style={{ color: "#44B9DE" }}/></button>
         </div>
     )
 }

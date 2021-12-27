@@ -1,6 +1,5 @@
 *{
     font-family: 'Poppins', sans-serif;
-    color: white;
     box-sizing: border-box;
 }
 
@@ -88,6 +87,7 @@
 
 .more-button{
     background: transparent;
+    color: #FFFFFF;
     border: #44C1E9 2px solid;
     align-self: center;
     border-radius: 5px;

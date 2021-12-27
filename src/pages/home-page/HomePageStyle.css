@@ -1,10 +1,10 @@
 *{
     font-family: 'Poppins', sans-serif;
-    color: white;
     box-sizing: border-box;
     overflow-x: hidden;
 }
 
 .home-page{
     background-color: #18181A;
+    color: #FFFFFF;
 }

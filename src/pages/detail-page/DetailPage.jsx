@@ -141,7 +141,7 @@ function DetailPage(){
                         <div className="d-flex flex-row align-items-center information-section__third">
                             <h5>Overview</h5>
                             <span className="d-flex flex-row align-items-center rating">
-                                <FontAwesomeIcon icon={['fas', 'star']} style={{ color: "#FF0000" }}/>
+                                <FontAwesomeIcon icon={['fas', 'star']} style={{ color: "#E4C44F" }}/>
                                 <p>{anime.score ? anime.score : "N/A"}</p>
                             </span>
                         </div>

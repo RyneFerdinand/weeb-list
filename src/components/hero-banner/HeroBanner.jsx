@@ -18,7 +18,7 @@ function HeroBanner(props){
                             {props.animeTitle}
                         </div>
                         <div className="anime-show">
-                            <FontAwesomeIcon icon={['fas', 'tv']} /> {props.animeShow} &emsp; <span className="text--blue">{props.animeGenre}</span>
+                            <FontAwesomeIcon icon={['fas', 'tv']} style={{ color: "#44B9DE" }} />&nbsp;&nbsp;{props.animeShow} &emsp; <span className="text--blue">{props.animeGenre}</span>
                         </div>
                         <div className="anime-description">
                             {props.animeDescription}
@@ -32,7 +32,7 @@ function HeroBanner(props){
                     </div>
                 </div>
                 <Link to={`/anime/${props.mal_id}`} className='more-link'>
-                    <button className="more-button">More &emsp; <FontAwesomeIcon icon={['fas', 'chevron-right']} style={{ color: "#E4C44F" }}/></button>
+                    <button className="more-button">More &emsp; <FontAwesomeIcon icon={['fas', 'chevron-right']} style={{ color: "#44B9DE" }}/></button>
                 </Link>
             </div>
             :
@@ -50,7 +50,7 @@ function HeroBanner(props){
                                 {props.animeTitle}
                             </div>
                             <div className="anime-show">
-                                <FontAwesomeIcon icon={['fas', 'tv']} />&nbsp;{props.animeShow} &emsp; <span className="text--blue">{props.animeGenre}</span>
+                                <FontAwesomeIcon icon={['fas', 'tv']} style={{ color: "#44B9DE" }} />&nbsp;&nbsp;{props.animeShow} &emsp; <span className="text--blue">{props.animeGenre}</span>
                             </div>
                             <div className="anime-description">
                                 {props.animeDescription}
@@ -61,7 +61,7 @@ function HeroBanner(props){
                     </div>
                 </div>
                 <Link to={`/anime/${props.mal_id}`} className='more-link'>
-                    <button className="more-button">More &emsp; <FontAwesomeIcon icon={['fas', 'chevron-right']} style={{ color: "#E4C44F" }}/></button>
+                    <button className="more-button">More &emsp; <FontAwesomeIcon icon={['fas', 'chevron-right']} style={{ color: "#44B9DE" }}/></button>
                 </Link>
             </div>
             }
