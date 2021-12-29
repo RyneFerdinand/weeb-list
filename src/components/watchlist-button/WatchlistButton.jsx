@@ -1,6 +1,6 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import axios from "axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import './WatchlistButton.css'
 
 function WatchlistButton(props){
@@ -29,7 +29,32 @@ function WatchlistButton(props){
     })
 
     
-    const [watchlistStatus, setWatchlistStatus] = useState(()=>"Add to Watchlist");
+    
+    const [watchlistStatus, setWatchlistStatus] = useState(()=>"");
+    
+    const searchWatchlist = async () => {
+        try {
+            let watchlist = await axios.post('http://localhost:8080/watchlist/search', {
+                userID: "1",
+                animeID: `${props.id}`
+            })
+            console.log("Anime: " + props.id);
+            console.log(watchlist);
+            if(watchlist.data !== null){
+                setWatchlistStatus("In Watchlist")
+            } else {
+                setWatchlistStatus("Add to Watchlist");
+            }
+        } catch (error) {
+            
+        }
+
+        return "Add to Watchlist"
+    }
+
+    useEffect(() => {
+        console.log(searchWatchlist());
+    }, [])
 
     const handleWatchlist = async () => {
         if(watchlistStatus === "Add to Watchlist"){
@@ -45,13 +70,12 @@ function WatchlistButton(props){
         } else {
             setWatchlistStatus("Add to Watchlist");
                 try {
-                let msg = await axios.delete("http://localhost:8080/watchlist/delete", {
+                await axios.delete("http://localhost:8080/watchlist/delete", {
                     data:{
                         userID: "1",
                         animeID: `${props.id}`
                 }
                 });
-                console.log(msg);
             } catch (error) {
                 
             }

@@ -5,8 +5,8 @@ import "./AnimeCard.css"
 
 function AnimeCard(props){
     
-    let link = props.source === "mal" ? props.anime.id : props.anime.mal_id;
-    link = `/anime/${link}`;
+    let id = props.source === "mal" ? props.anime.id : props.anime.mal_id;
+    let link = `/anime/${id}`;
 
     return(
         <div className="anime-card d-flex flex-column">
@@ -22,7 +22,7 @@ function AnimeCard(props){
                             <div className="search-card__type">
                                 <FontAwesomeIcon icon={['fas', 'tv']} style={{ color: "#44B9DE" }} />&nbsp;&nbsp;{props.anime.type}
                             </div>
-                            <WatchlistButton size={"small"}/>
+                            <WatchlistButton size={"small"} id={ id }/>
                         </div>:
                         <></>
                     }
