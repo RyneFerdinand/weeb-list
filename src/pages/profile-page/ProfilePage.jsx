@@ -20,8 +20,8 @@ function ProfilePage(){
 
     return(
         <div className="profile-container">
-            <div className='container py-5'>
-                <h1 className='header-title fw-bolder mb-5'>Budi's <span className='header-span'>Profile</span></h1>
+            <div className='container py-5 text-light'>
+                <h1 className='header-title fw-bolder mb-3'>Budi's <span className='header-span'>Profile</span></h1>
                 <div className="d-flex">
                     <div className="w-25 py-5"> 
                         <img src="https://www.themoviedb.org/t/p/w600_and_h900_bestv2/h0A3pzHaNTVRD7xNfabuoyadJba.jpg" alt="" 

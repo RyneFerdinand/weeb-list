@@ -9,11 +9,9 @@ import Header from './components/header/Header';
 import Footer from './components/footer/Footer';
 import HomePage from './pages/home-page/HomePage';
 import WatchlistPage from './pages/watchlist-page/WatchlistPage';
-<<<<<<< HEAD
 import ProfilePage from './pages/profile-page/ProfilePage';
 // import WatchlistPage from './pages/watchlist-page/WatchlistPage';
-=======
->>>>>>> 03a949c23655b40d13db28232b1506ff9003323c
+
  
 library.add(fas);
 
@@ -32,18 +30,12 @@ function App() {
               <Route path="/watchlist">
                 <WatchlistPage/>
               </Route>
-<<<<<<< HEAD
               <Route path='/profile'>
                 <ProfilePage/>
               </Route>
-              <Route path="/">
-                <HomePage/>
-              </Route>
-=======
                 <Route path="/">
                   <HomePage/>
                 </Route>
->>>>>>> 03a949c23655b40d13db28232b1506ff9003323c
             </Switch>
           <Footer/>
         </Router>
