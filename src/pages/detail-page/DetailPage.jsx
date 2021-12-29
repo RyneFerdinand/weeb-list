@@ -10,6 +10,7 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom/cjs/react-router-dom.min";
 import axios from "axios";
 import LoadingBar from "react-top-loading-bar";
+import WatchlistButton from "../../components/watchlist-button/WatchlistButton";
 
 function DetailPage() {
   let { id } = useParams();
@@ -45,7 +46,7 @@ function DetailPage() {
       }
     };
     getAnime();
-  }, [query,animeId]);
+  }, [query, animeId]);
 
   let reviews = [
     {
@@ -142,6 +143,7 @@ function DetailPage() {
                   <p>{anime.score ? anime.score : "N/A"}</p>
                 </span>
               </div>
+              <WatchlistButton source={"detail"} id={id}/>
               <div className="information-section__fourth">
                 <p className="description-section">
                   {anime.synopsis

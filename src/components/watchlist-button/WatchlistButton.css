@@ -14,3 +14,13 @@
     border-radius: 5px;
     color: #FFFFFF;
 }
+
+.add-btn--blue{
+    background: #44C1E9;
+    border:#44C1E9 2px solid;
+    font-size: 1rem;
+    width: 20%;
+    padding: 0.5em 0em;
+    border-radius: 5px;
+    color: #FFFFFF;
+}
