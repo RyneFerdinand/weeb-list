@@ -26,9 +26,9 @@ function App() {
               <Route path="/watchlist">
                 <WatchlistPage/>
               </Route>
-              <Route path="/">
-                <HomePage/>
-              </Route>
+                <Route path="/">
+                  <HomePage/>
+                </Route>
             </Switch>
           <Footer/>
         </Router>
