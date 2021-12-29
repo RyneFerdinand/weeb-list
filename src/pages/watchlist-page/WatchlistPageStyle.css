@@ -1,6 +1,5 @@
 *{
     font-family: 'Poppins', sans-serif;
-    color: white;
     box-sizing: border-box;
     overflow-x: hidden;
 }
@@ -9,86 +8,114 @@ body{
     background-color: #18181A;
 }
 
-.title{
-    font-weight: bold;
-    font-size: 5vw;
+.watchlist{
+    gap: 2em;
 }
 
-.second-title{
+
+.watchlist-page-wrapper{
+    padding: 4em 0;
+    color: #FFFFFF;
+}
+
+.watchlist-page{
+    margin: 0 auto;
+    width: 90%;
+    gap: 4em;
+}
+
+.watchlist__title{
+    font-weight: 600;
+    font-size: 4vw;
+}
+
+.watchlist__second-title{
     color: #44C1E9;
 }
 
 .watchlist-header{
     opacity: 50%;
-    display: flex;
-    justify-content: center;
+    font-weight: 600;
+    display: grid;
+    gap: 5%;
+    grid-template-columns: 10% 35% 13% 12% 10%;
     align-items: center;
+    justify-items: center;
 }
 
 .watchlist-header div{
-    text-align: center;
     font-size: 1.5rem;
 }
 
 .watchlist-header > div:nth-child(1){
-    width: 50vw;
-}
-
-.watchlist-header > div:nth-child(2){
-    width: 20vw;
-}
-
-.watchlist-header > div:nth-child(3){
-    width: 20vw;
+    grid-column: 2/2;
 }
 
 .watchlist-content{
-    display: flex;
+    display: grid;
+    gap: 5%;
+    grid-template-columns: 10% 35% 13% 12% 10%;
     align-items: center;
-    justify-content: center;
-    margin-top: 2.5rem;
-    margin-bottom: 2.5rem;
+    justify-items: center;
+    /* align-items: center;
+    justify-content: center; */
+    /* gap: 5%; */
 }
 
-img{
+.watchlist-anime-poster{
     width: 125px;
     height: 200px;
-    border-radius: 10px;
-    margin-right: 1rem;
+    border-radius: 15px;
 }
 
 .watchlist-title{
-    text-align: center;
-    display: flex;
-    align-items: center;
+    justify-self: start;
     font-size: 1.5rem;
-    width: 50vw;
     font-weight: bold;
+}
+
+.status-select{
+    border-width: 0;
+    background-color: transparent;
+    border-radius: 0;
+    border-color: #44C1E9;
+    color: white;
+    font-size: 1.5rem;
+    width: 80%;
+    cursor: pointer;
+}
+
+.status-select:focus{
+    outline: none;
+}
+
+.status-select option{
+    color: #000000;
+    font-family: 'Poppins', sans-serif;
 }
 
 .watchlist-status{
     text-align: center;
-    width: 20vw;
     font-size: 1.5rem;
 }
 
 .watchlist-rating{
-    width: 20vw;
     text-align: center;
-    font-size: 1.5rem;
+    font-size: 1.3rem;
+}
+
+.watchlist-rating div{
+    display: flex;
+    align-items: center;
 }
 
 .fa-plus{
     color: #44C1E9;
 }
 
-.watchlist-delete{
-    width: 5vw;
-}
-
-.delete{
+.delete-btn{
     border: #44C1E9 2px solid;
-    outline: none;
+    border-radius: 5px;
     background: transparent;
     display: flex;
     align-items: center;

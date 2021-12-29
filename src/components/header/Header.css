@@ -12,9 +12,14 @@ header {
   width: 30%;
 }
 
+.web-logo-wrapper{
+  display: flex;
+  align-items: center;
+  margin-right: 3%;
+}
+
 .web-logo {
   height: 1.875rem;
-  padding: 0 4%;
 }
 
 .bar{

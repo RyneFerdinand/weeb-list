@@ -23,3 +23,8 @@
 .character-card__text h5:last-child{
     align-self: flex-end;
 }
+
+.character-info h5{
+    display: flex;
+    flex-wrap: nowrap;
+}

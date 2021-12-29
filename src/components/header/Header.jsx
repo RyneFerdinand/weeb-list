@@ -10,9 +10,11 @@ function Header() {
         <nav className='d-flex flex-row align-items-center'>
 
           <div className="left-nav d-flex flex-row align-items-center">
-            <img className="web-logo"
-            src={WebsiteLogo}
-            alt= "logo"/>
+            <Link to="/" className="web-logo-wrapper">
+              <img className="web-logo"
+              src={WebsiteLogo}
+              alt= "logo"/>
+            </Link>
             <div className ="bar">
               <Link to="/" className="menu-bar">Home</Link>
             </div>

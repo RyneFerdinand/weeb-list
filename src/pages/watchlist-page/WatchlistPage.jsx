@@ -1,50 +1,54 @@
+import axios from "axios";
+import { useEffect, useState } from "react";
 import WatchlistContent from "./WatchlistContent"
-// import './WatchlistPageStyle.css'
+import './WatchlistPageStyle.css'
 
 function WatchlistPage(){
-    let watchlists = [
-        {
-            "title": "Boruto: Naruto Next Generations",
-            "status": "Finished",
-            "rating": "Add Rating",
-            "image": "https://picsum.photos/200/300"
-        },
-        {
-            "title": "Takt Op. Destiny",
-            "status": "Watching",
-            "rating": "8.5",
-            "image": "https://picsum.photos/200/300"
-        },
-        {
-            "title": "Kimetsu no Yaiba: Mugen Ressha-hen",
-            "status": "Planned",
-            "rating": "Add Rating",
-            "image": "https://picsum.photos/200/300"
+    
+    const [watchlist, setWatchlist] = useState(()=> []);
+
+    const getWatchlist = async () => {
+        try {
+            let watchlistData = await axios.post("http://localhost:8080/watchlist/view", {
+                userID: "1"
+            });
+            console.log(watchlistData.data);
+            setWatchlist(watchlistData.data);
+        } catch (error) {
         }
-    ]
+    }
+
+    useEffect(() => {
+        getWatchlist();
+    }, []);
+    
     return (
-        <div>
-            <div className="title">
-                <span className="first-title">My </span>
-                <span className="second-title">Watchlist</span>
-            </div>
-            <div className="watchlist">
-                <div className="watchlist-header">
-                    <div>Title</div>
-                    <div>Status</div>
-                    <div>My Rating</div>
-                    <div className="watchlist-delete"></div>
+        <div className="watchlist-page-wrapper">
+            <div className="watchlist-page d-flex flex-column">
+                <div className="watchlist__title">
+                    <span className="watchlist__first-title">My </span>
+                    <span className="watchlist__second-title">Watchlist</span>
                 </div>
-                {watchlists.map((watchlist) => {
-                    return (
-                        <WatchlistContent
-                            watchlistTitle={watchlist.title}
-                            watchlistStatus={watchlist.status}
-                            watchlistRating={watchlist.rating}
-                            watchlistImage={watchlist.image}
-                        />
-                    )
-                })}
+                <div className="watchlist d-flex flex-column">
+                    <div className="watchlist-header">
+                        <div>Title</div>
+                        <div>Status</div>
+                        <div>My Rating</div>
+                        <div className="watchlist-delete"></div>
+                    </div>
+                    {watchlist.map((watchlist) => {
+                        return (
+                            <WatchlistContent
+                                key={watchlist.anime.id}
+                                watchlistId={watchlist.watchlist._id}
+                                watchlistTitle={watchlist.anime.title}
+                                watchlistStatus={watchlist.watchlist.status}
+                                watchlistRating={5}
+                                watchlistImage={watchlist.anime.main_picture.large}
+                            />
+                        )
+                    })}
+                </div>
             </div>
         </div>
     )
