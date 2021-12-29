@@ -1,0 +1,14 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
+
+.form-title {
+  font-family: "Poppins", sans-serif;
+}
+
+.dash-col {
+  background-color: #302f2f;
+  font-family: "Poppins", sans-serif;
+}
+
+.col-data {
+  color: #44c1e9;
+}

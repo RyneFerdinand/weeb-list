@@ -1,0 +1,40 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
+
+.profile-container {
+  background-color: #18181a;
+}
+
+.header-title {
+  font-family: "Montserrat", sans-serif;
+}
+
+.header-span {
+  color: #44c1e9;
+}
+
+.profile-image {
+  width: 20rem;
+  height: 20rem;
+  object-fit: cover;
+}
+
+.profile-detail p {
+  font-family: "Poppins", sans-serif;
+  font-weight: bolder;
+}
+
+.profile-button {
+  background-color: transparent;
+  outline: none;
+  border: none;
+  font-weight: bolder;
+}
+
+.profile-page {
+  height: 7rem;
+}
+
+.profile-button-active {
+  color: #44c1e9;
+}

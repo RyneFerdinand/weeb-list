@@ -1,0 +1,29 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
+
+.input-group-text {
+  background-color: transparent !important;
+  width: 10rem;
+  border: none;
+}
+
+.input-group {
+  background-color: #085770 !important;
+  border-radius: 7px;
+}
+
+.form-control {
+  background-color: transparent !important;
+  border: none;
+  outline: none;
+  color: #fff !important;
+  font-family: "Poppins", sans-serif;
+}
+
+.form-label {
+  color: #fff !important;
+  font-family: "Poppins", sans-serif;
+}
+
+.btn-primary {
+  background-color: #44c1e9;
+}
