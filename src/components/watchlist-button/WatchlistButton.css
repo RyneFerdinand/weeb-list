@@ -5,3 +5,12 @@
     padding: 0.4em 1.5em;
     color: #FFFFFF;
 }
+
+.add-btn--small{
+    background: transparent;
+    border: #44C1E9 2px solid;
+    font-size: 0.8rem;
+    padding: 0.5em 0em;
+    border-radius: 5px;
+    color: #FFFFFF;
+}

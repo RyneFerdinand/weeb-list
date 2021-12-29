@@ -1,4 +1,4 @@
-import SearchCard from "../../components/search-card/SearchCard"
+import AnimeCard from "../../components/anime-card/AnimeCard"
 import { useState, useEffect } from 'react'
 import axios from 'axios'
 import "./AnimePage.css"
@@ -211,7 +211,7 @@ function AnimePage(){
                     {
                         animeList?.map(anime=>{
                             return(
-                                    <SearchCard key={anime.mal_id} anime={anime}/>
+                                    <AnimeCard key={anime.mal_id} anime={anime} type={"search"}/>
                                 )
                             })
                     }

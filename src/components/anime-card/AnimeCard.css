@@ -1,13 +1,18 @@
 Link{
     color: #FFFFFF;
+    text-decoration: none;
 }
 
-.recommendation-card__poster{
+.anime-card{
+    width: 75%;
+}
+
+.anime-card__poster{
     position: relative;
-    height: 15rem;
+    height: 14rem;
 }
 
-.recommendation-card__poster img{
+.anime-card__poster img{
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -15,7 +20,7 @@ Link{
     border-radius: 10px 10px 0 0;
 }
 
-.recommendation-card__title-wrapper{
+.anime-card__title-wrapper--small{
     background-color: rgba(39, 144, 177, 0.75);
     padding: 0.5em;
     height: 4rem;
@@ -23,7 +28,17 @@ Link{
     border-radius: 0 0 10px 10px;
 }
 
-.recommendation-card__title{
+.anime-card__title-wrapper--large{
+    background-color: rgba(39, 144, 177, 0.75);
+    padding: 0.5em;
+    height: 8rem;
+    border: 1px transparent solid;
+    border-radius: 0 0 10px 10px;
+    color: #FFFFFF;
+}
+
+
+.anime-card__title{
     font-family: "Montserrat", sans-serif;
     color: #FFFFFF;
     line-height: 140%;
@@ -36,5 +51,6 @@ Link{
     -webkit-box-orient: vertical;
 }
 
-.recommendation-card__type{
+.anime-card__bottom{
+    gap: 0.3em;
 }
