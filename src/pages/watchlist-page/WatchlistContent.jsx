@@ -10,11 +10,12 @@ function WatchlistContent(props) {
   const removeWatchlist = async () => {
     try {
       let URL = "http://localhost:8080/watchlist/delete";
-      let message = await axios.delete(URL, {
+      await axios.delete(URL, {
         data: {
           id: props.watchlistId,
         },
       });
+      props.rerenderFunction(props.watchlistId);
     } catch (error) {
       console.log(error.message);
     }

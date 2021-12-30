@@ -18,6 +18,18 @@ function WatchlistPage(){
         }
     }
 
+    console.log(watchlist);
+    const rerenderPage = (id) => {
+        let updatedWatchlist = [];
+        watchlist.forEach(wl => {
+            console.log(wl.watchlist._id + " " + id);
+            if(wl.watchlist._id !== id){
+                updatedWatchlist.push(wl);
+            }
+        });
+        setWatchlist(updatedWatchlist);
+    }
+
     useEffect(() => {
         getWatchlist();
     }, []);
@@ -45,6 +57,7 @@ function WatchlistPage(){
                                 watchlistStatus={watchlist.watchlist.status}
                                 watchlistRating={5}
                                 watchlistImage={watchlist.anime.main_picture.large}
+                                rerenderFunction={rerenderPage}
                             />
                         )
                     })}
