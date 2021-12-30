@@ -18,7 +18,6 @@ function WatchlistPage(){
         }
     }
 
-    console.log(watchlist);
     const rerenderPage = (id) => {
         let updatedWatchlist = [];
         watchlist.forEach(wl => {
@@ -52,6 +51,7 @@ function WatchlistPage(){
                         return (
                             <WatchlistContent
                                 key={watchlist.anime.id}
+                                animeId={watchlist.anime.id}
                                 watchlistId={watchlist.watchlist._id}
                                 watchlistTitle={watchlist.anime.title}
                                 watchlistStatus={watchlist.watchlist.status}

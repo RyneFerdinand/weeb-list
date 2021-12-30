@@ -24,6 +24,7 @@ function DetailPage() {
   const [fetchStatus, setFetchStatus] = useState(() => true);
   const [characterCount, setCharacterCount] = useState(() => 6);
   const [fetchProgress, setFetchProgress] = useState(() => 0);
+  const [reviewed, setReviewed] = useState(()=>false);
 
   if (id !== animeId) {
     setFetchStatus(true);
@@ -39,6 +40,12 @@ function DetailPage() {
         const reviews = await axios.post(URL, {
           animeID: animeId,
         });
+        reviews.data.forEach(review=>{
+          if(review.userID == 1){
+            setReviewed(true);
+          }
+        })
+        
         setReview(reviews.data);
       } catch (error) {}
 

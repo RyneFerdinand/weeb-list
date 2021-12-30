@@ -1,6 +1,7 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 function WatchlistContent(props) {
   let status = ["Planned", "Watching", "Finished"];
@@ -50,13 +51,16 @@ function WatchlistContent(props) {
       </div>
     );
   }
+
   return (
     <div className="watchlist-content">
-      <img
-        src={props.watchlistImage}
-        alt=""
-        className="watchlist-anime-poster"
-      />
+      <Link to={`/anime/${props.animeId}`}>
+          <img
+            src={props.watchlistImage}
+            alt=""
+            className="watchlist-anime-poster"
+          />
+      </Link>
       <div className="watchlist-title">&nbsp; {props.watchlistTitle}</div>
       <select className="status-select" onChange={(e) => updateWatchlist(e)}>
         {status?.map((status) =>
