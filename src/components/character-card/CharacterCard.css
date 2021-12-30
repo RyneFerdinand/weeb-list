@@ -25,6 +25,13 @@
 }
 
 .character-info h5{
-    display: flex;
-    flex-wrap: nowrap;
+    color: #FFFFFF;
+    line-height: 140%;
+    overflow: hidden;
+    flex-wrap: wrap;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    line-clamp: 2; 
+    -webkit-box-orient: vertical;
 }

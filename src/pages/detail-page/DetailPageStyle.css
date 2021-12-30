@@ -97,11 +97,43 @@ h5, p{
     padding: 2em 0;
 }
 
-    
+.review-buttons{
+    gap: 2em;
+}
+
 .card-wrapper{
     padding: 3em 0;
 }
 
+.custom-body{
+    gap: 1em;
+    padding: 1em 1em 2em 1em;
+}
+
+.custom-body textarea{
+    resize: none;
+    font-size: 0.8rem;
+}
+
 .recommendation-section{
     padding: 2em 0;
+}
+
+.score-cbo{
+    border-width: 0 0 1px 0;
+    border-color: var(--blue);
+    background-color: transparent;
+    color: var(--blue);
+}
+
+.score-section{
+    gap: 1em;
+}
+
+.custom-modal{
+    background-color: #18181A;
+}
+
+.text--white{
+    color: #FFFFFF;
 }
