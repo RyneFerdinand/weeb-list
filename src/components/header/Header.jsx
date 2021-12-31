@@ -29,9 +29,10 @@ function Header() {
             <div className="right-bar">
               <Link to="/watchlist" className="menu-bar">My watchlist</Link>
             </div>
-            <div className="user"> 
-              <a href="https://user.com" ><i className="fal fa-user"></i></a>
-            </div>
+            <Link to="/login">
+              <div className="user"> 
+              </div>
+            </Link>
           </div>
         </nav>
       </header>

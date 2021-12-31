@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import './Login.css'
 import WebsiteLogo from '../../Website Logo.png'
 import Axios from 'axios'
-import { useHistory } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 
 function Login() {
     const [username, setUsername] = useState("")
@@ -31,15 +31,15 @@ function Login() {
     return (
         <div className = "login">
             <div className="website-logo">
-                <img src={WebsiteLogo}></img>
+                <img src={WebsiteLogo} alt=""/>
             </div>
             <div className="content">
                 <div className="left">
                     <div className="caption">
-                        <h1>Welcome back to <a>Weeb List</a>.</h1>
+                        <h1>Welcome back to <Link to="/">Weeb List</Link>.</h1>
                     </div>
                     <div className="sub-caption">
-                        <p>Don't have an account? <a href="http://localhost:3000/#/register">Create a new one</a></p>
+                        <p>Don't have an account? <Link to="/register">Create a new one</Link></p>
                     </div>
                 </div>
                 <div className="right">
@@ -64,7 +64,7 @@ function Login() {
                 </div>
             </div>
             <div className="back">
-                <a><i class="fas fa-chevron-left"></i> Back to Home</a>
+                <Link to="/"><i class="fas fa-chevron-left"></i> Back to Home</Link>
             </div>
         </div>
     )

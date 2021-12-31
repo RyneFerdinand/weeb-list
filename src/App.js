@@ -10,6 +10,8 @@ import Footer from './components/footer/Footer';
 import HomePage from './pages/home-page/HomePage';
 import WatchlistPage from './pages/watchlist-page/WatchlistPage';
 import ProfilePage from './pages/profile-page/ProfilePage';
+import Login from './pages/login-page/Login';
+import Register from './pages/register-page/Register';
 // import WatchlistPage from './pages/watchlist-page/WatchlistPage';
 
  
@@ -21,6 +23,13 @@ function App() {
         <Router>
           <Header/>
             <Switch>
+const bodyParser = require("body-parser");
+              <Route path="/login">
+                <Login/>
+              </Route>
+              <Route path="/register">
+                <Register/>
+              </Route>
               <Route path="/anime/:id">
                 <DetailPage/>
               </Route>
