@@ -5,12 +5,14 @@ import './WatchlistPageStyle.css'
 
 function WatchlistPage(){
     
+    let userID = localStorage.getItem("userID");
     const [watchlist, setWatchlist] = useState(()=> []);
+
 
     const getWatchlist = async () => {
         try {
             let watchlistData = await axios.post("http://localhost:8080/watchlist/view", {
-                userID: "1"
+                userID: userID
             });
             console.log(watchlistData.data);
             setWatchlist(watchlistData.data);
@@ -55,7 +57,7 @@ function WatchlistPage(){
                                 watchlistId={watchlist.watchlist._id}
                                 watchlistTitle={watchlist.anime.title}
                                 watchlistStatus={watchlist.watchlist.status}
-                                watchlistRating={5}
+                                watchlistRating={watchlist.rating ? watchlist.rating.rating : -1}
                                 watchlistImage={watchlist.anime.main_picture.large}
                                 rerenderFunction={rerenderPage}
                             />

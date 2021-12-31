@@ -1,7 +1,57 @@
 import "./ReviewCard.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import axios from "axios";
 
 function ReviewCard(props) {
+  let reviewScore = props.review.score;
+  let description = props.review.description;
+  const ratingScore = ["-", 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+  let username = localStorage.getItem("username");
+  let userID = localStorage.getItem("userID");
+
+  const updateReview = async () => {
+    if (
+      reviewScore === -1 ||
+      reviewScore === "-" ||
+      description.trim().length === 0
+    ) {
+      return;
+    }
+
+    document.getElementById("editReview").classList.remove("show", "d-block");
+    document
+      .querySelectorAll(".modal-backdrop")
+      .forEach((bd) => bd.classList.remove("modal-backdrop"));
+
+    let URL = "http://localhost:8080/rating/update";
+
+    try {
+
+      const review = await axios.patch(URL, {
+        id: props.review._id,
+        description: description,
+        rating: reviewScore
+      });
+
+      props.updateState(review.data, "update");
+    } catch (error) {}
+  };
+  
+  const removeReview = async () => {
+    console.log("ID: " + props.review._id);
+    let URL = "http://localhost:8080/rating/delete";
+    try {
+      await axios.delete(URL, {
+        data:{
+          id: props.review._id
+        }
+      });
+      props.updateState(props.review, "delete");
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   let pfp = [
     "https://static.zerochan.net/Texas.%28Arknights%29.full.2824483.jpg",
     "https://preview.redd.it/1fd85j0at0f41.jpg?width=640&crop=smart&auto=webp&s=68c17507d15479937b184c4f9f6c5e86aea79f7f",
@@ -18,21 +68,35 @@ function ReviewCard(props) {
         />
         <div className="d-flex flex-column review__data">
           <div className="upper-review d-flex flex-row align-items-center justify-content-between">
-            <h4>{"Hans"}</h4>
-            <div className="d-flex-flex-row align-items-center">
+            <h4>{username}</h4>
+            {props.review.userID === userID ? (
+              <div className="update-buttons d-flex-flex-row align-items-center">
                 <FontAwesomeIcon
-                data-bs-toggle="modal"
-                data-bs-target="#editReview"
-                icon={["fas", "edit"]}
-                style={{ color: "#4489DE", fontSize: "1.5rem" }}
+                  data-bs-toggle="modal"
+                  data-bs-target="#editReview"
+                  onClick={() => {
+                    document.querySelector("textarea").value = description;
+                  }}
+                  icon={["fas", "edit"]}
+                  style={{
+                    color: "#4489DE",
+                    fontSize: "1.5rem",
+                    cursor: "pointer",
+                  }}
                 />
                 <FontAwesomeIcon
-                data-bs-toggle="modal"
-                data-bs-target="#editReview"
-                icon={["fa", "trash"]}
-                style={{ color: "#4489DE", fontSize: "1.5rem" }}
+                  icon={["fa", "trash"]}
+                  style={{
+                    color: "#4489DE",
+                    fontSize: "1.5rem",
+                    cursor: "pointer",
+                  }}
+                  onClick={removeReview}
                 />
-            </div>
+              </div>
+            ) : (
+              <></>
+            )}
             <div
               class="modal fade"
               id="editReview"
@@ -59,12 +123,17 @@ function ReviewCard(props) {
                       <select
                         name="score-select"
                         class="score-cbo"
-                        onClick={(e) => {
-                        }}
+                        onClick={(e) => {reviewScore = e.target.value}}
                       >
-                        {/* {ratingScore.map((score) => (
-                          <option value={score}>{score}</option>
-                        ))} */}
+                        {ratingScore.map((score) => {
+                          return score === props.review.rating ? (
+                            <option value={score} selected>
+                              {score}
+                            </option>
+                          ) : (
+                            <option value={score}>{score}</option>
+                          );
+                        })}
                       </select>
                     </div>
                     <h7 className="text--white">Description:</h7>
@@ -73,7 +142,7 @@ function ReviewCard(props) {
                       id=""
                       rows="10"
                       onChange={(e) => {
-                        // description = e.target.value;
+                        description = e.target.value;
                       }}
                     ></textarea>
                   </div>
@@ -88,9 +157,9 @@ function ReviewCard(props) {
                     <button
                       type="button"
                       class="btn btn-primary"
-                    //   onClick={addReview}
+                      onClick={updateReview}
                     >
-                      Add Review
+                      Update Review
                     </button>
                   </div>
                 </div>
