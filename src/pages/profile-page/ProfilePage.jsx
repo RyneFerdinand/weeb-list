@@ -17,6 +17,18 @@ function ProfilePage(){
             setCurrentPage(buttonText);
         }
     }
+    
+    const [username, setUsername] = useState("")
+    const [gender, setGender] = useState("")
+    const [joined, setJoined] = useState("")
+
+    useEffect(() => {
+        Axios.get('http://localhost:3001/getprofile').then((response) => {
+            setUsername(response.data.username)
+            setGender(response.data.gender)
+            setJoined(response.data.joined)
+        })
+    }, [])
 
     return(
         <div className="profile-container">
@@ -28,15 +40,15 @@ function ProfilePage(){
                         className='profile-image mb-3'/>
                         <div className="d-flex profile-detail">
                             <p className='w-50'>Username</p>
-                            <p className='w-50'>{req.session.user.username}</p>
+                            <p className='w-50'>{username}</p>
                         </div>
                         <div className="d-flex profile-detail">
                             <p className='w-50'>Gender</p>
-                            <p className='w-50'>{req.session.user.gender}</p>
+                            <p className='w-50'>{gender}</p>
                         </div>
                         <div className="d-flex profile-detail">
                             <p className='w-50'>Joined</p>
-                            <p className='w-50'>{req.session.user.joined}</p>
+                            <p className='w-50'>{joined}</p>
                         </div>
                         <div className='mt-3 d-flex flex-column align-items-center justify-content-between profile-page'>
                             <button className={'profile-button ' + buttonClassName('dashboard')} onClick={()=> handleProfileButton('dashboard')}>Dashboard</button>
