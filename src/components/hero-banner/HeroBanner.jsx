@@ -8,7 +8,7 @@ function HeroBanner(props) {
     <div className="banner-container">
       {props.alignment === "left" ? (
         <div className="banner d-flex flex-column">
-          <div className="content d-flex flex-row align-items-center">
+          <div className="d-flex flex-row align-items-center">
             <div className="detail d-flex flex-column justify-content-between">
               <div className="d-flex flex-row align-items-center">
                 <h1 className="title title--left">{props.firstTitle} </h1>
@@ -49,7 +49,7 @@ function HeroBanner(props) {
         </div>
       ) : (
         <div className="banner d-flex flex-column">
-          <div className="content d-flex flex-row align-items-center">
+          <div className="d-flex flex-row align-items-center">
             <div
               className="anime-background"
               style={{ backgroundImage: `url(${props.image})` }}

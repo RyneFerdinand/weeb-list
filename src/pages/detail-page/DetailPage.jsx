@@ -18,13 +18,14 @@ function DetailPage() {
   let query = "";
   let reviewScore = -1;
   let description = "";
+  let currID = localStorage.getItem("userID");
 
   const [anime, setAnime] = useState(() => []);
   const [review, setReview] = useState(() => []);
   const [fetchStatus, setFetchStatus] = useState(() => true);
   const [characterCount, setCharacterCount] = useState(() => 6);
   const [fetchProgress, setFetchProgress] = useState(() => 0);
-  const [reviewed, setReviewed] = useState(()=>false);
+  const [reviewed, setReviewed] = useState(() => false);
 
   if (id !== animeId) {
     setFetchStatus(true);
@@ -40,12 +41,13 @@ function DetailPage() {
         const reviews = await axios.post(URL, {
           animeID: animeId,
         });
-        reviews.data.forEach(review=>{
-          if(review.userID == 1){
+        console.log(reviews);
+        reviews.data.forEach((review) => {
+          if (review.userID === currID) {
             setReviewed(true);
           }
-        })
-        
+        });
+
         setReview(reviews.data);
       } catch (error) {}
 
@@ -68,25 +70,30 @@ function DetailPage() {
   }, [query, animeId]);
 
   const addReview = async () => {
-    if(reviewScore === -1 || description.trim().length === 0){
+    if (reviewScore === -1 || description.trim().length === 0) {
       return;
     }
-    
+
+    document.querySelector("textarea").value = "";
+    document.querySelector("select").value = "-";
     document.getElementById("reviewModal").classList.remove("show", "d-block");
-    document.querySelectorAll(".modal-backdrop").forEach(bd => bd.classList.remove("modal-backdrop"));
+    document
+      .querySelectorAll(".modal-backdrop")
+      .forEach((bd) => bd.classList.remove("modal-backdrop"));
 
     let URL = "http://localhost:8080/rating/add";
     try {
       const review = await axios.post(URL, {
-        userID: 1,
+        userID: currID,
         animeID: animeId,
         description: description,
-        rating: reviewScore
+        rating: reviewScore,
       });
       console.log(review);
-      setReview(prevReview => {
-        return [...prevReview, review.data]
+      setReview((prevReview) => {
+        return [...prevReview, review.data];
       });
+      setReviewed(true);
     } catch (error) {}
   };
 
@@ -114,6 +121,29 @@ function DetailPage() {
 
   const hideCharacter = () => {
     setCharacterCount(6);
+  };
+
+  const updateReviewState = (newReview, action) => {
+    let updatedReviews = [];
+    if(action === "update"){
+      review.forEach((rev) => {
+        if (rev._id !== newReview._id) {
+          updatedReviews.push(rev);
+        } else {
+          updatedReviews.push(newReview);
+        }
+      });
+    } else {
+      review.forEach((rev) => {
+        if (rev._id !== newReview._id) {
+          updatedReviews.push(rev);
+        }
+      });
+      description = "";
+      ratingScore = -1;
+      setReviewed(false);
+    }
+    setReview(updatedReviews);
   };
 
   return (
@@ -172,7 +202,7 @@ function DetailPage() {
           </div>
           <div className="character-section d-flex flex-column justify-content-start custom-container">
             <div className="d-flex flex-row">
-              <h1>Characters &&nbsp;</h1>
+              <h1>Characters &nbsp;</h1>
               <h1 className="text--blue">Voice Actors</h1>
             </div>
             <div className="character-section__cards">
@@ -215,7 +245,11 @@ function DetailPage() {
             <h1>Review</h1>
             <div className="review-section__review d-flex flex-column">
               {review.map((review) => (
-                <ReviewCard review={review} />
+                <ReviewCard
+                  review={review}
+                  animeID={animeId}
+                  updateState={updateReviewState}
+                />
               ))}
             </div>
             <div className="review-buttons d-flex flex-row align-items-center justify-content-center">
@@ -226,18 +260,22 @@ function DetailPage() {
                 />
                 <p>Load More</p>
               </button>
-              <button
-                type="button"
-                className="d-flex flex-row align-items-center load-button"
-                data-bs-toggle="modal"
-                data-bs-target="#reviewModal"
-              >
-                <FontAwesomeIcon
-                  icon={["fas", "plus"]}
-                  style={{ color: "#44C1E9" }}
-                />
-                <p>Add Review</p>
-              </button>
+              {reviewed === true ? (
+                <></>
+              ) : (
+                <button
+                  type="button"
+                  className="d-flex flex-row align-items-center load-button"
+                  data-bs-toggle="modal"
+                  data-bs-target="#reviewModal"
+                >
+                  <FontAwesomeIcon
+                    icon={["fas", "plus"]}
+                    style={{ color: "#44C1E9" }}
+                  />
+                  <p>Add Review</p>
+                </button>
+              )}
             </div>
           </div>
           <div
@@ -263,15 +301,28 @@ function DetailPage() {
                 <div class="custom-body modal-body d-flex flex-column">
                   <div className="score-section d-flex flex-row align-items-center">
                     <h7 className="text--white">Rating: </h7>
-                      <select name="score-select" class="score-cbo" onClick={(e)=>{reviewScore = e.target.value !== "-" ? e.target.value : -1}}>
-                        {
-                          ratingScore.map(score => 
-                            <option value={score}>{score}</option>)
-                        }
-                      </select>
+                    <select
+                      name="score-select"
+                      class="score-cbo"
+                      onClick={(e) => {
+                        reviewScore =
+                          e.target.value !== "-" ? e.target.value : -1;
+                      }}
+                    >
+                      {ratingScore.map((score) => (
+                        <option value={score}>{score}</option>
+                      ))}
+                    </select>
                   </div>
                   <h7 className="text--white">Description:</h7>
-                  <textarea name="" id="" rows="10" onChange={(e)=>{description = e.target.value}}></textarea>
+                  <textarea
+                    name=""
+                    id=""
+                    rows="10"
+                    onChange={(e) => {
+                      description = e.target.value;
+                    }}
+                  ></textarea>
                 </div>
                 <div class="modal-footer">
                   <button
@@ -281,7 +332,11 @@ function DetailPage() {
                   >
                     Cancel
                   </button>
-                  <button type="button" class="btn btn-primary" onClick={addReview}>
+                  <button
+                    type="button"
+                    class="btn btn-primary"
+                    onClick={addReview}
+                  >
                     Add Review
                   </button>
                 </div>

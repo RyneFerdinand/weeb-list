@@ -36,11 +36,13 @@ function WatchlistContent(props) {
       }
   };
 
-  if (watchlistRating === "Add Rating") {
+  if (watchlistRating === -1) {
     watchlistRating = (
       <div>
-        <FontAwesomeIcon icon={["fas", "plus"]} style={{ color: "#44B9DE" }} />
-        &emsp;{watchlistRating}
+        <Link to={`anime/${props.animeId}`} style={{ color: "#FFFFFF", textDecoration: "none" }}>
+          <FontAwesomeIcon icon={["fas", "plus"]} style={{ color: "#44B9DE" }} />
+          &nbsp;Add Review
+        </Link>
       </div>
     );
   } else {
