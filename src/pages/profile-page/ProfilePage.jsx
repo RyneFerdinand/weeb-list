@@ -28,15 +28,15 @@ function ProfilePage(){
                         className='profile-image mb-3'/>
                         <div className="d-flex profile-detail">
                             <p className='w-50'>Username</p>
-                            <p className='w-50'>Budi123</p>
+                            <p className='w-50'>{req.session.user.username}</p>
                         </div>
                         <div className="d-flex profile-detail">
                             <p className='w-50'>Gender</p>
-                            <p className='w-50'>Gender</p>
+                            <p className='w-50'>{req.session.user.gender}</p>
                         </div>
                         <div className="d-flex profile-detail">
                             <p className='w-50'>Joined</p>
-                            <p className='w-50'>10 Nov 2021</p>
+                            <p className='w-50'>{req.session.user.joined}</p>
                         </div>
                         <div className='mt-3 d-flex flex-column align-items-center justify-content-between profile-page'>
                             <button className={'profile-button ' + buttonClassName('dashboard')} onClick={()=> handleProfileButton('dashboard')}>Dashboard</button>
