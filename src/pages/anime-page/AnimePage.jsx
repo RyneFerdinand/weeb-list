@@ -21,6 +21,14 @@ function AnimePage() {
   const [yearList, setYearList] = useState(() => []);
   const [year, setYear] = useState(() => 2022);
   const [fetchProgress, setFetchProgress] = useState(() => 0);
+  const [skeletons, setSkeletons] = useState(()=>{
+    let data = [];
+    for (let i = 0; i < 40; i++) {
+      const card = <AnimeCard loading={true}/>
+      data.push(card);
+    }
+    return data;
+  })
 
   const getAnime = async () => {
     setAnimeList([]);
@@ -94,7 +102,7 @@ function AnimePage() {
 
       let years = [];
 
-      let currYear = new Date().getFullYear() + 1;
+      let currYear = new Date().getFullYear();
       for (let count = currYear; count >= 1917; count--) {
         years.push(count);
       }
@@ -211,11 +219,14 @@ function AnimePage() {
         <h1 className="text--blue">Anime</h1>
         <div className="anime-data d-flex flex-row">
           <div className="card-container">
-            {animeList?.map((anime) => {
-              return (
-                <AnimeCard key={anime.mal_id} anime={anime} type={"search"} />
-              );
-            })}
+            { animeList.length > 0 ?
+              animeList?.map((anime) => {
+                return (
+                  <AnimeCard key={anime.mal_id} anime={anime} type={"search"} loading={false} />
+                );
+              }):
+              skeletons
+            }
           </div>
 
           <div className="filter-container">

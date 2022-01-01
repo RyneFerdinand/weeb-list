@@ -1,8 +1,9 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import Dashboard from "../../components/dashboard/Dashboard";
 import UpdateProfile from "../../components/update-profile/UpdateProfile";
 import ChangePassword from "../../components/change-password/ChangePassword";
 import './Profile.css'
+import { Axios } from 'axios';
 
 function ProfilePage(){
     const [currPage, setCurrentPage] = useState('dashboard')

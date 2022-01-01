@@ -35,7 +35,7 @@ h5, p{
 .card-container{
     width: 78%;
     display: grid;
-    gap: 2em 0;
+    gap: 2.5em 0;
     grid-template-columns: repeat(auto-fill, minmax(12.5rem, 1fr));
 }
 
@@ -75,7 +75,7 @@ h5, p{
     border-color: #44C1E9;
     color: #FFFFFF;
     font-family: Poppins, sans-serif;
-    font-size: 1rem;
+    font-size: 0.9rem;
 }
 
 .btn-selected{

@@ -4,7 +4,7 @@ Link{
 }
 
 .anime-card{
-    width: 75%;
+    width: 80%;
 }
 
 .anime-card__poster{
@@ -53,4 +53,50 @@ Link{
 
 .anime-card__bottom{
     gap: 0.3em;
+}
+
+.skeleton{
+    height: 22rem;
+    border-radius: 10px;
+    opacity: 0.6;
+    animation: skeleton-loading 1s linear infinite alternate;
+}
+
+.skeleton-text{
+    width: 100%;
+    height: 1rem;
+    border-radius: 5px;
+    opacity: 0.3;
+    animation: skeleton-text-loading 1s linear infinite alternate;
+}
+
+.skeleton-text-container{
+    background-color: rgba(0, 0, 0, 0.1);
+    padding: 7% 5% 25% 5%;
+    gap: 0.5rem;
+
+}
+
+.skeleton-text:last-child{
+    width: 80%;
+}
+
+@keyframes skeleton-loading {
+    0%{
+        background-color: hsl(200, 20%, 70%);
+    }
+
+    100%{
+        background-color: hsl(200, 20%, 95%);
+    }
+}
+
+@keyframes skeleton-text-loading {
+    0%{
+        background-color:hsl(0, 0%, 22%);
+    }
+
+    100%{
+        background-color:hsl(0, 0%, 47%);
+    }
 }

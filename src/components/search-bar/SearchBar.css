@@ -28,8 +28,7 @@
 }
 
 .searchIcon {
-  height: 42px;
-  width: 50px;
+  width: 2.5rem;
   background-color: #383838;
   display: flex;
   align-items: center;
@@ -39,14 +38,11 @@
 }
 
 .searchIcon i {
-  font-size: 22px;
-  /* opacity: 50%; */
   background-color: #383838;
 }
 
 .searchIcon p {
   background-color: #383838;
-  padding: 0;
 }
 
 .dataResult {

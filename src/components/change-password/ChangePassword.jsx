@@ -1,5 +1,6 @@
-import React from 'react'
+import React, { useState } from 'react'
 import './ChangePassword.css'
+import Axios from 'axios'
 
 function UpdateProfile(){
     const [oldPassword, setOldPassword] = useState("")

@@ -107,7 +107,7 @@ function HomePage() {
                 itemClass="carousel-item-padding-40-px"
               >
                 {anime.recommendation.map((recommendation) => (
-                  <AnimeCard anime={recommendation} type={"recommendation"} source={"mal"} />
+                  <AnimeCard anime={recommendation} type={"recommendation"} source={"mal"} loading={false} />
                 ))}
               </Carousel>
           </div>
@@ -126,7 +126,7 @@ function HomePage() {
                 itemClass="carousel-item-padding-40-px"
               >
                 {anime.seasonal.map((seasonal) => (
-                  <AnimeCard anime={seasonal.node} type={"recommendation"} source={"mal"} />
+                  <AnimeCard anime={seasonal.node} type={"recommendation"} source={"mal"} loading={false} />
                 ))}
               </Carousel>
           </div>
