@@ -3,9 +3,11 @@ import Dashboard from "../../components/dashboard/Dashboard";
 import UpdateProfile from "../../components/update-profile/UpdateProfile";
 import ChangePassword from "../../components/change-password/ChangePassword";
 import './Profile.css'
-import { Axios } from 'axios';
+import Axios from 'axios'
+import { useHistory } from 'react-router-dom'
 
 function ProfilePage(){
+    Axios.defaults.withCredentials = true;
     const [currPage, setCurrentPage] = useState('dashboard')
 
     function buttonClassName(page){
@@ -19,22 +21,31 @@ function ProfilePage(){
         }
     }
     
+    const [name, setName] = useState("")
     const [username, setUsername] = useState("")
     const [gender, setGender] = useState("")
     const [joined, setJoined] = useState("")
+    const history = useHistory()
 
     useEffect(() => {
         Axios.get('http://localhost:3001/getprofile').then((response) => {
-            setUsername(response.data.username)
-            setGender(response.data.gender)
-            setJoined(response.data.joined)
+            if (response.data.message === 'You need to login first'){
+                alert(response.data.message)
+                history.push('/login')
+            }
+            else {
+                setName(response.data.name)
+                setUsername(response.data.username)
+                setGender(response.data.gender)
+                setJoined(response.data.joined)
+            }
         })
     }, [])
 
     return(
         <div className="profile-container">
             <div className='container py-5 text-light'>
-                <h1 className='header-title fw-bolder mb-3'>Budi's <span className='header-span'>Profile</span></h1>
+            <h1 className='header-title fw-bolder mb-3'>{name.substring(0, name.indexOf(' '))}'s <span className='header-span'>Profile</span></h1>
                 <div className="d-flex">
                     <div className="w-25 py-5"> 
                         <img src="https://www.themoviedb.org/t/p/w600_and_h900_bestv2/h0A3pzHaNTVRD7xNfabuoyadJba.jpg" alt="" 

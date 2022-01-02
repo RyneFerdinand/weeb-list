@@ -1,15 +1,20 @@
 import React, { useState } from 'react'
 import './ChangePassword.css'
 import Axios from 'axios'
+import { useHistory } from 'react-router-dom'
 
 function UpdateProfile(){
     const [oldPassword, setOldPassword] = useState("")
     const [newPassword, setNewPassword] = useState("")
     const [confirmPassword, setConfirmPassword] = useState("")
+    const history = useHistory()
 
     const changePassword = () => {
-        Axios.post('http://localhost:3001/changepassword', {newPassword: newPassword, confirmPassword: confirmPassword}).then((response) => {
+        Axios.post('http://localhost:3001/changepassword', {oldPassword: oldPassword, newPassword: newPassword, confirmPassword: confirmPassword}).then((response) => {
             alert(response.data.message)
+            if (response.data.message === 'Change password successful'){
+                window.location.reload()
+            }
         })
     }
 
