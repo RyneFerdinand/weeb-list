@@ -287,7 +287,7 @@ app.get('/getprofile', (req, res) => {
 })
 
 app.get('/dashboard', (req, res) => {
-    let watchlist = 0, finished = 0, watching = 0, planned = 0, review = 0, hours = 0
+    let watchlist = 0, finished = 0, watching = 0, planned = 0, review = 0
     Watchlist.find({userID: req.session.user._id}, (err, foundWatchlist) => {
         if (!err && foundWatchlist){
             watchlist = foundWatchlist.length
@@ -313,7 +313,7 @@ app.get('/dashboard', (req, res) => {
             review = foundRating.length
         }
     })
-    res.send({watchlist: watchlist, finished: finished, watching: watching, planned: planned, review: review, hours: hours})
+    res.send({watchlist: watchlist, finished: finished, watching: watching, planned: planned, review: review})
 })
 
 app.listen(3001, function(){

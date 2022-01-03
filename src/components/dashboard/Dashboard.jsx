@@ -8,7 +8,6 @@ function Dashboard(){
     const [watching, setWatching] = useState(0)
     const [planned, setPlanned] = useState(0)
     const [review, setReview] = useState(0)
-    const [hours, setHours] = useState(0)
 
     useEffect(() => {
         Axios.get('http://localhost:3001/dashboard').then((response) => {
@@ -17,7 +16,6 @@ function Dashboard(){
             setWatching(response.data.watching)
             setPlanned(response.data.planned)
             setReview(response.data.review)
-            setHours(response.data.hours)
         })
     }, [])
 
@@ -53,12 +51,6 @@ function Dashboard(){
                     <div class="p-5 dash-col text-center fw-bolder">
                         <p>Total Review</p>
                         <p className='col-data fs-1'>{review}</p>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="p-5 dash-col text-center fw-bolder">
-                        <p>Hours Spent</p>
-                        <p className='col-data fs-1'>{hours}</p>
                     </div>
                 </div>
             </div>
