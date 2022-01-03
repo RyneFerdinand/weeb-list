@@ -41,7 +41,6 @@ function DetailPage() {
         const reviews = await axios.post(URL, {
           animeID: animeId,
         });
-        console.log(reviews);
         reviews.data.forEach((review) => {
           if (review.userID === currID) {
             setReviewed(true);
@@ -60,6 +59,7 @@ function DetailPage() {
             );
           },
         });
+        console.log(anime);
         setAnime(anime.data);
         setFetchStatus(false);
       } catch (error) {
@@ -89,7 +89,6 @@ function DetailPage() {
         description: description,
         rating: reviewScore,
       });
-      console.log(review);
       setReview((prevReview) => {
         return [...prevReview, review.data];
       });
@@ -362,8 +361,9 @@ function DetailPage() {
                 {anime.recommendations.map((recommendation) => (
                   <AnimeCard
                     anime={recommendation}
+                    loading={false}
                     type={"recommendation"}
-                    source={"detail"}
+                    source={"mal"}
                   />
                 ))}
               </Carousel>
