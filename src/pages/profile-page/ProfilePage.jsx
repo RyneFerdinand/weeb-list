@@ -25,6 +25,7 @@ function ProfilePage(){
     const [username, setUsername] = useState("")
     const [gender, setGender] = useState("")
     const [joined, setJoined] = useState("")
+    const [profileImage, setProfileImage] = useState("")
     const history = useHistory()
 
     useEffect(() => {
@@ -38,9 +39,18 @@ function ProfilePage(){
                 setUsername(response.data.username)
                 setGender(response.data.gender)
                 setJoined(response.data.joined)
+                setProfileImage(response.data.profileImage)
             }
         })
     }, [])
+
+
+    const image = (e) => {
+        setProfileImage(e.target.src)
+        Axios.post('http://localhost:3001/changeimage', {profileImage: e.target.src}).then((response) => {
+            alert(response.data.message)
+        })
+    }
 
     return(
         <div className="profile-container">
@@ -48,8 +58,29 @@ function ProfilePage(){
             <h1 className='header-title fw-bolder mb-3'>{name.substring(0, name.indexOf(' '))}'s <span className='header-span'>Profile</span></h1>
                 <div className="d-flex">
                     <div className="w-25 py-5"> 
-                        <img src="https://www.themoviedb.org/t/p/w600_and_h900_bestv2/h0A3pzHaNTVRD7xNfabuoyadJba.jpg" alt="" 
-                        className='profile-image mb-3'/>
+                        <img src={profileImage} alt="" 
+                        className='profile-image mb-3' data-bs-toggle="modal" data-bs-target="#imageModal"/>
+                        <div class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="imageModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title text-dark" id="imageModalLabel">Choose image for profile</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body text-dark">
+                                    <img style={{width: "200px", height: "300px"}} class="m-3" src="https://picsum.photos/200/302" value="https://picsum.photos/200/300" onClick={image}></img>
+                                    <img style={{width: "200px", height: "300px"}}  class="m-3" src="https://picsum.photos/200/302" value="https://picsum.photos/200/300" onClick={image}></img>
+                                    <img style={{width: "200px", height: "300px"}}  class="m-3" src="https://picsum.photos/200/302" value="https://picsum.photos/200/300" onClick={image}></img>
+                                    <img style={{width: "200px", height: "300px"}}  class="m-3" src="https://picsum.photos/200/302" value="https://picsum.photos/200/300" onClick={image}></img>
+                                    <img style={{width: "200px", height: "300px"}}  class="m-3" src="https://picsum.photos/200/302" value="https://picsum.photos/200/300" onClick={image}></img>
+                                    <img style={{width: "200px", height: "300px"}}  class="m-3" src="https://picsum.photos/200/302" value="https://picsum.photos/200/300" onClick={image}></img>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                </div>
+                                </div>
+                            </div>
+                        </div>
                         <div className="d-flex profile-detail">
                             <p className='w-50'>Username</p>
                             <p className='w-50'>{username}</p>

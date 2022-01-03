@@ -36,7 +36,8 @@ const userSchema = new mongoose.Schema({
     email: String,
     password: String,
     gender: String,
-    joined: String
+    joined: String,
+    profileImage: String
 });
 
 const watchlistSchema = new mongoose.Schema({
@@ -131,7 +132,8 @@ app.post('/register', (req, res) => {
                     email: email,
                     password: hash,
                     gender: "-",
-                    joined: date
+                    joined: date,
+                    profileImage: 'https://picsum.photos/200/300'
                 })
                 newUser.save(function (err){
                     if (err){
@@ -224,7 +226,7 @@ app.post('/updateprofile', (req, res) => {
 app.get('/updateprofile', (req, res) => {
     User.findOne({username: req.session.user.username}, (err, foundUser) => {
         if (!err && foundUser){
-            res.send({name: foundUser.name, email: foundUser.email, username: foundUser.username, gender: foundUser.gender})
+            res.send({name: foundUser.name, email: foundUser.email, username: foundUser.username, gender: foundUser.gender, profileImage: foundUser.profileImage})
         }
     })
 })
@@ -282,7 +284,7 @@ app.get('/getprofile', (req, res) => {
         res.send({message: 'You need to login first'})
     }
     else {
-        res.send({name: req.session.user.name, username: req.session.user.username, gender: req.session.user.gender, joined: req.session.user.joined})
+        res.send({name: req.session.user.name, username: req.session.user.username, gender: req.session.user.gender, joined: req.session.user.joined, profileImage: req.session.user.profileImage})
     }
 })
 
@@ -314,6 +316,25 @@ app.get('/dashboard', (req, res) => {
         }
     })
     res.send({watchlist: watchlist, finished: finished, watching: watching, planned: planned, review: review})
+})
+
+app.post('/changeimage', (req, res) => {
+    User.findById(req.session.user._id, (err, foundUser) => {
+        if (!err && foundUser){
+            foundUser.profileImage = req.body.profileImage
+            foundUser.save((err) => {
+                if (err){
+                    res.send({message: 'Change image unsucessful'})
+                }
+                else {
+                    res.send({message: 'Change image sucessful'})
+                }
+            })
+        }
+        else {
+            res.send({message: 'Change image unsucessful'})
+        }
+    })
 })
 
 app.listen(3001, function(){
