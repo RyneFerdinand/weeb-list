@@ -33,7 +33,6 @@ function AnimePage() {
   const getAnime = async () => {
     setAnimeList([]);
     let API_URL = "http://localhost:8080/anime/search?q=" + query;
-    console.log(API_URL);
     let anime;
     try {
       anime = await axios.get(API_URL, {

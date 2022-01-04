@@ -33,23 +33,28 @@ header {
 
 .right-nav{
   width: 20%;
+  gap: 10%;
 }
 
-.user i {
-  opacity: 50%;
-  background-color: #c4c4c4;
-  color: black;
-}
 
 .user {
-  margin-left: 10%;
   color: black;
   background-color: #c4c4c4;
   height: 3.2rem;
   width: 3.2rem;
   border-radius: 50px;
+  object-fit: cover;
 }
 
 .menu-bar:hover {
   color: #44c1e9;
+}
+
+.login-header-btn{
+  background-color: var(--blue);
+  border-radius: 5px;
+  color: #FFFFFF;
+  border: none;
+  padding: 0.2em 0.7em;
+  font-weight: 600;
 }

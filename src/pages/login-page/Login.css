@@ -18,7 +18,7 @@ Link {
 }
 
 .content {
-  margin-top: 110px;
+  padding: 8em 0;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -27,7 +27,6 @@ Link {
 
 .caption {
   width: 400px;
-  padding-right: 80px;
 }
 
 .caption h1 {
@@ -50,11 +49,6 @@ Link {
 
 .sub-caption a {
   color: #44c1e9;
-}
-
-.back {
-  padding-top: 80px;
-  padding-left: 130px;
 }
 
 .form-box {

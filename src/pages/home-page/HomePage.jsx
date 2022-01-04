@@ -48,7 +48,6 @@ function HomePage() {
 
   const getHomeAnime = async () => {
     let API_URL = "http://localhost:8080/anime/home";
-    console.log("masuk")
     try {
       let tempAnimeList = await axios.post(API_URL, {
         userID: localStorage.getItem("userID"),
@@ -56,7 +55,6 @@ function HomePage() {
           setFetchProgress(
             Math.floor((progressEvent.loaded / progressEvent.total) * 100)
           );
-          console.log(fetchProgress);
         },
       });
       setAnime(tempAnimeList.data);

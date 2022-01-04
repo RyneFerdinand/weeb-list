@@ -27,7 +27,7 @@ function HeroBanner(props) {
               </div>
               <div className="anime-description">{props.animeDescription}</div>
               <div className="bottom-detail d-flex flex-row">
-                <WatchlistButton size={"large"} />
+                <WatchlistButton size={"large"} id={props.mal_id} />
                 <Link to={`/anime/${props.mal_id}`} className="more-link">
                   <button className="more-button">
                     More &emsp;{" "}
@@ -74,7 +74,7 @@ function HeroBanner(props) {
               </div>
               <div className="anime-description">{props.animeDescription}</div>
               <div className="bottom-detail d-flex flex-row">
-                <WatchlistButton size={"large"} />
+                <WatchlistButton size={"large"} id={props.mal_id} />
                 <Link to={`/anime/${props.mal_id}`} className="more-link">
                   <button className="more-button">
                     More &emsp;{" "}

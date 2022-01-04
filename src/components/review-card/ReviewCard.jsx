@@ -38,7 +38,6 @@ function ReviewCard(props) {
   };
   
   const removeReview = async () => {
-    console.log("ID: " + props.review._id);
     let URL = "http://localhost:8080/rating/delete";
     try {
       await axios.delete(URL, {

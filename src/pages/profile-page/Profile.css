@@ -36,3 +36,11 @@
 .profile-button-active {
   color: #44c1e9;
 }
+
+.custom-profile-modal{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  align-items: center;
+  justify-items: center;
+  row-gap: 2.5em;
+}

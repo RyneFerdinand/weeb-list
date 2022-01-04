@@ -10,7 +10,7 @@ function UpdateProfile(){
     const history = useHistory()
 
     const changePassword = () => {
-        Axios.post('http://localhost:3001/changepassword', {oldPassword: oldPassword, newPassword: newPassword, confirmPassword: confirmPassword}).then((response) => {
+        Axios.post('http://localhost:8080/changepassword', {oldPassword: oldPassword, newPassword: newPassword, confirmPassword: confirmPassword}).then((response) => {
             alert(response.data.message)
             if (response.data.message === 'Change password successful'){
                 window.location.reload()
@@ -20,7 +20,7 @@ function UpdateProfile(){
 
     return(
         <div className='container'>
-            <h2 className='form-title fw-bolder mb-5'>Change Password</h2>
+            <h2 style={{ overflowY: "hidden"}} className='form-title fw-bolder mb-5'>Change Password</h2>
             <div>
                 <div class="mb-3 input-group">
                     <label htmlFor="old_password" class="form-label input-group-text">Old Password</label>

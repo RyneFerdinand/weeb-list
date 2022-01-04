@@ -39,8 +39,6 @@ function WatchlistButton(props){
                 userID: userID,
                 animeID: `${props.id}`
             })
-            console.log("Anime: " + props.id);
-            console.log(watchlist);
             if(watchlist.data !== null){
                 setWatchlistStatus("In Watchlist")
             } else {

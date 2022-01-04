@@ -19,7 +19,7 @@ Link{
 }
 
 .register-content {
-  margin-top: 20px;
+  padding: 8em 0;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -91,8 +91,11 @@ Link{
 
 .terms {
   display: flex;
+  gap: 0.8em;
   align-items: center;
-  padding-left: 25px;
+  padding-left: 10px;
+  color: #FFFFFF;
+  
 }
 
 .terms input {

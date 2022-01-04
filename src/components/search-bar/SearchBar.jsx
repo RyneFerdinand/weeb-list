@@ -16,16 +16,15 @@ function SearchBar({ placeholder }) {
 
   const getAnime = async () => {
     if (wordEntered !== "") {
-      console.log(cancelToken);
       cancelToken.cancel();
 
       let query = wordEntered;
       let API_URL = "http://localhost:8080/anime/search?q=" + query;
       try {
-        // const anime = await axios.get(API_URL, {
-        //     cancelToken: cancelToken.token
-        // });
-        // setFilteredData(anime.data.results.slice(0, 10));
+        const anime = await axios.get(API_URL, {
+            cancelToken: cancelToken.token
+        });
+        setFilteredData(anime.data.results.slice(0, 10));
       } catch (error) {
         console.log(error.message);
       }

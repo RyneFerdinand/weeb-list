@@ -10,7 +10,7 @@ function UpdateProfile(){
     const [gender, setGender] = useState("")
 
     useEffect(() => {
-        Axios.get('http://localhost:3001/updateprofile').then((response) => {
+        Axios.get('http://localhost:8080/updateprofile').then((response) => {
             setName(response.data.name)
             setEmail(response.data.email)
             setUsername(response.data.username)
@@ -19,7 +19,7 @@ function UpdateProfile(){
     }, [])
 
     const update = () => {
-        Axios.post('http://localhost:3001/updateprofile', {name: name, email: email, username: username, gender: gender}).then((response) => {
+        Axios.post('http://localhost:8080/updateprofile', {name: name, email: email, username: username, gender: gender}).then((response) => {
             alert(response.data.message)
             if (response.data.message === 'Update successful'){
                 window.location.reload()
@@ -29,7 +29,7 @@ function UpdateProfile(){
 
     return(
         <div className='container'>
-            <h2 className='form-title fw-bolder mb-5'>Update Profile</h2>
+            <h2 className='form-title fw-bolder mb-5' style={{ overflowY: "hidden"}}>Update Profile</h2>
             <div>
                 <div class="mb-3 input-group">
                     <label htmlFor="name" class="form-label input-group-text">Name</label>

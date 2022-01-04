@@ -14,7 +14,7 @@ function Register() {
     Axios.defaults.withCredentials = true;
 
     const register = () => {
-        Axios.post('http://localhost:3001/register', {username: username, name: name, password: password, email: email, checkbox: checkbox}).then((response) => {
+        Axios.post('http://localhost:8080/register', {username: username, name: name, password: password, email: email, checkbox: checkbox}).then((response) => {
             alert(response.data.message)
             if (response.data.registeredIn === true){   
                 history.push('/login')
@@ -24,13 +24,12 @@ function Register() {
 
     return (
         <div className = "register">
-            <div className="website-logo">
-                <img src={WebsiteLogo}></img>
-            </div>
             <div className="register-content">
                 <div className="left">
-                    <div className="caption">
-                        <h1>Create New <a>Weeb List</a> Account.</h1>
+                    <div className="caption d-flex flex-column">
+                        <h1>Create New</h1>
+                        <h1 className='text--blue'>Weeb List</h1>
+                        <h1>Account.</h1>
                     </div>
                     <div className="sub-caption">
                         <p>Already have an account? <a href="http://localhost:3000/#/login">Log in</a></p>
@@ -103,9 +102,6 @@ function Register() {
                         </div>
                     </div>
                 </div>
-            </div>
-            <div className="register-back">
-                <a><i class="fas fa-chevron-left"></i> Back to Home</a>
             </div>
         </div>
     )

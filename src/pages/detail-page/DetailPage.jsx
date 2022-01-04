@@ -46,7 +46,6 @@ function DetailPage() {
             setReviewed(true);
           }
         });
-
         setReview(reviews.data);
       } catch (error) {}
 
@@ -59,7 +58,6 @@ function DetailPage() {
             );
           },
         });
-        console.log(anime);
         setAnime(anime.data);
         setFetchStatus(false);
       } catch (error) {
@@ -252,13 +250,16 @@ function DetailPage() {
               ))}
             </div>
             <div className="review-buttons d-flex flex-row align-items-center justify-content-center">
-              <button className="d-flex flex-row align-items-center load-button">
-                <FontAwesomeIcon
-                  icon={["fas", "chevron-down"]}
-                  style={{ color: "#44C1E9" }}
-                />
-                <p>Load More</p>
-              </button>
+              {review.length > 0 ?
+                <button className="d-flex flex-row align-items-center load-button">
+                  <FontAwesomeIcon
+                    icon={["fas", "chevron-down"]}
+                    style={{ color: "#44C1E9" }}
+                  />
+                  <p>Load More</p>
+                </button>:
+                <></>
+              }
               {reviewed === true ? (
                 <></>
               ) : (

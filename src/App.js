@@ -12,23 +12,24 @@ import WatchlistPage from "./pages/watchlist-page/WatchlistPage";
 import ProfilePage from "./pages/profile-page/ProfilePage";
 import Login from "./pages/login-page/Login";
 import Register from "./pages/register-page/Register";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 // import WatchlistPage from './pages/watchlist-page/WatchlistPage';
 
 library.add(fas);
 
 function App() {
   
-  localStorage.setItem("userID", "61cbd680d167679d1302bb46");
-  localStorage.setItem("loggedIn", true);
-  localStorage.setItem("username", "michaelthe23");
+  const [loggedIn, setLoggedIn] = useState(()=>false);
   
   return (
     <div>
       <Router>
-        <Header />
+        <Header loggedIn={loggedIn} />
         <Switch>
           <Route path="/login">
-            <Login />
+            <Login login={(state)=>setLoggedIn(state)} />
           </Route>
           <Route path="/register">
             <Register />
@@ -40,7 +41,7 @@ function App() {
             <AnimePage />
           </Route>
           <Route path="/watchlist">
-            <WatchlistPage />
+            <WatchlistPage loggedIn={loggedIn}/>
           </Route>
           <Route path="/profile">
             <ProfilePage />
