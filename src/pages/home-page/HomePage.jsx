@@ -9,6 +9,7 @@ import AnimeCard from "../../components/anime-card/AnimeCard";
 function HomePage() {
   const [anime, setAnime] = useState(async () => []);
   const [fetchProgress, setFetchProgress] = useState(()=>0);
+  const [userID, setUserID] = useState(()=>"");
 
   const mainCarousel = {
     desktop: {
@@ -49,8 +50,11 @@ function HomePage() {
   const getHomeAnime = async () => {
     let API_URL = "http://localhost:8080/anime/home";
     try {
+      let userID = await axios.get("http://localhost:8080/id");
+      setUserID(userID.data);
+      
       let tempAnimeList = await axios.post(API_URL, {
-        userID: localStorage.getItem("userID"),
+        userID: userID.data,
         onDownloadProgress: (progressEvent) => {
           setFetchProgress(
             Math.floor((progressEvent.loaded / progressEvent.total) * 100)

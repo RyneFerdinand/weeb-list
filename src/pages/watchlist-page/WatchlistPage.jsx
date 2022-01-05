@@ -5,14 +5,17 @@ import WatchlistContent from "./WatchlistContent";
 import "./WatchlistPageStyle.css";
 
 function WatchlistPage(props) {
-  let userID = localStorage.getItem("userID");
+  let userID;
   const [watchlist, setWatchlist] = useState(() => []);
 
   const history = useHistory();
 
-
   const getWatchlist = async () => {
     try {
+      let user = await axios.get("http://localhost:8080/id");
+      userID = user.data;
+      console.log(userID);
+
       let watchlistData = await axios.post(
         "http://localhost:8080/watchlist/view",
         {

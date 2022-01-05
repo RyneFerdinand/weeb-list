@@ -18,7 +18,6 @@ function DetailPage() {
   let query = "";
   let reviewScore = -1;
   let description = "";
-  let currID = localStorage.getItem("userID");
 
   const [anime, setAnime] = useState(() => []);
   const [review, setReview] = useState(() => []);
@@ -26,12 +25,24 @@ function DetailPage() {
   const [characterCount, setCharacterCount] = useState(() => 6);
   const [fetchProgress, setFetchProgress] = useState(() => 0);
   const [reviewed, setReviewed] = useState(() => false);
+  const [currID, setCurrID] = useState(() => "");
 
   if (id !== animeId) {
     setFetchStatus(true);
     setAnime({});
     setAnimeId(id);
   }
+  const getID = async () => {
+    try {
+      const user = await axios.get("http://localhost:8080/id");
+      console.log(user);
+      setCurrID(user.data);
+    } catch (error) {}
+  };
+
+  useEffect(() => {
+    getID();
+  }, []);
 
   let ratingScore = ["-", 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
   useEffect(() => {
@@ -46,6 +57,7 @@ function DetailPage() {
             setReviewed(true);
           }
         });
+        console.log(reviews.data);
         setReview(reviews.data);
       } catch (error) {}
 
@@ -68,6 +80,11 @@ function DetailPage() {
   }, [query, animeId]);
 
   const addReview = async () => {
+    console.log(currID);
+    console.log(animeId);
+    console.log(description);
+    console.log(reviewScore);
+
     if (reviewScore === -1 || description.trim().length === 0) {
       return;
     }
@@ -87,6 +104,7 @@ function DetailPage() {
         description: description,
         rating: reviewScore,
       });
+      console.log(review);
       setReview((prevReview) => {
         return [...prevReview, review.data];
       });
@@ -122,7 +140,7 @@ function DetailPage() {
 
   const updateReviewState = (newReview, action) => {
     let updatedReviews = [];
-    if(action === "update"){
+    if (action === "update") {
       review.forEach((rev) => {
         if (rev._id !== newReview._id) {
           updatedReviews.push(rev);
@@ -250,16 +268,17 @@ function DetailPage() {
               ))}
             </div>
             <div className="review-buttons d-flex flex-row align-items-center justify-content-center">
-              {review.length > 0 ?
+              {review.length > 0 ? (
                 <button className="d-flex flex-row align-items-center load-button">
                   <FontAwesomeIcon
                     icon={["fas", "chevron-down"]}
                     style={{ color: "#44C1E9" }}
                   />
                   <p>Load More</p>
-                </button>:
+                </button>
+              ) : (
                 <></>
-              }
+              )}
               {reviewed === true ? (
                 <></>
               ) : (

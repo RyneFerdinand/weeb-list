@@ -26,7 +26,7 @@ function App() {
   return (
     <div>
       <Router>
-        <Header loggedIn={loggedIn} />
+        <Header loggedIn={loggedIn} login={(state)=>setLoggedIn(state)} />
         <Switch>
           <Route path="/login">
             <Login login={(state)=>setLoggedIn(state)} />

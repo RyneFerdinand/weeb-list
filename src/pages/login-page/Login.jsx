@@ -30,7 +30,6 @@ function Login(props) {
   useEffect(() => {
     Axios.get("http://localhost:8080/login").then((response) => {
       if (response.data.loggedIn === true) {
-        sessionStorage.setItem("loggedIn", true);
         props.login(true)
         history.push("/");
       }

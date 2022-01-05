@@ -6,7 +6,7 @@ import "./Profile.css";
 import Axios from "axios";
 import { useHistory } from "react-router-dom";
 
-function ProfilePage() {
+function ProfilePage(props) {
   Axios.defaults.withCredentials = true;
   const [currPage, setCurrentPage] = useState("dashboard");
 
@@ -40,6 +40,7 @@ function ProfilePage() {
     Axios.get("http://localhost:8080/getprofile").then((response) => {
       if (response.data.message === "You need to login first") {
         alert(response.data.message);
+        props.setloggedIn(false);
         history.push('/login')
       } else {
         setName(response.data.name);

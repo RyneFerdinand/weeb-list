@@ -1,13 +1,31 @@
 import "./ReviewCard.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "axios";
+import { useEffect, useState } from "react";
 
 function ReviewCard(props) {
   let reviewScore = props.review.score;
   let description = props.review.description;
   const ratingScore = ["-", 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-  let username = localStorage.getItem("username");
-  let userID = localStorage.getItem("userID");
+  const [userID, setUserID] = useState(()=>"");
+  const [username, setUsername] = useState(()=>"");
+  const [profile, setProfile] = useState(()=>"");
+
+  const getUserData = async() => {
+    try {
+      let userID = await axios.get("http://localhost:8080/id");
+      setUserID(userID.data);
+      let user = await axios.get("http://localhost:8080/getprofile");
+      setUsername(user.data.username);
+      setProfile(user.data.profileImage)
+    } catch (error) {
+      
+    }
+  }
+
+  useEffect(() => {
+    getUserData();
+  }, [])
 
   const updateReview = async () => {
     if (
@@ -61,7 +79,7 @@ function ReviewCard(props) {
     <div className="d-flex flex-column review-wrapper">
       <div className="d-flex flex-row review">
         <img
-          src={pfp[Math.floor(Math.random() * 3)]}
+          src={profile}
           alt=""
           className="review__profile"
         />

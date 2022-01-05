@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import './WatchlistButton.css'
 
 function WatchlistButton(props){
-    let userID = localStorage.getItem("userID");
+    let userID;
     const [classData, setClassData] = useState(()=>{
         let data;
         if(props.size === "large"){
@@ -35,6 +35,9 @@ function WatchlistButton(props){
     
     const searchWatchlist = async () => {
         try {
+            let user = await axios.get("http://localhost:8080/id");
+            userID = user.data;
+      
             let watchlist = await axios.post('http://localhost:8080/watchlist/search', {
                 userID: userID,
                 animeID: `${props.id}`
@@ -52,18 +55,19 @@ function WatchlistButton(props){
     }
 
     useEffect(() => {
-        console.log(searchWatchlist());
+        searchWatchlist();
     }, [])
 
     const handleWatchlist = async () => {
         if(watchlistStatus === "Add to Watchlist"){
             setWatchlistStatus("In Watchlist");
             try {
+                console.log(userID);
                 await axios.post("http://localhost:8080/watchlist/add", {
                     userID: userID,
                     animeID: `${props.id}`
                 });
-
+                
             } catch (error) {
             }
         } else {
