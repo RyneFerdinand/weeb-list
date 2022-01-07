@@ -199,7 +199,7 @@ function ProfilePage(props) {
             </div>
           </div>
           <div className="w-75 px-3">
-            {currPage == "dashboard" && <Dashboard />}
+            {currPage == "dashboard" && <Dashboard joined={joined}/>}
             {currPage == "update-profile" && <UpdateProfile />}
             {currPage == "change-password" && <ChangePassword />}
           </div>

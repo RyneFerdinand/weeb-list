@@ -8,7 +8,7 @@ function Dashboard(){
     const [watching, setWatching] = useState(0)
     const [planned, setPlanned] = useState(0)
     const [review, setReview] = useState(0)
-
+    const [weebScale, setWeebScale] = useState("")
     useEffect(() => {
         Axios.get('http://localhost:8080/dashboard').then((response) => {
             setWatchlist(response.data.watchlist)
@@ -50,6 +50,12 @@ function Dashboard(){
                 <div class="col">
                     <div class="p-5 dash-col text-center fw-bolder">
                         <p>Total Review</p>
+                        <p className='col-data fs-1'>{review}</p>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="p-5 dash-col text-center fw-bolder">
+                        <p>Weeb Scale</p>
                         <p className='col-data fs-1'>{review}</p>
                     </div>
                 </div>
