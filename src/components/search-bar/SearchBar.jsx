@@ -7,7 +7,6 @@ import { Link, useHistory } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 function SearchBar({ placeholder }) {
-  const cancelToken = axios.CancelToken.source();
   const [filteredData, setFilteredData] = useState(() => []);
   const [wordEntered, setWordEntered] = useState(() => "");
   const searchRef = useRef(null);
@@ -16,29 +15,38 @@ function SearchBar({ placeholder }) {
 
   const getAnime = async () => {
     if (wordEntered !== "") {
-      cancelToken.cancel();
-
       let query = wordEntered;
-      let API_URL = "http://localhost:8080/anime/search?q=" + query;
+      let API_URL = "http://localhost:8080/anime/searchQuery?q=" + query;
       try {
-        const anime = await axios.get(API_URL, {
-            cancelToken: cancelToken.token
-        });
-        setFilteredData(anime.data.results.slice(0, 10));
+        let anime;
+        setTimeout(async () => {
+          anime = await axios.get(API_URL);
+          console.log(anime.data);
+          setFilteredData(anime.data);
+        }, 1000);
       } catch (error) {
-        console.log(error.message);
+        console.log(error);
       }
-    } else {
-      setFilteredData([]);
     }
   };
 
   useEffect(() => {
-    getAnime();
+    if(wordEntered.length > 2){
+      getAnime();
+    }
   }, [wordEntered]);
 
   const handleFilter = (event) => {
+    try {
+      clearTimeout();
+    } catch (error) {
+      console.log("cancelled");
+    }
     const searchWord = event.target.value;
+    if (searchWord === "") {
+      setFilteredData([]);
+    }
+
     setWordEntered(searchWord);
   };
 
@@ -48,12 +56,14 @@ function SearchBar({ placeholder }) {
   };
 
   const searchQuery = (e) => {
-    e.preventDefault();
     setWordEntered("");
+    setFilteredData([]);
+    e.preventDefault();
     if (wordEntered.length > 2)
       queryHistory.push(`/anime?q=${encodeURI(wordEntered)}`);
   };
 
+  console.log(filteredData);
   return (
     <div ref={searchRef} className="search">
       <div className="searchInput">
@@ -88,14 +98,14 @@ function SearchBar({ placeholder }) {
           className="dataResult"
           style={{ display: outsideClickRef ? "none" : "fixed" }}
         >
-          {filteredData.map((data) => {
+          {filteredData?.map((data) => {
             return (
               <Link
-                to={`/anime/${data.mal_id}`}
+                to={`/anime/${data.node.id}`}
                 onClick={() => setWordEntered("")}
                 style={{ textDecoration: "none" }}
               >
-                <SearchQueryCard data={data} />
+                <SearchQueryCard data={data.node} />
               </Link>
             );
           })}
