@@ -6,29 +6,35 @@ import "react-dropdown/style.css";
 import { useLocation } from "react-router-dom";
 import queryString from "query-string";
 import LoadingBar from "react-top-loading-bar";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-function AnimePage() {
+function AnimePage(props) {
   const { search } = useLocation();
   let searchObj = queryString.parse(search);
 
   const [animeList, setAnimeList] = useState([]);
-  const [query, setQuery] = useState(() =>
+  const [query, setQuery] = useState(() =>"");
+  const [genre, setGenre] = useState(() => []);
+  const [currSearch, setCurrSearch] = useState(
     searchObj.q !== undefined ? searchObj.q : ""
   );
-  const [genre, setGenre] = useState(() => []);
   const [sortBy, setSortBy] = useState(() => []);
   const [season, setSeason] = useState(() => []);
   const [yearList, setYearList] = useState(() => []);
   const [year, setYear] = useState(() => 2022);
   const [fetchProgress, setFetchProgress] = useState(() => 0);
-  const [skeletons, setSkeletons] = useState(()=>{
+  const [skeletons, setSkeletons] = useState(() => {
     let data = [];
     for (let i = 0; i < 40; i++) {
-      const card = <AnimeCard loading={true}/>
+      const card = <AnimeCard loading={true} />;
       data.push(card);
     }
     return data;
-  })
+  });
+  const [currPage, setCurrPage] = useState(() => 1);
+  const [availableButton, setAvailableButton] = useState(() => {
+    return { left: false, right: true };
+  });
 
   const getAnime = async () => {
     setAnimeList([]);
@@ -46,6 +52,12 @@ function AnimePage() {
       if (anime.data.results.length !== 50) {
         anime.data.results = anime.data.results.slice(0, 50);
       }
+      let page = {
+        left: Boolean(anime.data.prevPage),
+        right: Boolean(anime.data.nextPage),
+      };
+
+      setAvailableButton(page);
       setAnimeList(anime.data.results);
     } catch (error) {
       console.log(error.message);
@@ -111,12 +123,16 @@ function AnimePage() {
   }, []);
 
   useEffect(() => {
-    setQuery(encodeURI(searchObj.q !== undefined ? searchObj.q : ""));
+    let newQuerySearch = searchObj.q !== undefined ? searchObj.q : "";
+    if (newQuerySearch !== currSearch) {
+    }
+
+    setCurrSearch(encodeURI(searchObj.q !== undefined ? searchObj.q : ""));
     updateQuery();
   }, [searchObj]);
 
   function updateQuery() {
-    let q = "";
+    let q = currSearch;
 
     let seasonChosen = false;
     season.forEach((season) => {
@@ -148,11 +164,17 @@ function AnimePage() {
               : sort.sortBy.toLowerCase());
         }
       });
+
+      q += "&page=" + currPage;
     }
-    setQuery((prevQuery) => prevQuery + q);
+    setQuery(q);
   }
 
   function changeGenreState(selectedGenre) {
+    setCurrPage(1);
+    season.forEach((season) => {
+      season.selected = false;
+    })
     let tempGenre = genre;
 
     tempGenre.forEach((gen) => {
@@ -165,6 +187,11 @@ function AnimePage() {
   }
 
   function changeSortState(selectedSort) {
+    setCurrPage(1);
+    season.forEach((season) => {
+      season.selected = false;
+    });
+
     let tempSort = sortBy;
     tempSort.forEach((sort) => {
       if (sort.sortBy === selectedSort.sortBy) {
@@ -178,11 +205,14 @@ function AnimePage() {
   }
 
   function changeSeasonState(selectedSeason) {
+    setCurrPage(1);
     let tempSeason = season;
+    genre.forEach((gen) => (gen.selected = false));
+    sortBy.forEach((sort) => (sort.selected = false));
     tempSeason.forEach((season) => {
       if (season.season === selectedSeason.season) {
         season.selected = !season.selected;
-      } else {
+          } else {
         season.selected = false;
       }
     });
@@ -191,6 +221,7 @@ function AnimePage() {
   }
 
   function changeYearState(selectedYear) {
+    setCurrPage(1);
     setYear(selectedYear.target.value);
     let seasonChosen = false;
     season.forEach((season) => {
@@ -200,6 +231,28 @@ function AnimePage() {
     });
     if (seasonChosen) {
       updateQuery();
+    }
+  }
+
+  function updatePage(direction) {
+    let buttonStatus = {
+      left: false,
+      right: false,
+    };
+    if (direction === "left") {
+      if (availableButton.left) {
+        setAnimeList([]);
+        setAvailableButton(buttonStatus);
+        setCurrPage((prev) => prev - 1);
+        updateQuery();
+      }
+    } else if (direction === "right") {
+      if (availableButton.right) {
+        setAnimeList([]);
+        setAvailableButton(buttonStatus);
+        setCurrPage((prev) => prev + 1);
+        updateQuery();
+      }
     }
   }
 
@@ -218,14 +271,50 @@ function AnimePage() {
         <h1 className="text--blue">Anime</h1>
         <div className="anime-data d-flex flex-row">
           <div className="card-container">
-            { animeList.length > 0 ?
-              animeList?.map((anime) => {
-                return (
-                  <AnimeCard key={anime.mal_id} anime={anime} type={"search"} loading={false} />
-                );
-              }):
-              skeletons
-            }
+            {animeList.length > 0
+              ? animeList?.map((anime) => {
+                  return (
+                    <AnimeCard
+                      key={anime.mal_id}
+                      anime={anime}
+                      loggedIn={props.loggedIn}
+                      loading={false}
+                    />
+                  );
+                })
+              : skeletons}
+            <div className="pagination-buttons">
+              <button
+                onClick={() => updatePage("left")}
+                disabled={!availableButton.left}
+                className={
+                  availableButton.left === true
+                    ? "d-flex flex-row align-items-center"
+                    : "inactive-btn d-flex flex-row align-items-center"
+                }
+              >
+                <FontAwesomeIcon
+                  icon={["fas", "chevron-left"]}
+                  style={{ color: "#44B9DE" }}
+                />
+                <h5>Prev</h5>
+              </button>
+              <button
+                onClick={() => updatePage("right")}
+                disabled={!availableButton.right}
+                className={
+                  availableButton.right === true
+                    ? "d-flex flex-row align-items-center"
+                    : "inactive-btn d-flex flex-row align-items-center"
+                }
+              >
+                <h5>Next</h5>
+                <FontAwesomeIcon
+                  icon={["fas", "chevron-right"]}
+                  style={{ color: "#44B9DE" }}
+                />
+              </button>
+            </div>
           </div>
 
           <div className="filter-container">

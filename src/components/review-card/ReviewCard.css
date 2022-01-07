@@ -10,7 +10,8 @@
 
 .review__profile{
     width: 8%;
-    height: 8%;
+    height: 115px;
+    object-fit: cover;
     border-radius: 10px;
 }
 
@@ -30,5 +31,10 @@
 
 .review__rating {
     color: #FFFFFF;
+    gap: 1em;
+}
+
+
+.update-buttons{
     gap: 1em;
 }

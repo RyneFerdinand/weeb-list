@@ -10,11 +10,21 @@ function WatchlistPage(props) {
 
   const history = useHistory();
 
+  useEffect(() => {
+    axios.get("http://localhost:8080/login").then((response) => {
+      if (response.data.loggedIn === true) {
+        props.login(true)
+      } else {
+        props.login(false);
+        history.push("/");
+      }
+    });
+  }, []);
+  
   const getWatchlist = async () => {
     try {
       let user = await axios.get("http://localhost:8080/id");
       userID = user.data;
-      console.log(userID);
 
       let watchlistData = await axios.post(
         "http://localhost:8080/watchlist/view",

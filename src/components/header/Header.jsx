@@ -6,8 +6,22 @@ import { Link, useHistory } from "react-router-dom";
 import Axios from "axios";
 
 function Header(props) {
-  const [profileImage, setProfileImage] = useState(() => "");
+  const [profileImage, setProfileImage] = useState(() => props.profileImage);
   const history = useHistory();
+
+  useEffect(() => {
+    Axios.get("http://localhost:8080/login").then((response) => {
+      if (response.data.loggedIn === true) {
+        props.login(true)
+      } else {
+        props.login(false);
+      }
+    });
+  }, []);
+
+  if(props.profileImage !== "" && props.profileImage !== profileImage){
+    setProfileImage(props.profileImage)
+  }
 
   if (props.loggedIn === true) {
     Axios.get("http://localhost:8080/getprofile").then((response) => {

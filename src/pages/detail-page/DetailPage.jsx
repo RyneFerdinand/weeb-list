@@ -12,7 +12,7 @@ import axios from "axios";
 import LoadingBar from "react-top-loading-bar";
 import WatchlistButton from "../../components/watchlist-button/WatchlistButton";
 
-function DetailPage() {
+function DetailPage(props) {
   let { id } = useParams();
   const [animeId, setAnimeId] = useState(() => "");
   let query = "";
@@ -23,6 +23,7 @@ function DetailPage() {
   const [review, setReview] = useState(() => []);
   const [fetchStatus, setFetchStatus] = useState(() => true);
   const [characterCount, setCharacterCount] = useState(() => 6);
+  const [reviewCount, setReviewCount] = useState(() => 3);
   const [fetchProgress, setFetchProgress] = useState(() => 0);
   const [reviewed, setReviewed] = useState(() => false);
   const [currID, setCurrID] = useState(() => "");
@@ -35,7 +36,6 @@ function DetailPage() {
   const getID = async () => {
     try {
       const user = await axios.get("http://localhost:8080/id");
-      console.log(user);
       setCurrID(user.data);
     } catch (error) {}
   };
@@ -57,7 +57,6 @@ function DetailPage() {
             setReviewed(true);
           }
         });
-        console.log(reviews.data);
         setReview(reviews.data);
       } catch (error) {}
 
@@ -80,11 +79,6 @@ function DetailPage() {
   }, [query, animeId]);
 
   const addReview = async () => {
-    console.log(currID);
-    console.log(animeId);
-    console.log(description);
-    console.log(reviewScore);
-
     if (reviewScore === -1 || description.trim().length === 0) {
       return;
     }
@@ -104,7 +98,6 @@ function DetailPage() {
         description: description,
         rating: reviewScore,
       });
-      console.log(review);
       setReview((prevReview) => {
         return [...prevReview, review.data];
       });
@@ -203,7 +196,11 @@ function DetailPage() {
                   <p>{anime.score ? anime.score : "N/A"}</p>
                 </span>
               </div>
-              <WatchlistButton source={"detail"} id={id} />
+              {props.loggedIn === true ? (
+                <WatchlistButton source={"detail"} id={id} />
+              ) : (
+                <></>
+              )}
               <div className="information-section__fourth">
                 <p className="description-section">
                   {anime.synopsis
@@ -231,45 +228,12 @@ function DetailPage() {
                 )}
               </div>
             </div>
-            {characterCount < anime.characters.length ? (
-              <button
-                className="d-flex flex-row align-items-center load-button"
-                onClick={loadCharacter}
-              >
-                <FontAwesomeIcon
-                  icon={["fas", "chevron-down"]}
-                  style={{ color: "#44C1E9" }}
-                />
-                <p>Load More</p>
-              </button>
-            ) : (
-              <button
-                className="d-flex flex-row align-items-center load-button"
-                onClick={hideCharacter}
-              >
-                <FontAwesomeIcon
-                  icon={["fas", "chevron-up"]}
-                  style={{ color: "#44C1E9" }}
-                />
-                <p>Hide</p>
-              </button>
-            )}
-          </div>
-
-          <div className="d-flex flex-column review-section custom-container">
-            <h1>Review</h1>
-            <div className="review-section__review d-flex flex-column">
-              {review.map((review) => (
-                <ReviewCard
-                  review={review}
-                  animeID={animeId}
-                  updateState={updateReviewState}
-                />
-              ))}
-            </div>
-            <div className="review-buttons d-flex flex-row align-items-center justify-content-center">
-              {review.length > 0 ? (
-                <button className="d-flex flex-row align-items-center load-button">
+            {anime.characters.length > 6 ? (
+              characterCount < anime.characters.length ? (
+                <button
+                  className="d-flex flex-row align-items-center load-button"
+                  onClick={loadCharacter}
+                >
                   <FontAwesomeIcon
                     icon={["fas", "chevron-down"]}
                     style={{ color: "#44C1E9" }}
@@ -277,118 +241,176 @@ function DetailPage() {
                   <p>Load More</p>
                 </button>
               ) : (
-                <></>
-              )}
-              {reviewed === true ? (
-                <></>
-              ) : (
                 <button
-                  type="button"
                   className="d-flex flex-row align-items-center load-button"
-                  data-bs-toggle="modal"
-                  data-bs-target="#reviewModal"
+                  onClick={hideCharacter}
                 >
                   <FontAwesomeIcon
-                    icon={["fas", "plus"]}
+                    icon={["fas", "chevron-up"]}
                     style={{ color: "#44C1E9" }}
                   />
-                  <p>Add Review</p>
+                  <p>Hide</p>
                 </button>
-              )}
-            </div>
+              )
+            ) : (
+              <></>
+            )}
           </div>
-          <div
-            class="modal fade"
-            id="reviewModal"
-            tabindex="-1"
-            aria-labelledby="reviewModalLabel"
-            aria-hidden="true"
-          >
-            <div class="modal-dialog">
-              <div class="custom-modal modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title text--blue" id="reviewModalLabel">
-                    Review
-                  </h5>
-                  <button
-                    type="button"
-                    class="btn-close btn-close-white"
-                    data-bs-dismiss="modal"
-                    aria-label="Close"
-                  ></button>
+
+          {anime.score ? (
+            <div>
+              <div className="d-flex flex-column review-section custom-container">
+                <h1>Review</h1>
+                <div className="review-section__review d-flex flex-column">
+                  {review.length > 0 ? (
+                    review.map((review, idx) =>
+                      idx < reviewCount ? (
+                        <ReviewCard
+                          review={review}
+                          animeID={animeId}
+                          updateState={updateReviewState}
+                        />
+                      ) : (
+                        <></>
+                      )
+                    )
+                  ) : (
+                    <div className="no-review-container">
+                      <h4 className="text--white">There are no reviews yet</h4>
+                    </div>
+                  )}
                 </div>
-                <div class="custom-body modal-body d-flex flex-column">
-                  <div className="score-section d-flex flex-row align-items-center">
-                    <h7 className="text--white">Rating: </h7>
-                    <select
-                      name="score-select"
-                      class="score-cbo"
-                      onClick={(e) => {
-                        reviewScore =
-                          e.target.value !== "-" ? e.target.value : -1;
+                <div className="review-buttons d-flex flex-row align-items-center justify-content-center">
+                  {review.length > reviewCount ? (
+                    <button
+                      className="d-flex flex-row align-items-center load-button"
+                      onClick={() => {
+                        setReviewCount((prev) => prev + 3);
                       }}
                     >
-                      {ratingScore.map((score) => (
-                        <option value={score}>{score}</option>
-                      ))}
-                    </select>
-                  </div>
-                  <h7 className="text--white">Description:</h7>
-                  <textarea
-                    name=""
-                    id=""
-                    rows="10"
-                    onChange={(e) => {
-                      description = e.target.value;
-                    }}
-                  ></textarea>
+                      <FontAwesomeIcon
+                        icon={["fas", "chevron-down"]}
+                        style={{ color: "#44C1E9" }}
+                      />
+                      <p>Load More</p>
+                    </button>
+                  ) : (
+                    <></>
+                  )}
+                  {reviewed === true || props.loggedIn === false ? (
+                    <></>
+                  ) : (
+                    <button
+                      type="button"
+                      className="d-flex flex-row align-items-center load-button"
+                      data-bs-toggle="modal"
+                      data-bs-target="#reviewModal"
+                    >
+                      <FontAwesomeIcon
+                        icon={["fas", "plus"]}
+                        style={{ color: "#44C1E9" }}
+                      />
+                      <p>Add Review</p>
+                    </button>
+                  )}
                 </div>
-                <div class="modal-footer">
-                  <button
-                    type="button"
-                    class="btn btn-secondary"
-                    data-bs-dismiss="modal"
+              </div>
+              <div
+                class="modal fade"
+                id="reviewModal"
+                tabindex="-1"
+                aria-labelledby="reviewModalLabel"
+                aria-hidden="true"
+              >
+                <div class="modal-dialog">
+                  <div class="custom-modal modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title text--blue" id="reviewModalLabel">
+                        Review
+                      </h5>
+                      <button
+                        type="button"
+                        class="btn-close btn-close-white"
+                        data-bs-dismiss="modal"
+                        aria-label="Close"
+                      ></button>
+                    </div>
+                    <div class="custom-body modal-body d-flex flex-column">
+                      <div className="score-section d-flex flex-row align-items-center">
+                        <h7 className="text--white">Rating: </h7>
+                        <select
+                          name="score-select"
+                          class="score-cbo"
+                          onClick={(e) => {
+                            reviewScore =
+                              e.target.value !== "-" ? e.target.value : -1;
+                          }}
+                        >
+                          {ratingScore.map((score) => (
+                            <option value={score}>{score}</option>
+                          ))}
+                        </select>
+                      </div>
+                      <h7 className="text--white">Description:</h7>
+                      <textarea
+                        name=""
+                        id=""
+                        rows="10"
+                        onChange={(e) => {
+                          description = e.target.value;
+                        }}
+                      ></textarea>
+                    </div>
+                    <div class="modal-footer">
+                      <button
+                        type="button"
+                        class="btn btn-secondary"
+                        data-bs-dismiss="modal"
+                      >
+                        Cancel
+                      </button>
+                      <button
+                        type="button"
+                        class="btn btn-primary"
+                        onClick={addReview}
+                      >
+                        Add Review
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="recommendation-section custom-container d-flex flex-column">
+                <div className="d-flex flex-row">
+                  <h1>More&nbsp;</h1>
+                  <h1 className="text--blue">Like&nbsp;</h1>
+                  <h1>This</h1>
+                </div>
+                <div className="recommendation-section__cards">
+                  <Carousel
+                    swipeable={false}
+                    className="card-wrapper"
+                    draggable={true}
+                    partialVisbile={false}
+                    responsive={responsive}
+                    containerClass="carousel-container"
+                    itemClass="carousel-item-padding-40-px"
                   >
-                    Cancel
-                  </button>
-                  <button
-                    type="button"
-                    class="btn btn-primary"
-                    onClick={addReview}
-                  >
-                    Add Review
-                  </button>
+                    {anime.recommendations.map((recommendation) => (
+                      <AnimeCard
+                        anime={recommendation}
+                        loading={false}
+                        type={"recommendation"}
+                        source={"mal"}
+                      />
+                    ))}
+                  </Carousel>
                 </div>
               </div>
             </div>
-          </div>
-          <div className="recommendation-section custom-container d-flex flex-column">
-            <div className="d-flex flex-row">
-              <h1>More&nbsp;</h1>
-              <h1 className="text--blue">Like&nbsp;</h1>
-              <h1>This</h1>
-            </div>
-            <div className="recommendation-section__cards">
-              <Carousel
-                swipeable={false}
-                className="card-wrapper"
-                draggable={true}
-                partialVisbile={false}
-                responsive={responsive}
-                containerClass="carousel-container"
-                itemClass="carousel-item-padding-40-px"
-              >
-                {anime.recommendations.map((recommendation) => (
-                  <AnimeCard
-                    anime={recommendation}
-                    loading={false}
-                    type={"recommendation"}
-                    source={"mal"}
-                  />
-                ))}
-              </Carousel>
-            </div>
-          </div>
+          ) : (
+            <div></div>
+          )}
         </div>
       ) : (
         <div></div>

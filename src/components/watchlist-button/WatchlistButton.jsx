@@ -62,7 +62,9 @@ function WatchlistButton(props){
         if(watchlistStatus === "Add to Watchlist"){
             setWatchlistStatus("In Watchlist");
             try {
-                console.log(userID);
+                let user = await axios.get("http://localhost:8080/id");
+                userID = user.data;
+    
                 await axios.post("http://localhost:8080/watchlist/add", {
                     userID: userID,
                     animeID: `${props.id}`

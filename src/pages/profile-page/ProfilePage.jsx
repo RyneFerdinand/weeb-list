@@ -5,10 +5,23 @@ import ChangePassword from "../../components/change-password/ChangePassword";
 import "./Profile.css";
 import Axios from "axios";
 import { useHistory } from "react-router-dom";
+import axios from "axios";
 
 function ProfilePage(props) {
   Axios.defaults.withCredentials = true;
   const [currPage, setCurrentPage] = useState("dashboard");
+
+  useEffect(() => {
+    axios.get("http://localhost:8080/login").then((response) => {
+      if (response.data.loggedIn === true) {
+        props.login(true)
+      } else {
+        props.login(false);
+        history.push("/");
+      }
+    });
+  }, []);
+
 
   function buttonClassName(page) {
     return page == currPage ? "profile-button-active" : "";
@@ -34,6 +47,7 @@ function ProfilePage(props) {
   const [gender, setGender] = useState("");
   const [joined, setJoined] = useState("");
   const [profileImage, setProfileImage] = useState("");
+  const [selectedImage, setSelectedImage] = useState(() => "");
   const history = useHistory();
 
   useEffect(() => {
@@ -41,21 +55,23 @@ function ProfilePage(props) {
       if (response.data.message === "You need to login first") {
         alert(response.data.message);
         props.setloggedIn(false);
-        history.push('/login')
+        history.push("/login");
       } else {
         setName(response.data.name);
         setUsername(response.data.username);
         setGender(response.data.gender);
         setJoined(response.data.joined);
         setProfileImage(response.data.profileImage);
+        setSelectedImage(response.data.profileImage);
       }
     });
   }, []);
 
   const updateImage = (e) => {
-    setProfileImage(e.target.src);
+    setProfileImage(selectedImage);
+    props.setProfile(selectedImage);
     Axios.post("http://localhost:8080/changeimage", {
-      profileImage: e.target.src,
+      profileImage: selectedImage,
     }).then((response) => {
       alert(response.data.message);
     });
@@ -64,7 +80,10 @@ function ProfilePage(props) {
   return (
     <div className="profile-container">
       <div className="container py-5 text-light">
-        <h1 className="header-title fw-bolder mb-3" style={{ overflowY: "hidden"}}>
+        <h1
+          className="header-title fw-bolder mb-3"
+          style={{ overflowY: "hidden" }}
+        >
           {username}'s <span className="header-span">Profile</span>
         </h1>
         <div className="d-flex">
@@ -75,6 +94,7 @@ function ProfilePage(props) {
               className="profile-image mb-3"
               data-bs-toggle="modal"
               data-bs-target="#imageModal"
+              style={{ cursor:"pointer" }}
             />
             <div
               class="modal fade"
@@ -97,15 +117,34 @@ function ProfilePage(props) {
                     ></button>
                   </div>
                   <div class="modal-body text-dark custom-profile-modal">
-                    {imageList.map((image) => (
-                      <img
-                        src={image}
-                        alt=""
-                        value={image}
-                        style={{ width: "100px", height: "100px", objectFit: "cover" }}
-                        onClick={updateImage}
-                      />
-                    ))}
+                    {imageList.map((image) => {
+                      return image !== selectedImage ? (
+                        <img
+                          src={image}
+                          alt=""
+                          style={{
+                            width: "100px",
+                            height: "100px",
+                            objectFit: "cover",
+                            cursor: "pointer",
+                          }}
+                          onClick={()=>setSelectedImage(image)}
+                        />
+                      ) : (
+                        <img
+                          src={image}
+                          alt=""
+                          style={{
+                            width: "100px",
+                            height: "100px",
+                            objectFit: "cover",
+                            cursor: "pointer",
+                            border: "solid 5px var(--blue)",
+                          }}
+                          onClick={()=>{setSelectedImage(image)}}
+                        />
+                      );
+                    })}
                   </div>
                   <div class="modal-footer">
                     <button
@@ -114,6 +153,9 @@ function ProfilePage(props) {
                       data-bs-dismiss="modal"
                     >
                       Close
+                    </button>
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal" aria-label="Close" onClick={updateImage}>
+                      Save
                     </button>
                   </div>
                 </div>

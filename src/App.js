@@ -22,11 +22,12 @@ library.add(fas);
 function App() {
   
   const [loggedIn, setLoggedIn] = useState(()=>false);
+  const [profileImage, setProfileImage] = useState(()=>"");
   
   return (
     <div>
       <Router>
-        <Header loggedIn={loggedIn} login={(state)=>setLoggedIn(state)} />
+        <Header loggedIn={loggedIn} login={(state)=>setLoggedIn(state)} profileImage={profileImage} />
         <Switch>
           <Route path="/login">
             <Login login={(state)=>setLoggedIn(state)} />
@@ -35,19 +36,19 @@ function App() {
             <Register />
           </Route>
           <Route path="/anime/:id">
-            <DetailPage />
+            <DetailPage loggedIn={loggedIn}/>
           </Route>
           <Route path="/anime">
-            <AnimePage />
+            <AnimePage loggedIn={loggedIn}/>
           </Route>
           <Route path="/watchlist">
-            <WatchlistPage loggedIn={loggedIn}/>
+            <WatchlistPage loggedIn={loggedIn} login={(state)=>setLoggedIn(state)}/>
           </Route>
           <Route path="/profile">
-            <ProfilePage />
+            <ProfilePage setProfile={(image)=> setProfileImage(image)} login={(state)=>setLoggedIn(state)} />
           </Route>
           <Route path="/">
-            <HomePage />
+            <HomePage loggedIn={loggedIn}/>
           </Route>
         </Switch>
         <Footer />

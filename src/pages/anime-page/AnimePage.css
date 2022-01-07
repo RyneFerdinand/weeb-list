@@ -97,3 +97,27 @@ h5, p{
     color: #000000;
 
 }
+
+.pagination-buttons{
+    grid-column: 1 / -1;
+    display: flex;
+    justify-content: center;
+    gap: 2%;
+}
+
+.pagination-buttons button{
+    background: transparent;
+    border:#44C1E9 2px solid;
+    font-size: 1rem;
+    gap: 0.5em;
+    padding: 0.5em 1em;
+    border-radius: 5px;
+    color: #FFFFFF;
+}
+.inactive-btn{
+    opacity: 20%;
+}
+
+.pagination-buttons h5{
+    margin: 0;
+}

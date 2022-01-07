@@ -5,11 +5,12 @@ import HeroBanner from "../../components/hero-banner/HeroBanner";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import AnimeCard from "../../components/anime-card/AnimeCard";
+import LoadingBar from "react-top-loading-bar";
 
-function HomePage() {
+function HomePage(props) {
   const [anime, setAnime] = useState(async () => []);
-  const [fetchProgress, setFetchProgress] = useState(()=>0);
-  const [userID, setUserID] = useState(()=>"");
+  const [fetchProgress, setFetchProgress] = useState(() => 0);
+  const [userID, setUserID] = useState(() => "");
 
   const mainCarousel = {
     desktop: {
@@ -50,17 +51,14 @@ function HomePage() {
   const getHomeAnime = async () => {
     let API_URL = "http://localhost:8080/anime/home";
     try {
-      let userID = await axios.get("http://localhost:8080/id");
-      setUserID(userID.data);
-      
       let tempAnimeList = await axios.post(API_URL, {
-        userID: userID.data,
         onDownloadProgress: (progressEvent) => {
           setFetchProgress(
             Math.floor((progressEvent.loaded / progressEvent.total) * 100)
           );
         },
       });
+      console.log(tempAnimeList.data)
       setAnime(tempAnimeList.data);
     } catch (error) {
       console.log(error);
@@ -71,8 +69,18 @@ function HomePage() {
     getHomeAnime();
   }, []);
 
+
   return (
     <div className="home-page">
+      <LoadingBar
+        color="#44B9DE"
+        progress={fetchProgress}
+        height={3}
+        transitionTime={100}
+        loaderSpeed={400}
+        waitingTime={500}
+        onLoaderFinished={() => setFetchProgress(0)}
+      />
       {typeof anime.carousel !== typeof undefined ? (
         <div>
           <Carousel
@@ -101,6 +109,7 @@ function HomePage() {
                 animeShow={anime.show}
                 animeDescription={anime.description}
                 image={anime.image}
+                loggedIn={props.loggedIn}
               />
             ))}
           </Carousel>
@@ -121,7 +130,7 @@ function HomePage() {
               {anime.recommendation.map((recommendation) => (
                 <AnimeCard
                   anime={recommendation}
-                  type={"recommendation"}
+                  loggedIn={props.loggedIn}
                   source={"mal"}
                   loading={false}
                 />
@@ -145,7 +154,7 @@ function HomePage() {
               {anime.seasonal.map((seasonal) => (
                 <AnimeCard
                   anime={seasonal.node}
-                  type={"recommendation"}
+                  loggedIn={props.loggedIn}
                   source={"mal"}
                   loading={false}
                 />

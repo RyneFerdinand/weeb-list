@@ -137,3 +137,13 @@ h5, p{
 .text--white{
     color: #FFFFFF;
 }
+
+.no-review-container{
+    border: 1px solid var(--blue);
+    border-radius: 10px;
+    padding: 1.5em 1em;
+}
+
+.no-review-container h4{
+    margin: 0;
+}

@@ -3,7 +3,6 @@ import MoreDiv from "./MoreDiv";
 import "./HomePageStyle.css";
 
 function TopAndBottom(props){
-    console.log(props);
     return (
         <div className="top">
             <div className="title">

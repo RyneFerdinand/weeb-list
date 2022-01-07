@@ -14,9 +14,10 @@ function AnimeCard(props) {
 
   return (
     <div className="anime-card d-flex flex-column">
-      {props.loading === false ? (
+      {props.loading === false || props.type === "recommendation" ? (
         <div>
-          <Link to={link} style={{ textDecoration: "none" }}>
+          {props.anime.main_picture || props.anime.image_url ?
+            <Link to={link} style={{ textDecoration: "none" }}>
             <div className="anime-card__poster">
               <img
                 src={
@@ -28,22 +29,29 @@ function AnimeCard(props) {
               />
             </div>
           </Link>
+          :
+          <Link>
+            <div className="skeleton">
+
+            </div>
+          </Link>
+          }
           <div
             className={
-              props.type === "search"
+              props.loggedIn === true
                 ? "anime-card__title-wrapper--large d-flex flex-column justify-content-between"
                 : "anime-card__title-wrapper--small d-flex flex-column justify-content-between"
             }
           >
             <p className="anime-card__title">{props.anime.title}</p>
-            {props.type === "search" ? (
+            {props.loggedIn === true ? (
               <div className="anime-card__bottom d-flex flex-column">
                 <div className="search-card__type">
                   <FontAwesomeIcon
                     icon={["fas", "tv"]}
                     style={{ color: "#44B9DE" }}
                   />
-                  &nbsp;&nbsp;{props.anime.type}
+                  &nbsp;&nbsp;{props.source === "mal" ? props.anime.media_type.toUpperCase() : props.anime.type.toUpperCase()}
                 </div>
                 <WatchlistButton size={"small"} id={id} />
               </div>

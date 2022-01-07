@@ -7,25 +7,27 @@ function ReviewCard(props) {
   let reviewScore = props.review.score;
   let description = props.review.description;
   const ratingScore = ["-", 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-  const [userID, setUserID] = useState(()=>"");
-  const [username, setUsername] = useState(()=>"");
-  const [profile, setProfile] = useState(()=>"");
+  const [userID, setUserID] = useState(() => "");
+  const [username, setUsername] = useState(() => "");
+  const [profile, setProfile] = useState(() => "");
 
-  const getUserData = async() => {
+  const getUserData = async () => {
     try {
       let userID = await axios.get("http://localhost:8080/id");
       setUserID(userID.data);
-      let user = await axios.get("http://localhost:8080/getprofile");
+      let user = await axios.post("http://localhost:8080/id", {
+        userId: props.review.userID,
+      });
       setUsername(user.data.username);
-      setProfile(user.data.profileImage)
+      setProfile(user.data.profileImage);
     } catch (error) {
-      
+      console.log(error);
     }
-  }
+  };
 
   useEffect(() => {
     getUserData();
-  }, [])
+  }, []);
 
   const updateReview = async () => {
     if (
@@ -35,7 +37,6 @@ function ReviewCard(props) {
     ) {
       return;
     }
-
     document.getElementById("editReview").classList.remove("show", "d-block");
     document
       .querySelectorAll(".modal-backdrop")
@@ -44,24 +45,24 @@ function ReviewCard(props) {
     let URL = "http://localhost:8080/rating/update";
 
     try {
-
       const review = await axios.patch(URL, {
         id: props.review._id,
         description: description,
-        rating: reviewScore
+        rating: reviewScore,
       });
 
+      console.log(review);
       props.updateState(review.data, "update");
     } catch (error) {}
   };
-  
+
   const removeReview = async () => {
     let URL = "http://localhost:8080/rating/delete";
     try {
       await axios.delete(URL, {
-        data:{
-          id: props.review._id
-        }
+        data: {
+          id: props.review._id,
+        },
       });
       props.updateState(props.review, "delete");
     } catch (error) {
@@ -69,20 +70,10 @@ function ReviewCard(props) {
     }
   };
 
-  let pfp = [
-    "https://static.zerochan.net/Texas.%28Arknights%29.full.2824483.jpg",
-    "https://preview.redd.it/1fd85j0at0f41.jpg?width=640&crop=smart&auto=webp&s=68c17507d15479937b184c4f9f6c5e86aea79f7f",
-    "https://cdn.donmai.us/original/ff/21/ff213428946865341e1e25c9852c0487.jpg",
-  ];
-
   return (
     <div className="d-flex flex-column review-wrapper">
       <div className="d-flex flex-row review">
-        <img
-          src={profile}
-          alt=""
-          className="review__profile"
-        />
+        <img src={profile} alt="" className="review__profile" />
         <div className="d-flex flex-column review__data">
           <div className="upper-review d-flex flex-row align-items-center justify-content-between">
             <h4>{username}</h4>
@@ -99,6 +90,7 @@ function ReviewCard(props) {
                     color: "#4489DE",
                     fontSize: "1.5rem",
                     cursor: "pointer",
+                    marginRight: "0.5em",
                   }}
                 />
                 <FontAwesomeIcon
@@ -140,10 +132,13 @@ function ReviewCard(props) {
                       <select
                         name="score-select"
                         class="score-cbo"
-                        onClick={(e) => {reviewScore = e.target.value}}
+                        onClick={(e) => {
+                          reviewScore = e.target.value;
+                        }}
                       >
                         {ratingScore.map((score) => {
-                          return score === props.review.rating ? (
+                          return score.toString() ===
+                            props.review.rating.toString() ? (
                             <option value={score} selected>
                               {score}
                             </option>
