@@ -13,7 +13,7 @@ function AnimePage(props) {
   let searchObj = queryString.parse(search);
 
   const [animeList, setAnimeList] = useState([]);
-  const [query, setQuery] = useState(() =>"");
+  const [query, setQuery] = useState(() => "");
   const [genre, setGenre] = useState(() => []);
   const [currSearch, setCurrSearch] = useState(
     searchObj.q !== undefined ? searchObj.q : ""
@@ -36,32 +36,42 @@ function AnimePage(props) {
     return { left: false, right: true };
   });
 
-  const getAnime = async () => {
-    setAnimeList([]);
-    let API_URL = "http://localhost:8080/anime/search?q=" + query;
-    let anime;
-    try {
-      anime = await axios.get(API_URL, {
-        onDownloadProgress: (progressEvent) => {
-          setFetchProgress(
-            Math.floor((progressEvent.loaded / progressEvent.total) * 100)
-          );
-        },
-      });
-      setFetchProgress(30);
-      if (anime.data.results.length !== 50) {
-        anime.data.results = anime.data.results.slice(0, 50);
-      }
-      let page = {
-        left: Boolean(anime.data.prevPage),
-        right: Boolean(anime.data.nextPage),
-      };
+  const [toFunc, setToFunc] = useState(()=> null);
 
-      setAvailableButton(page);
-      setAnimeList(anime.data.results);
-    } catch (error) {
-      console.log(error.message);
+  const getAnime = () => {
+    setAnimeList([]);
+    if(toFunc){
+      clearTimeout(toFunc);
     }
+
+    setToFunc(setTimeout(async () => {
+      let API_URL = "http://localhost:8080/anime/search?q=" + query;
+      let anime;
+      console.log(API_URL);
+      try {
+        anime = await axios.get(API_URL, {
+          onDownloadProgress: (progressEvent) => {
+            setFetchProgress(
+              Math.floor((progressEvent.loaded / progressEvent.total) * 100)
+            );
+          },
+        });
+        setFetchProgress(30);
+        if (anime.data.results.length !== 50) {
+          anime.data.results = anime.data.results.slice(0, 50);
+        }
+        let page = {
+          left: Boolean(anime.data.prevPage),
+          right: Boolean(anime.data.nextPage),
+        };
+
+        setAvailableButton(page);
+        setAnimeList(anime.data.results);
+        console.log("kelar ngab")
+      } catch (error) {
+        console.log(error.message);
+      }
+    }, 800));
   };
 
   useEffect(() => {
@@ -174,7 +184,7 @@ function AnimePage(props) {
     setCurrPage(1);
     season.forEach((season) => {
       season.selected = false;
-    })
+    });
     let tempGenre = genre;
 
     tempGenre.forEach((gen) => {
@@ -212,7 +222,7 @@ function AnimePage(props) {
     tempSeason.forEach((season) => {
       if (season.season === selectedSeason.season) {
         season.selected = !season.selected;
-          } else {
+      } else {
         season.selected = false;
       }
     });

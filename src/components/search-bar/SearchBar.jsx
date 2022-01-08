@@ -9,44 +9,53 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 function SearchBar({ placeholder }) {
   const [filteredData, setFilteredData] = useState(() => []);
   const [wordEntered, setWordEntered] = useState(() => "");
+  const [lastLength, setLastLength] = useState(() => 0);
   const searchRef = useRef(null);
   const outsideClickRef = OutsideClick(searchRef);
   const queryHistory = useHistory();
+  const [toFunc, setToFunc] = useState(() => null);
 
-  const getAnime = async () => {
+  const getAnime = () => {
     if (wordEntered !== "") {
       let query = wordEntered;
-      let API_URL = "http://localhost:8080/anime/searchQuery?q=" + query;
-      try {
-        let anime;
-        setTimeout(async () => {
-          anime = await axios.get(API_URL);
-          console.log(anime.data);
-          setFilteredData(anime.data);
-        }, 1000);
-      } catch (error) {
-        console.log(error);
+      console.log(toFunc);
+      if (toFunc) {
+        clearTimeout(toFunc);
       }
+      setToFunc(
+        setTimeout(async () => {
+          let API_URL = "http://localhost:8080/anime/searchQuery?q=" + query;
+          try {
+            let anime;
+            anime = await axios.get(API_URL);
+            setFilteredData([]);
+            setFilteredData(anime.data);
+          } catch (error) {
+            console.log(error);
+          }
+          console.log("SUBMITTED")
+        }, 500)
+      );
     }
   };
 
   useEffect(() => {
-    if(wordEntered.length > 2){
+    if (wordEntered.length > 2) {
       getAnime();
     }
   }, [wordEntered]);
 
   const handleFilter = (event) => {
-    try {
-      clearTimeout();
-    } catch (error) {
-      console.log("cancelled");
-    }
     const searchWord = event.target.value;
     if (searchWord === "") {
       setFilteredData([]);
     }
 
+    if (lastLength > searchWord.length) {
+      setFilteredData([]);
+    }
+
+    setLastLength(searchWord.length);
     setWordEntered(searchWord);
   };
 
