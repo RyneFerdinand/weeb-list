@@ -144,7 +144,9 @@ function DetailPage(props) {
       });
     } else {
       review.forEach((rev) => {
+        console.log(rev._id + " === " + newReview._id);
         if (rev._id !== newReview._id) {
+          console.log("deleted");
           updatedReviews.push(rev);
         }
       });

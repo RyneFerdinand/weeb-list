@@ -54,7 +54,7 @@ function ProfilePage(props) {
     Axios.get("http://localhost:8080/getprofile").then((response) => {
       if (response.data.message === "You need to login first") {
         alert(response.data.message);
-        props.setloggedIn(false);
+        props.login(false);
         history.push("/login");
       } else {
         setName(response.data.name);
@@ -76,6 +76,16 @@ function ProfilePage(props) {
       alert(response.data.message);
     });
   };
+
+  const logout = () => {
+    props.login(false);
+    try {
+      axios.get("http://localhost:8080/logout")
+      history.push('/');
+    } catch (error) {
+      
+    }
+  }
 
   return (
     <div className="profile-container">
@@ -195,6 +205,14 @@ function ProfilePage(props) {
                 onClick={() => handleProfileButton("change-password")}
               >
                 Change Password
+              </button>
+              <button
+                className={
+                  "profile-button "
+                }
+                onClick={() => logout()}
+              >
+                Logout
               </button>
             </div>
           </div>
