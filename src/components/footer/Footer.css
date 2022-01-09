@@ -1,15 +1,24 @@
 .footer {
   background-color: #252525;
+  padding: 5em 1%;
+  display: flex;
+  flex-direction: column;
+  gap: 4em;
+  cursor: pointer;
 }
 
 .above {
   display: flex;
   justify-content: space-around;
-  padding: 10px;
 }
 
 .item {
-  justify-content: center;
+  width: 19%;
+  gap: 0.5em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
   text-align: center;
 }
 
@@ -26,14 +35,13 @@
 
 .footer p {
   color: white;
-  width: 180px;
   font-family: Montserrat;
   font-style: normal;
   font-weight: normal;
+  width: 60%;
   font-size: 12.5px;
   line-height: 18px;
   text-align: center;
-  padding-top: 10px;
 }
 
 .footer a {
@@ -50,40 +58,41 @@
 }
 
 .followUs {
-  padding-top: 20px;
+  width: 100%;
   display: flex;
-  justify-content: space-between;
-  width: 250px;
+  align-items: center;
+  justify-content: center;
+  gap: 1em;
 }
 
-.followUs i {
-  color: white;
-  font-size: 30px;
+.icon-wrapper{
+  background-color: rgba(255, 255, 255, 0.2);
+  width: 2.5em;
+  height: 2.5em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+}
+
+
+.follow-us-icon{
+  width: 150%;
+  color: #FFFFFF;
+  font-size: 1.5rem;
 }
 
 .back-to-top {
   display: flex;
-  justify-content: center;
-  align-items: center;
+  gap: 1.5em;
 }
 
 .back-to-top h1 {
   font-size: 22px;
-  padding: 10px;
 }
 
-.back-to-top i {
-  font-size: 40px;
-}
-
-.above {
-  padding-top: 50px;
-}
-
-.bottom {
+.bottom{
   display: flex;
+  align-items: center;
   justify-content: center;
-  padding-bottom: 30px;
-  padding-top: 20px;
 }
-

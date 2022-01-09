@@ -161,7 +161,6 @@ function HomePage(props) {
               </Carousel>
             </div>
           </div>
-          )
         </div>
       ) : (
         <div className="loading-page d-flex flex-column align-items-center justify-content-center">

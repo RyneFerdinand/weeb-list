@@ -3,7 +3,8 @@ import { HashRouter as Router, Route, Switch } from "react-router-dom";
 import DetailPage from "./pages/detail-page/DetailPage";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { fas } from "@fortawesome/free-solid-svg-icons";
-import { far } from "@fortawesome/react-fontawesome";
+import { far } from "@fortawesome/free-regular-svg-icons";
+import { fab } from '@fortawesome/free-brands-svg-icons'
 import AnimePage from "./pages/anime-page/AnimePage";
 import Header from "./components/header/Header";
 import Footer from "./components/footer/Footer";
@@ -12,12 +13,11 @@ import WatchlistPage from "./pages/watchlist-page/WatchlistPage";
 import ProfilePage from "./pages/profile-page/ProfilePage";
 import Login from "./pages/login-page/Login";
 import Register from "./pages/register-page/Register";
-import { useEffect, useState } from "react";
-import axios from "axios";
-import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
-// import WatchlistPage from './pages/watchlist-page/WatchlistPage';
+import { useState } from "react";
 
 library.add(fas);
+library.add(fab);
+library.add(far);
 
 function App() {
   

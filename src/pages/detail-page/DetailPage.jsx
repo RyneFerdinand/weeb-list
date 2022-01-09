@@ -11,6 +11,7 @@ import { useParams } from "react-router-dom/cjs/react-router-dom.min";
 import axios from "axios";
 import LoadingBar from "react-top-loading-bar";
 import WatchlistButton from "../../components/watchlist-button/WatchlistButton";
+import ReactLoading from "react-loading";
 
 function DetailPage(props) {
   let { id } = useParams();
@@ -31,8 +32,11 @@ function DetailPage(props) {
   if (id !== animeId) {
     setFetchStatus(true);
     setAnime({});
+    setReview([])
     setAnimeId(id);
+    setReviewed(false);
   }
+  
   const getID = async () => {
     try {
       const user = await axios.get("http://localhost:8080/id");
@@ -70,6 +74,7 @@ function DetailPage(props) {
           },
         });
         setAnime(anime.data);
+        
         setFetchStatus(false);
       } catch (error) {
         console.log(error);
@@ -85,10 +90,6 @@ function DetailPage(props) {
 
     document.querySelector("textarea").value = "";
     document.querySelector("select").value = "-";
-    document.getElementById("reviewModal").classList.remove("show", "d-block");
-    document
-      .querySelectorAll(".modal-backdrop")
-      .forEach((bd) => bd.classList.remove("modal-backdrop"));
 
     let URL = "http://localhost:8080/rating/add";
     try {
@@ -149,10 +150,13 @@ function DetailPage(props) {
       });
       description = "";
       ratingScore = -1;
+      
       setReviewed(false);
     }
     setReview(updatedReviews);
   };
+
+  console.log("reviewed: " + reviewed);
 
   return (
     <div key={id} className="detail-page">
@@ -372,6 +376,7 @@ function DetailPage(props) {
                       <button
                         type="button"
                         class="btn btn-primary"
+                        data-bs-dismiss="modal"
                         onClick={addReview}
                       >
                         Add Review
@@ -402,6 +407,7 @@ function DetailPage(props) {
                         loading={false}
                         type={"recommendation"}
                         source={"mal"}
+                        setReviewed={(state) => setReviewed(state)}
                       />
                     ))}
                   </Carousel>
@@ -413,7 +419,15 @@ function DetailPage(props) {
           )}
         </div>
       ) : (
-        <div></div>
+        <div className="loading-page d-flex flex-column align-items-center justify-content-center">
+          <ReactLoading
+            type={"cylon"}
+            color={"#44B9DE"}
+            width={"4rem"}
+            height={"4rem"}
+          />
+          <h4 className="text--white">Chottomattekudasai...</h4>
+        </div>
       )}
     </div>
   );

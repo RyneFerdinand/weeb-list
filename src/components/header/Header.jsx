@@ -34,7 +34,7 @@ function Header(props) {
     });
   }
   return (
-    <header>
+    <header id="header">
       <nav className="d-flex flex-row align-items-center">
         <div className="left-nav d-flex flex-row align-items-center">
           <Link to="/" className="web-logo-wrapper">

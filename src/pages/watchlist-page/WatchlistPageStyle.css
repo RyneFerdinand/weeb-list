@@ -14,11 +14,11 @@ body{
 
 
 .watchlist-page-wrapper{
-    padding: 4em 0;
     color: #FFFFFF;
 }
 
 .watchlist-page{
+    padding: 4em 0;
     margin: 0 auto;
     width: 90%;
     gap: 4em;

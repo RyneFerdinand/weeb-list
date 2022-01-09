@@ -33,6 +33,7 @@ function WatchlistPage(props) {
           userID: userID,
         }
       );
+    console.log(watchlistData.data)
       setWatchlist(watchlistData.data);
     } catch (error) {}
   };
@@ -93,7 +94,7 @@ function WatchlistPage(props) {
               width={"4rem"}
               height={"4rem"}
             />
-            <h4 className="text--white">Loading your Home Page...</h4>
+            <h4 className="text--white">Grabbing your Watchlist...</h4>
           </div>
         )}
       </div>

@@ -12,12 +12,16 @@ function AnimeCard(props) {
     link = `/anime/${id}`;
   }
 
+  const updateReviewed = () => {
+    props.setReviewed(false);
+  }
+
   return (
     <div className="anime-card d-flex flex-column">
       {props.loading === false || props.type === "recommendation" ? (
         <div>
           {props.anime.main_picture || props.anime.image_url ?
-            <Link to={link} style={{ textDecoration: "none" }}>
+            <Link to={link} style={{ textDecoration: "none" }} onClick={()=> updateReviewed}>
             <div className="anime-card__poster">
               <img
                 src={
@@ -32,7 +36,6 @@ function AnimeCard(props) {
           :
           <Link>
             <div className="skeleton">
-
             </div>
           </Link>
           }
