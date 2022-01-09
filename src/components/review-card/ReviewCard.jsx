@@ -42,7 +42,9 @@ function ReviewCard(props) {
     let URL = "http://localhost:8080/rating/update";
 
     try {
-      console.log(userID + " " + animeID + " " + description + " " + reviewScore);
+      console.log(
+        userID + " " + animeID + " " + description + " " + reviewScore
+      );
       let review = await axios.patch(URL, {
         userID: userID,
         animeID: animeID,
@@ -50,7 +52,7 @@ function ReviewCard(props) {
         rating: reviewScore,
       });
 
-      console.log("REVIEW")
+      console.log("REVIEW");
       console.log(review);
       props.updateState(review.data, "update");
     } catch (error) {}
@@ -137,16 +139,9 @@ function ReviewCard(props) {
                           setReviewScore(e.target.value);
                         }}
                       >
-                        {ratingScore.map((score) => {
-                          return score.toString() ===
-                            props.review.rating.toString() ? (
-                            <option value={score} selected>
-                              {score}
-                            </option>
-                          ) : (
-                            <option value={score}>{score}</option>
-                          );
-                        })}
+                        {ratingScore.map((score) => (
+                          <option value={score}>{score}</option>
+                        ))}
                       </select>
                     </div>
                     <h7 className="text--white">Description:</h7>

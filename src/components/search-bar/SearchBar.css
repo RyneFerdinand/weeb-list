@@ -87,3 +87,15 @@
 #clearBtn {
   cursor: pointer;
 }
+
+.word-entered-container {
+  padding: 0.5em 1em;
+  font-size: 0.9rem;
+  overflow-y: hidden;
+  font-weight: 400;
+  height: 5rem;
+  background-color: rgba(0, 0, 0, 0.3);
+  align-items: center;
+  gap: 0.4em;
+  color: #FFFFFF;
+}

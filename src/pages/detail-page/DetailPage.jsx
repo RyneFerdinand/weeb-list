@@ -87,7 +87,6 @@ function DetailPage(props) {
     if (reviewScore === -1 || description.trim().length === 0) {
       return;
     }
-
     let URL = "http://localhost:8080/rating/add";
     try {
       const review = await axios.post(URL, {
