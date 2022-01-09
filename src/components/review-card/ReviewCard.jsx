@@ -1,15 +1,16 @@
-import "./ReviewCard.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import "./ReviewCard.css";
 
 function ReviewCard(props) {
-  let reviewScore = props.review.score;
   let description = props.review.description;
+  const [reviewScore, setReviewScore] = useState(() => props.review.score);
   const ratingScore = ["-", 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
   const [userID, setUserID] = useState(() => "");
   const [username, setUsername] = useState(() => "");
   const [profile, setProfile] = useState(() => "");
+  const animeID = props.animeID;
 
   const getUserData = async () => {
     try {
@@ -37,20 +38,19 @@ function ReviewCard(props) {
     ) {
       return;
     }
-    document.getElementById("editReview").classList.remove("show", "d-block");
-    document
-      .querySelectorAll(".modal-backdrop")
-      .forEach((bd) => bd.classList.remove("modal-backdrop"));
 
     let URL = "http://localhost:8080/rating/update";
 
     try {
-      const review = await axios.patch(URL, {
-        id: props.review._id,
+      console.log(userID + " " + animeID + " " + description + " " + reviewScore);
+      let review = await axios.patch(URL, {
+        userID: userID,
+        animeID: animeID,
         description: description,
         rating: reviewScore,
       });
 
+      console.log("REVIEW")
       console.log(review);
       props.updateState(review.data, "update");
     } catch (error) {}
@@ -132,8 +132,9 @@ function ReviewCard(props) {
                       <select
                         name="score-select"
                         class="score-cbo"
+                        value={reviewScore}
                         onClick={(e) => {
-                          reviewScore = e.target.value;
+                          setReviewScore(e.target.value);
                         }}
                       >
                         {ratingScore.map((score) => {
@@ -170,6 +171,7 @@ function ReviewCard(props) {
                       type="button"
                       class="btn btn-primary"
                       onClick={updateReview}
+                      data-bs-dismiss="modal"
                     >
                       Update Review
                     </button>

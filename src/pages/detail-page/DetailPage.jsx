@@ -32,11 +32,11 @@ function DetailPage(props) {
   if (id !== animeId) {
     setFetchStatus(true);
     setAnime({});
-    setReview([])
+    setReview([]);
     setAnimeId(id);
     setReviewed(false);
   }
-  
+
   const getID = async () => {
     try {
       const user = await axios.get("http://localhost:8080/id");
@@ -74,7 +74,7 @@ function DetailPage(props) {
           },
         });
         setAnime(anime.data);
-        
+
         setFetchStatus(false);
       } catch (error) {
         console.log(error);
@@ -87,9 +87,6 @@ function DetailPage(props) {
     if (reviewScore === -1 || description.trim().length === 0) {
       return;
     }
-
-    document.querySelector("textarea").value = "";
-    document.querySelector("select").value = "-";
 
     let URL = "http://localhost:8080/rating/add";
     try {
@@ -146,19 +143,17 @@ function DetailPage(props) {
       review.forEach((rev) => {
         console.log(rev._id + " === " + newReview._id);
         if (rev._id !== newReview._id) {
-          console.log("deleted");
           updatedReviews.push(rev);
         }
       });
+
       description = "";
       ratingScore = -1;
-      
+
       setReviewed(false);
     }
     setReview(updatedReviews);
   };
-
-  console.log("reviewed: " + reviewed);
 
   return (
     <div key={id} className="detail-page">
