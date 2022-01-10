@@ -1,46 +1,54 @@
-*{
-    font-family: 'Poppins', sans-serif;
-    box-sizing: border-box;
-    overflow-x: hidden;
+* {
+  font-family: "Poppins", sans-serif;
+  box-sizing: border-box;
+  overflow-x: hidden;
 }
 
-.home-page{
-    background-color: #18181A;
-    min-height: 55vh;
-    color: #FFFFFF;
+.home-page {
+  background-color: #18181a;
+  min-height: 55vh;
+  color: #ffffff;
 }
 
-.custom-container{
-    width: 95%;
-    margin: 0 auto;
+.custom-container {
+  width: 95%;
+  margin: 0 auto;
 }
 
-.recommendation-section{
-    padding-top: 6em;
+.recommendation-section {
+  padding-top: 6em;
 }
 
-.seasonal-section{
-    padding: 4em 0 5em 0;
+.seasonal-section {
+  padding: 4em 0 5em 0;
 }
 
-.loading-page{
-    background-color: rgb(37, 37, 37, 0.7);
-    gap: 3em;
-    top: 0;
-    width: 100vw;
-    height: 90vh;
+.loading-page {
+  background-color: rgb(37, 37, 37, 0.7);
+  gap: 3em;
+  top: 0;
+  width: 100vw;
+  height: 90vh;
 }
 
-.loading-page h4{
-    animation: fade-in-out 1s linear 0s infinite alternate;
+.empty-page {
+  background-color: rgb(37, 37, 37, 0.7);
+  gap: 3em;
+  top: 0;
+  width: 100vw;
+  height: 90vh;
+}
+
+.loading-page h4 {
+  animation: fade-in-out 1s linear 0s infinite alternate;
 }
 
 @keyframes fade-in-out {
-    0%{
-        opacity: 100%;
-    }
+  0% {
+    opacity: 100%;
+  }
 
-    100%{
-        opacity: 50%;
-    }
+  100% {
+    opacity: 50%;
+  }
 }

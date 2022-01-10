@@ -47,7 +47,6 @@ function AnimePage(props) {
     setToFunc(setTimeout(async () => {
       let API_URL = "http://localhost:8080/anime/search?q=" + query;
       let anime;
-      console.log(API_URL);
       try {
         anime = await axios.get(API_URL, {
           onDownloadProgress: (progressEvent) => {
@@ -57,7 +56,7 @@ function AnimePage(props) {
           },
         });
         setFetchProgress(30);
-        if (anime.data.results.length !== 50) {
+        if (anime.data.results.length > 50) {
           anime.data.results = anime.data.results.slice(0, 50);
         }
         let page = {
@@ -67,7 +66,6 @@ function AnimePage(props) {
 
         setAvailableButton(page);
         setAnimeList(anime.data.results);
-        console.log("kelar ngab")
       } catch (error) {
         console.log(error.message);
       }

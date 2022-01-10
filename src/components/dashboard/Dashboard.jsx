@@ -32,7 +32,7 @@ function Dashboard(props) {
       setPlanned(response.data.planned);
       setReview(response.data.review);
 
-      setWeebCounter(response.data.weebCounter);
+      setWeebCounter(response.data.weebCounter + 1);
     });
   }, []);
 

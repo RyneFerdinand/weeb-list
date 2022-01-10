@@ -8,6 +8,7 @@ import ReactLoading from "react-loading";
 function WatchlistPage(props) {
   let userID;
   const [watchlist, setWatchlist] = useState(() => []);
+  const [fetchStatus, setFetchStatus] = useState(() => false);
 
   const history = useHistory();
 
@@ -23,6 +24,7 @@ function WatchlistPage(props) {
   }, []);
 
   const getWatchlist = async () => {
+    setFetchStatus(true);
     try {
       let user = await axios.get("http://localhost:8080/id");
       userID = user.data;
@@ -33,8 +35,8 @@ function WatchlistPage(props) {
           userID: userID,
         }
       );
-    console.log(watchlistData.data)
       setWatchlist(watchlistData.data);
+      setFetchStatus(false);
     } catch (error) {}
   };
 
@@ -55,36 +57,45 @@ function WatchlistPage(props) {
   return (
     <div>
       <div className="watchlist-page-wrapper">
-        {watchlist.length > 0 ? (
-          <div className="watchlist-page d-flex flex-column">
-            <div className="watchlist__title">
-              <span className="watchlist__first-title">My </span>
-              <span className="watchlist__second-title">Watchlist</span>
-            </div>
-            <div className="watchlist d-flex flex-column">
-              <div className="watchlist-header">
-                <div>Title</div>
-                <div>Status</div>
-                <div>My Rating</div>
-                <div className="watchlist-delete"></div>
+        {fetchStatus === false ? (
+          <div>
+            {watchlist.length > 0 ? (
+              <div className="watchlist-page d-flex flex-column">
+                <div className="watchlist__title">
+                  <span className="watchlist__first-title">My </span>
+                  <span className="watchlist__second-title">Watchlist</span>
+                </div>
+                <div className="watchlist d-flex flex-column">
+                  <div className="watchlist-header">
+                    <div>Title</div>
+                    <div>Status</div>
+                    <div>My Rating</div>
+                    <div className="watchlist-delete"></div>
+                  </div>
+                  {watchlist.map((watchlist) => {
+                    return (
+                      <WatchlistContent
+                        key={watchlist.anime.id}
+                        animeId={watchlist.anime.id}
+                        watchlistId={watchlist.watchlist._id}
+                        watchlistTitle={watchlist.anime.title}
+                        watchlistStatus={watchlist.watchlist.status}
+                        watchlistRating={
+                          watchlist.rating ? watchlist.rating.rating : -1
+                        }
+                        watchlistImage={watchlist.anime.main_picture.large}
+                        rerenderFunction={rerenderPage}
+                      />
+                    );
+                  })}
+                  )
+                </div>
               </div>
-              {watchlist.map((watchlist) => {
-                return (
-                  <WatchlistContent
-                    key={watchlist.anime.id}
-                    animeId={watchlist.anime.id}
-                    watchlistId={watchlist.watchlist._id}
-                    watchlistTitle={watchlist.anime.title}
-                    watchlistStatus={watchlist.watchlist.status}
-                    watchlistRating={
-                      watchlist.rating ? watchlist.rating.rating : -1
-                    }
-                    watchlistImage={watchlist.anime.main_picture.large}
-                    rerenderFunction={rerenderPage}
-                  />
-                );
-              })}
-            </div>
+            ) : (
+              <div className="empty-page d-flex flex-column align-items-center justify-content-center">
+                <h4 className="text--white">Your Watchlist is Empty...</h4>
+              </div>
+            )}
           </div>
         ) : (
           <div className="loading-page d-flex flex-column align-items-center justify-content-center">
