@@ -31,6 +31,8 @@ function ReviewCard(props) {
   }, []);
 
   const updateReview = async () => {
+    description = document.querySelector('textarea').value;
+    
     if (
       reviewScore === -1 ||
       reviewScore === "-" ||
@@ -42,9 +44,6 @@ function ReviewCard(props) {
     let URL = "http://localhost:8080/rating/update";
 
     try {
-      console.log(
-        userID + " " + animeID + " " + description + " " + reviewScore
-      );
       let review = await axios.patch(URL, {
         userID: userID,
         animeID: animeID,
@@ -52,8 +51,6 @@ function ReviewCard(props) {
         rating: reviewScore,
       });
 
-      console.log("REVIEW");
-      console.log(review);
       props.updateState(review.data, "update");
     } catch (error) {}
   };

@@ -20,7 +20,6 @@ function SearchBar({ placeholder }) {
   const getAnime = () => {
     if (wordEntered !== "") {
       let query = wordEntered;
-      console.log(toFunc);
       if (toFunc) {
         clearTimeout(toFunc);
       }
@@ -37,7 +36,6 @@ function SearchBar({ placeholder }) {
           } catch (error) {
             console.log(error);
           }
-          console.log("SUBMITTED");
         }, 500)
       );
     }
@@ -78,7 +76,6 @@ function SearchBar({ placeholder }) {
       queryHistory.push(`/anime?q=${encodeURI(wordEntered)}`);
   };
 
-  console.log(filteredData);
   return (
     <div ref={searchRef} className="search">
       <div className="searchInput">

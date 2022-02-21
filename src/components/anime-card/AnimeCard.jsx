@@ -49,13 +49,15 @@ function AnimeCard(props) {
             <p className="anime-card__title">{props.anime.title}</p>
             {props.loggedIn === true ? (
               <div className="anime-card__bottom d-flex flex-column">
-                <div className="search-card__type">
+                {/* <div className="search-card__type">
                   <FontAwesomeIcon
                     icon={["fas", "tv"]}
                     style={{ color: "#44B9DE" }}
                   />
-                  &nbsp;&nbsp;{props.source === "mal" ? props.anime.media_type.toUpperCase() : props.anime.type.toUpperCase()}
-                </div>
+                  &nbsp;&nbsp;{ props.anime.type === null && props.anime.media_type === null ?<></>:
+                  props.source === "mal" ? props.anime.media_type.toUpperCase() : props.anime.type.toUpperCase()
+                  }
+                </div> */}
                 <WatchlistButton size={"small"} id={id} />
               </div>
             ) : (

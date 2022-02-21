@@ -51,13 +51,16 @@ function DetailPage(props) {
   let ratingScore = ["-", 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
   useEffect(() => {
     const getAnime = async () => {
+      const user = await axios.get("http://localhost:8080/id");
+      let currId = user.data;
       let URL = "http://localhost:8080/rating/view";
       try {
         const reviews = await axios.post(URL, {
           animeID: animeId,
         });
         reviews.data.forEach((review) => {
-          if (review.userID === currID) {
+
+          if (review.userID === currId) {
             setReviewed(true);
           }
         });
@@ -140,7 +143,6 @@ function DetailPage(props) {
       });
     } else {
       review.forEach((rev) => {
-        console.log(rev._id + " === " + newReview._id);
         if (rev._id !== newReview._id) {
           updatedReviews.push(rev);
         }

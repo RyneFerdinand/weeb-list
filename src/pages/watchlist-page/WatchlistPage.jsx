@@ -88,7 +88,6 @@ function WatchlistPage(props) {
                       />
                     );
                   })}
-                  )
                 </div>
               </div>
             ) : (

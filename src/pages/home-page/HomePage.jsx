@@ -64,7 +64,6 @@ function HomePage(props) {
       console.log(error);
     }
   };
-  console.log(anime);
   useEffect(() => {
     getHomeAnime();
   }, []);

@@ -63,7 +63,7 @@ function WatchlistContent(props) {
             className="watchlist-anime-poster"
           />
       </Link>
-      <div className="watchlist-title">&nbsp; {props.watchlistTitle}</div>
+      <div className="watchlist-title">{props.watchlistTitle}</div>
       <select className="status-select" onChange={(e) => updateWatchlist(e)}>
         {status?.map((status) =>
           status === props.watchlistStatus ? (
