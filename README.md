@@ -7,6 +7,7 @@ Technologies Used:
 - Express.JS (Backend)[*]
 - MongoDB (Database)[*]
 - Python (Recommendation Model)[*]
+
 [*] means that the implementation is in another repository
 
 Features:
